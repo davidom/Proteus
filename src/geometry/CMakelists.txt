@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 2.6)
+
+project(Test)
+
+add_executable(Test main.cxx)
+
+set(node_lib_headers node_impl.hxx node.hxx)
+set(node_lib_srcs node_impl.cxx node.cxx) 
+add_library(node_lib SHARED ${node_lib_headers} ${node_lib_srcs})
+
+target_link_libraries(Test node_lib)
+
+set(CMAKE_CXX_COMPILER g++4.7)
+set(CMAKE_CXX_FLAGS "-std=c++11 -O2")
+#set(CMAKE_VERBOSE_MAKEFILE ON)
