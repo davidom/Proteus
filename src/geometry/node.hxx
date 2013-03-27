@@ -1,7 +1,6 @@
 #ifndef __PROTEUS_NODE_CLASS__
 #define __PROTEUS_NODE_CLASS__
 
-
 #include <memory>
 
 namespace Proteus
@@ -13,7 +12,6 @@ namespace Proteus
   class
   node
   {
-
 	public:
 
 	/** 
@@ -26,21 +24,27 @@ namespace Proteus
 	 */
 	  node & operator= (const node&);
 
+	/**
+	 * \brief Move Constructor
+	 */
+	  node(node &&) = default;
+
 	/** 
 	 * \brief Destructor
 	 */
 	  ~node();
 	  
-	// Public Interface
 	/** 
 	 * \brief Public Constructor
 	 */
+	  node(const std::initializer_list<double> &&);
 	  node(const std::initializer_list<double> &);
 
 	/**
 	 * \brief operator[]
 	 */
-	  const double & operator[] (const size_t&);
+	  const double & operator[] (const size_t &) const;
+	  const double & operator[] (const size_t &&) const;
 
 	private:
 	/**
