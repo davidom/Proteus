@@ -9,8 +9,12 @@ namespace Proteus
 	Node Class Interface
   */
   // Only Public Constructor
+  node::node(const std::initializer_list<double> &&l) : 
+  	pimpl_{ new impl(std::move(l)) }
+	{}
+
   node::node(const std::initializer_list<double> &l) : 
-  	pimpl_{ new impl(l) }
+  	pimpl_{ new impl( l ) }
 	{}
 
   // Destructor
@@ -26,14 +30,21 @@ namespace Proteus
   (const node & rhs)
   {
 	pimpl_->pos_ = rhs.pimpl_->pos_;
+	return *this;
   }
 
   // Public Interface
   //-operator[]
   const double & node::operator[]
-  (const size_t & n)
+  (const size_t & n) const
   {
 	return pimpl_->pos_.at(n);
+  }
+
+  const double & node::operator[]
+  (const size_t && n) const
+  {
+	return pimpl_->pos_.at(std::move(n));
   }
 
 }
