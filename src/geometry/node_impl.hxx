@@ -15,12 +15,18 @@ namespace Proteus
 	 /** 
 	  * \brief Public Constructor
 	  */
+	   impl(const std::initializer_list<double> &&l);
 	   impl(const std::initializer_list<double> &l);
 
 	 /**
 	  * \brief Copy Constructor
 	  */
 	   impl(const impl &);
+
+	/**
+	 * \brief Move Contructor
+	 */
+	   impl(impl &&) = default;
 
 	 /**
 	  * \brief Destructor
