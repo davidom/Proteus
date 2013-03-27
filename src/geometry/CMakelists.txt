@@ -1,0 +1,29 @@
+cmake_minimum_required(VERSION 2.6)
+
+project(Test)
+
+add_executable(Test main.cxx)
+
+set(node_lib_headers
+node_impl.hxx
+node.hxx
+node_list.hxx
+node_list_impl.hxx)
+
+set(node_lib_srcs
+node_impl.cxx
+node.cxx
+node_list_impl.cxx 
+node_list.cxx)
+
+add_library(node_lib SHARED ${node_lib_headers} ${node_lib_srcs})
+
+target_link_libraries(Test node_lib)
+
+set(CMAKE_CXX_COMPILER g++4.7)
+set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic")
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+  set(CMAKE_VERBOSE_MAKEFILE ON)
+endif(CMAKE_BUILD_TYPE STREQUAL Debug)
