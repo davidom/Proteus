@@ -8,13 +8,21 @@ set(node_lib_headers
 node_impl.hxx
 node.hxx
 node_list.hxx
-node_list_impl.hxx)
+node_list_impl.hxx
+face_impl.hxx
+face.hxx
+face_list.hxx
+face_list_impl.hxx)
 
 set(node_lib_srcs
 node_impl.cxx
 node.cxx
 node_list_impl.cxx 
-node_list.cxx)
+node_list.cxx
+face_impl.cxx
+face.cxx
+face_list_impl.cxx 
+face_list.cxx)
 
 add_library(node_lib SHARED ${node_lib_headers} ${node_lib_srcs})
 
