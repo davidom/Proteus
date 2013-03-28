@@ -9,6 +9,10 @@ node_impl.hxx
 node.hxx
 node_list.hxx
 node_list_impl.hxx
+edge_impl.hxx
+edge.hxx
+edge_list.hxx
+edge_list_impl.hxx
 face_impl.hxx
 face.hxx
 face_list.hxx
@@ -19,6 +23,10 @@ node_impl.cxx
 node.cxx
 node_list_impl.cxx 
 node_list.cxx
+edge_impl.cxx
+edge.cxx
+edge_list_impl.cxx 
+edge_list.cxx
 face_impl.cxx
 face.cxx
 face_list_impl.cxx 
