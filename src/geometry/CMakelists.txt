@@ -16,7 +16,11 @@ edge_list_impl.hxx
 face_impl.hxx
 face.hxx
 face_list.hxx
-face_list_impl.hxx)
+face_list_impl.hxx
+cell_impl.hxx
+cell.hxx
+cell_list.hxx
+cell_list_impl.hxx)
 
 set(node_lib_srcs
 node_impl.cxx
@@ -30,7 +34,11 @@ edge_list.cxx
 face_impl.cxx
 face.cxx
 face_list_impl.cxx 
-face_list.cxx)
+face_list.cxx
+cell_impl.cxx
+cell.cxx
+cell_list_impl.cxx 
+cell_list.cxx)
 
 add_library(node_lib SHARED ${node_lib_headers} ${node_lib_srcs})
 
