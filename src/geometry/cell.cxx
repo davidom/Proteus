@@ -1,33 +1,33 @@
-#include "face.hxx"
-#include "face_impl.hxx"
+#include "cell.hxx"
+#include "cell_impl.hxx"
 #include <vector>
 
 namespace Proteus
 {
 
   /*
-	Face Class Interface
+	Cell Class Interface
   */
   // Only Public Constructor
-  face::face(const std::initializer_list<size_t> &&l) : 
+  cell::cell(const std::initializer_list<size_t> &&l) : 
   	pimpl_{ new impl(std::move(l)) }
 	{}
 
-  face::face(const std::initializer_list<size_t> &l) : 
+  cell::cell(const std::initializer_list<size_t> &l) : 
   	pimpl_{ new impl( l ) }
 	{}
 
   // Destructor
-  face::~face() {}
+  cell::~cell() {}
 
   // Copy Constructor
-  face::face(const face &other) :
+  cell::cell(const cell &other) :
   	pimpl_{new impl(*(other.pimpl_))} 
 	{}
 
   // Assignment Operator
-  face & face::operator=
-  (const face & rhs)
+  cell & cell::operator=
+  (const cell & rhs)
   {
 	pimpl_->def_ = rhs.pimpl_->def_;
 	return *this;
@@ -35,13 +35,13 @@ namespace Proteus
 
   // Public Interface
   //-operator[]
-  const size_t & face::operator[]
+  const size_t & cell::operator[]
   (const size_t & n) const
   {
 	return pimpl_->def_.at(n);
   }
 
-  const size_t & face::operator[]
+  const size_t & cell::operator[]
   (const size_t && n) const
   {
 	return pimpl_->def_.at(std::move(n));
