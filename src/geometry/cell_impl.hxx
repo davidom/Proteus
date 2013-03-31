@@ -1,14 +1,14 @@
-#ifndef __PROTEUS_FACE_IMPL_CLASS__
-#define __PROTEUS_FACE_IMPL_CLASS__
+#ifndef __PROTEUS_CELL_IMPL_CLASS__
+#define __PROTEUS_CELL_IMPL_CLASS__
 
 #include <vector>
 
 namespace Proteus
 {
   /**
-   * \brief Face Class Implementation
+   * \brief Cell Class Implementation
    */
-  class face::impl
+  class cell::impl
   {
 	 public:
 	 /** 

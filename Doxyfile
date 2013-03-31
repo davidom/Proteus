@@ -1,4 +1,4 @@
-# Doxyfile 1.8.3.1
+# Doxyfile 1.8.3.1-20130324
 
 # This file describes the settings to be used by the documentation system
 # doxygen (www.doxygen.org) for a project.
@@ -52,7 +52,7 @@ PROJECT_LOGO           =
 # If a relative path is entered, it will be relative to the location
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       =
+OUTPUT_DIRECTORY       = ./doc
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create
 # 4096 sub-directories (in 2 levels) under the output directory of each output
@@ -70,9 +70,9 @@ CREATE_SUBDIRS         = NO
 # Afrikaans, Arabic, Brazilian, Catalan, Chinese, Chinese-Traditional,
 # Croatian, Czech, Danish, Dutch, Esperanto, Farsi, Finnish, French, German,
 # Greek, Hungarian, Italian, Japanese, Japanese-en (Japanese with English
-# messages), Korean, Korean-en, Lithuanian, Norwegian, Macedonian, Persian,
-# Polish, Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic, Slovak,
-# Slovene, Spanish, Swedish, Ukrainian, and Vietnamese.
+# messages), Korean, Korean-en, Latvian, Lithuanian, Norwegian, Macedonian,
+# Persian, Polish, Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic,
+# Slovak, Slovene, Spanish, Swedish, Ukrainian, and Vietnamese.
 
 OUTPUT_LANGUAGE        = English
 
@@ -252,10 +252,10 @@ EXTENSION_MAPPING      =
 
 MARKDOWN_SUPPORT       = YES
 
-# When enabled doxygen tries to link words that correspond to documented classes,
-# or namespaces to their corresponding documentation. Such a link can be
-# prevented in individual cases by by putting a % sign in front of the word or
-# globally by setting AUTOLINK_SUPPORT to NO.
+# When enabled doxygen tries to link words that correspond to documented
+# classes, or namespaces to their corresponding documentation. Such a link can
+# be prevented in individual cases by by putting a % sign in front of the word
+# or globally by setting AUTOLINK_SUPPORT to NO.
 
 AUTOLINK_SUPPORT       = YES
 
@@ -311,11 +311,11 @@ SUBGROUPING            = YES
 INLINE_GROUPED_CLASSES = NO
 
 # When the INLINE_SIMPLE_STRUCTS tag is set to YES, structs, classes, and
-# unions with only public data fields will be shown inline in the documentation
-# of the scope in which they are defined (i.e. file, namespace, or group
-# documentation), provided this scope is documented. If set to NO (the default),
-# structs, classes, and unions are shown on a separate page (for HTML and Man
-# pages) or section (for LaTeX and RTF).
+# unions with only public data fields or simple typedef fields will be shown
+# inline in the documentation of the scope in which they are defined (i.e. file,
+# namespace, or group documentation), provided this scope is documented. If set
+# to NO (the default), structs, classes, and unions are shown on a separate
+# page (for HTML and Man pages) or section (for LaTeX and RTF).
 
 INLINE_SIMPLE_STRUCTS  = NO
 
@@ -365,7 +365,7 @@ LOOKUP_CACHE_SIZE      = 0
 # Private class members and static file members will be hidden unless
 # the EXTRACT_PRIVATE and EXTRACT_STATIC tags are set to YES
 
-EXTRACT_ALL            = NO
+EXTRACT_ALL            = YES
 
 # If the EXTRACT_PRIVATE tag is set to YES all private members of a class
 # will be included in the documentation.
@@ -668,7 +668,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = src/geometry
+INPUT                  = src/geometry INFO.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -756,8 +756,10 @@ IMAGE_PATH             =
 # is the value of the INPUT_FILTER tag, and <input-file> is the name of an
 # input file. Doxygen will then use the output that the filter program writes
 # to standard output.
-# If FILTER_PATTERNS is specified, this tag will be
-# ignored.
+# If FILTER_PATTERNS is specified, this tag will be ignored.
+# Note that the filter must not add or remove lines; it is applied before the
+# code is scanned, but not when the output code is generated. If lines are added
+# or removed, the anchors will not be placed correctly.
 
 INPUT_FILTER           =
 
@@ -787,11 +789,11 @@ FILTER_SOURCE_FILES    = NO
 FILTER_SOURCE_PATTERNS =
 
 # If the USE_MD_FILE_AS_MAINPAGE tag refers to the name of a markdown file that
-# is part of the input, its contents will be placed on the main page (index.html).
-# This can be useful if you have a project on for instance GitHub and want reuse
-# the introduction page also for the doxygen output.
+# is part of the input, its contents will be placed on the main page
+# (index.html). This can be useful if you have a project on for instance GitHub
+# and want reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE =
+USE_MDFILE_AS_MAINPAGE = INFO.md
 
 #---------------------------------------------------------------------------
 # configuration options related to source browsing
@@ -848,6 +850,13 @@ USE_HTAGS              = NO
 # which an include is specified. Set to NO to disable this.
 
 VERBATIM_HEADERS       = YES
+
+# If clang assisted parsing is enabled you can provide the compiler with command
+# line options that you would normally use when invoking the compiler. Note that
+# the include paths will be set by doxygen based on the files and directory
+# specified at INPUT and INCLUDE_PATH.
+
+CLANG_OPTIONS          =
 
 #---------------------------------------------------------------------------
 # configuration options related to the alphabetical class index
@@ -934,7 +943,7 @@ HTML_EXTRA_STYLESHEET  =
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
 # that these files will be copied to the base HTML output directory. Use the
-# $relpath$ marker in the HTML_HEADER and/or HTML_FOOTER files to load these
+# $relpath^ marker in the HTML_HEADER and/or HTML_FOOTER files to load these
 # files. In the HTML_STYLESHEET file, use the file name only. Also note that
 # the files will be copied as-is; there are no commands or markers available.
 
@@ -1251,8 +1260,8 @@ SERVER_BASED_SEARCH    = NO
 # which needs to be processed by an external indexer. Doxygen will invoke an
 # external search engine pointed to by the SEARCHENGINE_URL option to obtain
 # the search results. Doxygen ships with an example indexer (doxyindexer) and
-# search engine (doxysearch.cgi) which are based on the open source search engine
-# library Xapian. See the manual for configuration details.
+# search engine (doxysearch.cgi) which are based on the open source search
+# engine library Xapian. See the manual for configuration details.
 
 EXTERNAL_SEARCH        = NO
 
@@ -1307,7 +1316,7 @@ LATEX_OUTPUT           = latex
 # generating bitmaps for formulas in the HTML output, but not in the
 # Makefile that is written to the output directory.
 
-LATEX_CMD_NAME         = pdflatex
+LATEX_CMD_NAME         = latex
 
 # The MAKEINDEX_CMD_NAME tag can be used to specify the command name to
 # generate index for LaTeX. If left blank `makeindex' will be used as the
@@ -1345,6 +1354,13 @@ LATEX_HEADER           =
 # standard footer. Notice: only use this tag if you know what you are doing!
 
 LATEX_FOOTER           =
+
+# The LATEX_EXTRA_FILES tag can be used to specify one or more extra images
+# or other source files which should be copied to the LaTeX output directory.
+# Note that the files will be copied as-is; there are no commands or markers
+# available.
+
+LATEX_EXTRA_FILES      =
 
 # If the PDF_HYPERLINKS tag is set to YES, the LaTeX that is generated
 # is prepared for conversion to pdf (using ps2pdf). The pdf file will
@@ -1489,6 +1505,21 @@ XML_DTD                =
 # enabling this will significantly increase the size of the XML output.
 
 XML_PROGRAMLISTING     = YES
+
+#---------------------------------------------------------------------------
+# configuration options related to the DOCBOOK output
+#---------------------------------------------------------------------------
+
+# If the GENERATE_DOCBOOK tag is set to YES Doxygen will generate DOCBOOK files
+# that can be used to generate PDF.
+
+GENERATE_DOCBOOK       = NO
+
+# The DOCBOOK_OUTPUT tag is used to specify where the DOCBOOK pages will be put.
+# If a relative path is entered the value of OUTPUT_DIRECTORY will be put in
+# front of it. If left blank docbook will be used as the default path.
+
+DOCBOOK_OUTPUT         = docbook
 
 #---------------------------------------------------------------------------
 # configuration options for the AutoGen Definitions output
@@ -1639,6 +1670,12 @@ ALLEXTERNALS           = NO
 
 EXTERNAL_GROUPS        = YES
 
+# If the EXTERNAL_PAGES tag is set to YES all external pages will be listed
+# in the related pages index. If set to NO, only the current project's
+# pages will be listed.
+
+EXTERNAL_PAGES         = YES
+
 # The PERL_PATH should be the absolute path and name of the perl script
 # interpreter (i.e. the result of `which perl').
 
@@ -1676,7 +1713,7 @@ HIDE_UNDOC_RELATIONS   = YES
 # toolkit from AT&T and Lucent Bell Labs. The other options in this section
 # have no effect if this option is set to NO (the default)
 
-HAVE_DOT               = NO
+HAVE_DOT               = YES
 
 # The DOT_NUM_THREADS specifies the number of dot invocations doxygen is
 # allowed to run in parallel. When set to 0 (the default) doxygen will
