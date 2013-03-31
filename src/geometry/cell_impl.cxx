@@ -13,15 +13,15 @@ namespace Proteus
 
   // Copy Constructor
   cell::impl::impl(const impl & rhs) : 
-  	nl_(rhs.nl_)
+  	def_(rhs.def_)
   	{}
 
   // Only Public Constructor
   cell::impl::impl(const std::initializer_list<size_t> &&l) : 
-  	nl_{ std::move(l) } 
+  	def_{ std::move(l) } 
 	{}
 
   cell::impl::impl(const std::initializer_list<size_t> &l) : 
-  	nl_{ l } 
+  	def_{ l } 
 	{}
 }

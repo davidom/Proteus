@@ -29,7 +29,7 @@ namespace Proteus
   cell & cell::operator=
   (const cell & rhs)
   {
-	pimpl_->nl_ = rhs.pimpl_->nl_;
+	pimpl_->def_ = rhs.pimpl_->def_;
 	return *this;
   }
 
@@ -38,13 +38,13 @@ namespace Proteus
   const size_t & cell::operator[]
   (const size_t & n) const
   {
-	return pimpl_->nl_.at(n);
+	return pimpl_->def_.at(n);
   }
 
   const size_t & cell::operator[]
   (const size_t && n) const
   {
-	return pimpl_->nl_.at(std::move(n));
+	return pimpl_->def_.at(std::move(n));
   }
 
 }

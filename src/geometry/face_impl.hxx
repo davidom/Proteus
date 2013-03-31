@@ -35,7 +35,7 @@ namespace Proteus
 	/**
 	 * \brief Holder for Node List
 	 */
-	   std::vector<size_t> nl_;
+	   std::vector<size_t> def_;
 
 	private:
 	/**
