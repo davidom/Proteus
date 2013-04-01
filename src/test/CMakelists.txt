@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 2.6)
+
+project(Test)
+
+enable_testing()
+
+include_directories("/Users/dom9/Installed_Applications/gtest/gtest/include")
+include_directories("/Users/dom9/Work/Proteus/src/geometry")
+
+add_executable(Test test.cxx)
+
+target_link_libraries(Test /Users/dom9/Installed_Applications/gtest/gtest/libgtest.a)
+target_link_libraries(Test /Users/dom9/Installed_Applications/gtest/gtest/libgtest_main.a)
+target_link_libraries(Test /Users/dom9/Work/Proteus/src/geometry/Release/libgeom_lib.dylib)
+
+add_test(NAME Test COMMAND Test)
+
+set(CMAKE_CXX_COMPILER g++4.7)
+set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic")
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+  set(CMAKE_VERBOSE_MAKEFILE ON)
+endif(CMAKE_BUILD_TYPE STREQUAL Debug)
