@@ -7,13 +7,34 @@ enable_testing()
 include_directories("/Users/dom9/Installed_Applications/gtest/gtest/include")
 include_directories("/Users/dom9/Work/Proteus/src/geometry")
 
-add_executable(Test test.cxx)
+set(TEST_NAMES
+Node_Tests
+Edge_Tests
+Face_Tests
+Cell_Tests)
 
-target_link_libraries(Test /Users/dom9/Installed_Applications/gtest/gtest/libgtest.a)
-target_link_libraries(Test /Users/dom9/Installed_Applications/gtest/gtest/libgtest_main.a)
-target_link_libraries(Test /Users/dom9/Work/Proteus/src/geometry/Release/libgeom_lib.dylib)
+set(TEST_SOURCES
+node_tests.cxx
+edge_tests.cxx
+face_tests.cxx
+cell_tests.cxx)
 
-add_test(NAME Test COMMAND Test)
+list(LENGTH TEST_NAMES TEST_NAMES_LENGTH_TEMP)
+math(EXPR TEST_NAMES_LENGTH "${TEST_NAMES_LENGTH_TEMP} - 1")
+
+FOREACH(val RANGE ${TEST_NAMES_LENGTH})
+  list(GET TEST_NAMES ${val} TEST_NAME)
+  list(GET TEST_SOURCES ${val} TEST_SOURCE)
+  message(STATUS "Adding Test: ${TEST_NAME} From File: ${TEST_SOURCE}")
+  add_executable(${TEST_NAME} ${TEST_SOURCE})
+  target_link_libraries(${TEST_NAME} /Users/dom9/Installed_Applications/gtest/gtest/libgtest.a)
+  target_link_libraries(${TEST_NAME} /Users/dom9/Installed_Applications/gtest/gtest/libgtest_main.a)
+  target_link_libraries(${TEST_NAME} /Users/dom9/Work/Proteus/src/geometry/Release/libgeom_lib.dylib)
+  add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+ENDFOREACH()
+
+
+
 
 set(CMAKE_CXX_COMPILER g++4.7)
 set(CMAKE_CXX_FLAGS "-std=c++11")
