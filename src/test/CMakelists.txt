@@ -8,16 +8,10 @@ include_directories("/Users/dom9/Installed_Applications/gtest/gtest/include")
 include_directories("/Users/dom9/Work/Proteus/src/geometry")
 
 set(TEST_NAMES
-Node_Tests
-Edge_Tests
-Face_Tests
-Cell_Tests)
+Entity_Tests)
 
 set(TEST_SOURCES
-node_tests.cxx
-edge_tests.cxx
-face_tests.cxx
-cell_tests.cxx)
+entity_tests.cxx)
 
 list(LENGTH TEST_NAMES TEST_NAMES_LENGTH_TEMP)
 math(EXPR TEST_NAMES_LENGTH "${TEST_NAMES_LENGTH_TEMP} - 1")
@@ -39,7 +33,7 @@ ENDFOREACH()
 set(CMAKE_CXX_COMPILER g++4.7)
 set(CMAKE_CXX_FLAGS "-std=c++11")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -fno-elide-constructors -pedantic -D_GLIBCXX_DEBUG")
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
   set(CMAKE_VERBOSE_MAKEFILE ON)
 endif(CMAKE_BUILD_TYPE STREQUAL Debug)
