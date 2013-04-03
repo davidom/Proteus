@@ -20,7 +20,8 @@ face_list_impl.hxx
 cell_impl.hxx
 cell.hxx
 cell_list.hxx
-cell_list_impl.hxx)
+cell_list_impl.hxx
+entity.hxx)
 
 set(geom_lib_srcs
 node_impl.cxx
