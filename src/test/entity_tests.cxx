@@ -55,7 +55,9 @@ TEST(EntityTest, StoreInContainer)
   Proteus::entity<std::array<double,3>> a(x,y,z);
 
   std::vector<Proteus::entity<std::array<double,3>>> v;
-  v.push_back(a);
+  v.insert(v.end(),100,Proteus::Geometry::node3d(x,y,z));
+  v.insert(v.end(),100,a);
+  v.emplace_back(a);
 
   EXPECT_EQ(v[0][0], a[0]);
   EXPECT_EQ(v[0][1], a[1]);
@@ -65,6 +67,14 @@ TEST(EntityTest, StoreInContainer)
 
 TEST(GeometryTest, Construction)
 {
-  Proteus::geometry g;
-  Proteus::node2d n2;
+  const double x=1., y=2., z=3.;
+  const int x1=1, y1=2, z1=3;
+
+  Proteus::geometry<> g;
+  g.create_node(x,y,z);
+  g.create_edge(x1,y1);
+  g.create_face(x1,y1,z1);
+  g.create_cell(x1,y1,z1);
+  Proteus::Geometry::node3d n3(x,y,z);
+  Proteus::Geometry::tria t(x1,y1,z1);
 }
