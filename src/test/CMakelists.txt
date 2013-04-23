@@ -8,10 +8,12 @@ include_directories("/Users/dom9/Installed_Applications/gtest/gtest/include")
 include_directories("/Users/dom9/Work/Proteus/src")
 
 set(TEST_NAMES
-Entity_Tests)
+Entity_Tests
+Geometry_Tests)
 
 set(TEST_SOURCES
-entity_tests.cxx)
+entity_tests.cxx
+geometry_tests.cxx)
 
 list(LENGTH TEST_NAMES TEST_NAMES_LENGTH_TEMP)
 math(EXPR TEST_NAMES_LENGTH "${TEST_NAMES_LENGTH_TEMP} - 1")
