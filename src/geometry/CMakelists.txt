@@ -5,11 +5,9 @@ project(Test)
 set(geom_lib_headers
 entity.hxx
 geometry.hxx
-geometry_impl.hxx)
+)
 
 set(geom_lib_srcs
-geometry.cxx
-#geometry_impl.cxx
 )
 
 include_directories("../")
