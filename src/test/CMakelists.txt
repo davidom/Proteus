@@ -10,11 +10,13 @@ include_directories("/Users/dom9/Work/Proteus/src")
 set(TEST_NAMES
 Entity_Tests
 Geometry_Tests
+Entity_List_Tests
 )
 
 set(TEST_SOURCES
 entity_tests.cxx
 geometry_tests.cxx
+entity_list_tests.cxx
 )
 
 list(LENGTH TEST_NAMES TEST_NAMES_LENGTH_TEMP)

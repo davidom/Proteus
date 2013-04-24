@@ -5,6 +5,7 @@ project(Test)
 set(geom_lib_headers
 entity.hxx
 geometry.hxx
+entity_list.hxx
 )
 
 set(geom_lib_srcs
