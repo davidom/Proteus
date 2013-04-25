@@ -1,0 +1,34 @@
+ROUTINE
+-------
+
+INT_ ug_malloc_param (char Error_Message[],
+                      INT_ Max_Param_Labels,
+                      UG_Param_Struct ** UG_Param_Struct_Ptr)
+
+INPUT ARGUMENTS
+---------------
+
+Max_Param_Labels         : Maximum number of UG parameter labels per parameter.
+                           Within the routine the actual value of
+                           Max_Param_Labels is set to the maximum of the input
+                           value of Max_Param_Labels and an internal lower limit
+                           of 50.
+
+DESCRIPTION
+-----------
+
+Malloc UG parameter structure arrays.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred mallocing arrays.
+>0                       : Errors occurred mallocing arrays.
+                           The return value will be between 400 and 499
+
+OUTPUT ARGUMENTS
+---------------
+
+Error_Message            : Error message if the return value is >0.
+
+UG_Param_Struct_Ptr      : UG parameter structure.

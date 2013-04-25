@@ -1,0 +1,327 @@
+
+===============================================================
+ug RELEASE NOTES: 03/16/13 RELEASE VERSION 3.35.21
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added modifications to allow for very long file names. Previous
+  versions are limited to file path names with about 100 characters 
+  or less. The current version allows path names with about 1000
+  characters (500 on Windows) or less.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 01/30/13 RELEASE VERSION 3.34.21
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to set parameters directly to default, maximum
+  or minimum values by adding the suffix @def, @max, or @min.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 12/19/12 RELEASE VERSION 3.33.21
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added check_file macros for WIN32 systems.
+
+* Updated CMake files.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 11/12/12 RELEASE VERSION 3.33.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routine ug_ivivm to set a map of non-sequential values
+  to sequential values.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 08/25/12 RELEASE VERSION 3.32.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Consolidated all system and/or architecture related routines
+  in one file ug_system.c. Currently only two files have switches
+  for Windows and *NIX applications, ug_system.c and UG_LIB.h.
+  All other files are fully compatible as is.
+
+* Added full functionality of scripts that allow executables
+  to be restarted with one for a different system version or
+  architecture (32 vs 64-bit).
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 07/11/12 RELEASE VERSION 3.31.29
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added callback function for externally specified message handler.
+  If specified all output messages are routed to the routine from
+  any code that uses the UG library (AFLR3, AFLR4, etc).
+
+* Added callback function for externally specified signal handler.
+  If specified all fatal or interupt system signals are routed
+  to the routine from any code that uses the UG library (AFLR3,
+  AFLR4, etc).
+
+* Modified all input parameter handling for improved portability
+  and flexibility. The new parameter handling routines allow
+  argument vectors to be used to specify all input rather than
+  or in addition to input files. They also allow the specification
+  of multiple alternative parameter names for identification.
+  These changes will allow full portability to Windows systems
+  without the use of the Bourne shell scripts that are
+  currently used to create the input files.
+
+* Added additional output to File_Status_Monitor_Flag=1 option.
+
+* Modified TMP file creation to eliminate use of tmpfile.
+
+* Added capability to remove leading directory names from file
+  names when writing TMP files to a named TMP_File_Dir.
+
+* Added Windows backslash and colon directory separators to 
+  TMP directory manipulations.
+
+* Added routines to trap system signals and perform cleanup
+  before exiting. The new routines are in ug_signal.c
+
+* Combined routines for TMP file mode operation with standard
+  file I/O routines.
+
+* Removed socket mode option and routines for file I/O.
+
+Bugs Fixed:
+-----------
+
+* Added binary mode to file opening mode flag on Windows.
+
+
+===============================================================
+ug RELEASE NOTES: 09/27/11 RELEASE VERSION 3.25.20
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Removed recursive calls within ug_fio when socket or tmp files
+  are used.
+
+Bugs Fixed:
+-----------
+
+
+
+===============================================================
+ug RELEASE NOTES: 07/01/11 RELEASE VERSION 3.24.20
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Removed expressions from C-macro calls.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug RELEASE NOTES: 05/05/11 RELEASE VERSION 3.24.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added slight modifications for compatibility with Windows
+  systems (_WIN32 code).
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug RELEASE NOTES: 03/15/11 RELEASE VERSION 3.23.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* 
+
+Bugs Fixed:
+-----------
+
+* Corrected an initialization error with _WIN32 code that
+  prevented use of named tmp file directory.
+
+===============================================================
+ug RELEASE NOTES: 02/18/11 RELEASE VERSION 3.22.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Removed all __CYGWIN__ define checks and replaced with the
+  checks for _WIN32 being defined. If Windows is the target
+  then _WIN32 should be predefined.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 11/19/10 RELEASE VERSION 3.21.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability for general named tmp file directories.
+
+* Added include file and typedef changes for compatibility with
+  MS Windows systems.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 02/04/10 RELEASE VERSION 3.19.15
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routines ug_lim_int and ug_lim_double to limit int and double arrays.
+
+* Added routine ug_iaib to create an inverse list.
+
+* Changed file format byte ordering to be the same as the host byte ordering for
+  internal data files.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug RELEASE NOTES: 10/16/09 RELEASE VERSION 3.18.15
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added file status monitor capability to ug_fio routines.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug RELEASE NOTES: 06/14/09 RELEASE VERSION 3.17.15
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to get and output a Build Number for a given
+  executable to the ug_version_info routine.
+
+Bugs Fixed:
+-----------
+
+* Modified ug_get_*_param_index routines so that the correct
+  ending label index is returned.
+
+===============================================================
+ug RELEASE NOTES: 11/22/08 RELEASE VERSION 3.15.13
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routine to renumber a list of integer values so that the values are in
+  either consecutive and ascending order 1,2,3... or consecutive and first
+  encountered order and save a map of the new values.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug RELEASE NOTES: 11/19/08 RELEASE VERSION 3.15.10
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Reduced maximum static array size to 512 elements for
+  compatibility with Windows.
+
+* Added means to skip unistd.h include file for compatibility
+  with Windows.
+
+* Modified all __CYGWIN__ define checks to include an equivalent
+  check for WIN32. With CYGWIN use __CYGWIN__ and on Windows
+  systems use _WIN32 (predefined with Visual C/C++).
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug RELEASE NOTES: 09/29/08 RELEASE VERSION 3.12.9
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Removed test routines from library.
+
+Bugs Fixed:
+-----------
+

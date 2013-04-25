@@ -1,0 +1,50 @@
+ROUTINE
+-------
+
+void ug_io_free_grid (INT_1D * Surf_Grid_BC_Flag,
+                      INT_1D * Surf_ID_Flag,
+                      INT_1D * Surf_Reconnection_Flag,
+                      INT_4D * Surf_Quad_Connectivity,
+                      INT_3D * Surf_Tria_Connectivity,
+                      INT_8D * Vol_Hex_Connectivity,
+                      INT_1D * Vol_ID_Flag,
+                      INT_5D * Vol_Pent_5_Connectivity,
+                      INT_6D * Vol_Pent_6_Connectivity,
+                      INT_4D * Vol_Tet_Connectivity,
+                      DOUBLE_3D * Coordinates,
+                      DOUBLE_1D * Initial_Normal_Spacing,
+                      DOUBLE_1D * BL_Thickness)
+
+DESCRIPTION
+-----------
+
+Free grid data arrays.
+
+INPUT ARGUMENTS
+---------------
+
+Surf_Grid_BC_Flag        : Surface face grid boundary condition flag.
+
+Surf_ID_Flag             : Surface face ID flag.
+
+Surf_Reconnection_Flag   : Surface face reconnection flag.
+
+Surf_Quad_Connectivity   : Surface grid quad face connectivity.
+
+Surf_Tria_Connectivity   : Surface grid tria face connectivity.
+
+Vol_Hex_Connectivity     : Volume grid hexahedral element connectivity.
+
+Vol_ID_Flag              : Volume element ID flag.
+
+Vol_Pent_5_Connectivity  : Volume grid 5-node pentahedral element connectivity.
+
+Vol_Pent_6_Connectivity  : Volume grid 6-node pentahedral element connectivity.
+
+Vol_Tet_Connectivity     : Volume grid tetrahedral element connectivity.
+
+Coordinates              : Grid node coordinates.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing.
+
+BL_Thickness             : Thickness of boundary-layer.

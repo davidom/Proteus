@@ -1,0 +1,176 @@
+ROUTINE
+-------
+
+INT_ ug_io_read_2d_grid_file (char Grid_File_Name[],
+                              char Error_Message[],
+                              UG_IO_Param_Struct * UG_IO_2D_Param_Struct_Ptr,
+                              INT_ Message_Flag,
+                              INT_ *Number_of_Bnd_Edges,
+                              INT_ *Number_of_Nodes,
+                              INT_ *Number_of_Quads,
+                              INT_ *Number_of_Trias,
+                              INT_2D * Bnd_Edge_Connectivity,
+                              INT_1D * Bnd_Edge_Grid_BC_Flag,
+                              INT_1D * Bnd_Edge_ID_Flag,
+                              INT_4D * Quad_Connectivity,
+                              INT_3D * Tria_Connectivity,
+                              DOUBLE_2D * Coordinates,
+                              DOUBLE_1D * Initial_Normal_Spacing,
+                              DOUBLE_1D * BL_Thickness)
+
+DESCRIPTION
+-----------
+
+Read 2D grid data from a standard UG 2D grid file.
+
+This routine is designed to be called twice for each grid file. The first call
+reads the grid file dimensions and the second reads all the grid file data
+arrays. Before the second call the grid data arrays must be allocated to
+provide at least as much space as required by the grid file dimensions.
+
+INPUT ARGUMENTS (FIRST CALL)
+----------------------------
+
+Grid_File_Name           : Grid file name.
+                           If the grid file name is blank or NULL then nothing
+                           is done.
+
+UG_IO_2D_Param_Struct_Ptr: UG_IO parameter structure.
+
+Message_Flag             : Output message flag.
+                           If Message_Flag =  0 then no information messages
+                           are written.
+                           If Message_Flag >= 1 then information messages are
+                           written to standard output.
+
+RETURN VALUE (FIRST CALL)
+-------------------------
+
+0                        : No errors occurred reading grid file.
+<0                       : The grid file name is blank or NULL or the grid file
+                           name is not a standard UG surface or volume grid
+                           file. Nothing is done in this case.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred reading grid file.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS (FIRST CALL)
+-----------------------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Number_of_Bnd_Edges      : Number of boundary edges.
+
+Number_of_Nodes          : Number of nodes.
+
+Number_of_Quads          : Number of quad faces.
+
+Number_of_Trias          : Number of tria faces.
+
+INPUT ARGUMENTS (SECOND CALL)
+-----------------------------
+
+Grid_File_Name           : Grid file name.
+                           If the grid file name is blank or NULL then nothing
+                           is done.
+
+UG_IO_2D_Param_Struct_Ptr: UG_IO parameter structure.
+
+Message_Flag             : Output message flag.
+                           If Message_Flag =  0 then no information messages
+                           are written.
+                           If Message_Flag >= 1 then information messages are
+                           written to standard output.
+
+Number_of_Bnd_Edges      : Number of boundary edges.
+
+Number_of_Nodes          : Number of nodes.
+
+Number_of_Quads          : Number of quad faces.
+
+Number_of_Trias          : Number of tria faces.
+
+RETURN VALUE (SECOND CALL)
+--------------------------
+
+0                        : No errors occurred reading grid file.
+<0                       : The grid file name is blank or NULL or the grid file
+                           name is not a standard UG surface or volume grid
+                           file. Nothing is done in this case.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred reading grid file.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS (SECOND CALL)
+------------------------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Bnd_Edge_Connectivity    : Boundary edge connectivity.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Bnd_Edges.
+                           Array location zero is not used. The secondary index
+                           uses "C" style indexing with an index which ranges
+                           from zero to one corresponding to the two nodes of a
+                           particular boundary edge. The node index value
+                           stored in this array can vary from one to
+                           Number_of_Nodes.
+
+Bnd_Edge_Grid_BC_Flag    : Boundary edge grid boundary condition flag.
+                           Bnd_Edge_Grid_BC_Flag = NULL then this array is not
+                           used. This array uses "FORTRAN" style indexing with
+                           an index which ranges from one to
+                           Number_of_Bnd_Edges. Array location zero is not used.
+                           This array is used primarily for grid generation.
+
+Bnd_Edge_ID_Flag         : Boundary edge ID flag.
+                           Bnd_Edge_ID_Flag = NULL then this array is not used.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Bnd_Edges.
+                           Array location zero is not used. This array allows
+                           boundary edges to be grouped. Typically boundary
+                           edges with the same ID flag represent a complete or
+                           closed curve.
+
+Quad_Connectivity        : Quad face connectivity.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Quads.
+                           Array location zero is not used. The secondary index
+                           uses "C" style indexing with an index which ranges
+                           from zero to three corresponding to the four nodes
+                           of a particular quad face. The node index value
+                           stored in this array can vary from one to
+                           Number_of_Nodes.
+
+Tria_Connectivity        : Tria face connectivity.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Trias.
+                           Array location zero is not used. The secondary index
+                           uses "C" style indexing with an index which ranges
+                           from zero to two corresponding to the three nodes of
+                           a particular tria face. The node index value stored
+                           in this array can vary from one to Number_of_Nodes.
+
+Coordinates              : Grid node coordinates.
+                           This array uses "FORTRAN" style indexing with a
+                           primary index which ranges from one to
+                           Number_of_Nodes. Array location zero is not used.
+                           The secondary index uses "C" style indexing with an
+                           index which ranges from zero to one corresponding to
+                           the two coordinates (X,Y) for a particular node.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing for boundary-layer
+                           type grids.
+                           If Initial_Normal_Spacing = NULL then this array is
+                           not used. This array uses "FORTRAN" style indexing
+                           with an index which ranges from one to
+                           Number_of_Nodes. Array location zero is not used.
+                           This array is used primarily for grid generation.
+
+BL_Thickness             : Thickness of boundary-layer region for boundary-layer
+                           type grids.
+                           If BL_Thickness = NULL then this array is not used.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Nodes. Array
+                           location zero is not used. This array is used
+                           primarily for grid generation.

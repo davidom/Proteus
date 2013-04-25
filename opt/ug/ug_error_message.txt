@@ -1,0 +1,14 @@
+ROUTINE
+-------
+
+void ug_error_message (char *Text)
+
+DESCRIPTION
+-----------
+
+Write a message to standard error output.
+
+INPUT ARGUMENTS
+---------------
+
+Text                     : Text string.

@@ -1,0 +1,143 @@
+ROUTINE
+-------
+
+INT_ ug_io_read_tags_file (char Tags_Data_File_Name[],
+                           char Error_Message[],
+                           UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr,
+                           INT_ Message_Flag,
+                           INT_ Number_of_Surf_Quads,
+                           INT_ Number_of_Surf_Trias,
+                           INT_1D * Surf_Grid_BC_Flag,
+                           INT_1D * Surf_ID_Flag,
+                           INT_4D * Surf_Quad_Connectivity,
+                           INT_1D * Surf_Reconnection_Flag,
+                           INT_3D * Surf_Tria_Connectivity,
+                           DOUBLE_1D * Initial_Normal_Spacing,
+                           DOUBLE_1D * BL_Thickness)
+
+DESCRIPTION
+-----------
+
+Read surface grid BC and normal spacing data from a standard UG tags data file.
+
+INPUT ARGUMENTS
+---------------
+
+Tags_Data_File_Name      : Tags data file name.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+Message_Flag             : Output message flag.
+                           If Message_Flag =  0 then no information messages
+                           are written.
+                           If Message_Flag >= 1 then information messages are
+                           written to standard output.
+
+Number_of_Surf_Quads     : Number of boundary surface quad faces.
+
+Number_of_Surf_Trias     : Number of boundary surface tria faces.
+
+Surf_Grid_BC_Flag        : Surface face grid boundary condition flag.
+                           If Surf_Grid_BC_Flag = NULL then this array is not
+                           used. This array uses "FORTRAN" style indexing with
+                           an index which ranges from one to
+                           Number_of_Surf_Quads+Number_of_Surf_Trias. The first
+                           one to Number_of_Surf_Trias entries correspond to
+                           boundary surface tria faces. The next
+                           Number_of_Surf_Trias+1 to
+                           Number_of_Surf_Trias+Number_of_Surf_Quads entries
+                           correspond to boundary surface quad faces. Array
+                           location zero is not used. This array is used
+                           primarily for grid generation.
+
+Surf_ID_Flag             : Surface face ID flag.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Surf_Trias+
+                           Number_of_Surf_Quads. The first one to
+                           Number_of_Surf_Trias entries correspond to boundary
+                           surface tria faces. The next Number_of_Surf_Trias+1
+                           to Number_of_Surf_Trias+Number_of_Surf_Quads entries
+                           correspond to boundary surface quad faces. Array
+                           location zero is not used. This array allows surface
+                           faces to be grouped. Typically surface faces with
+                           the same ID flag represent a complete surface or
+                           enclosed surface.
+
+Surf_Reconnection_Flag   : Surface face reconnection flag.
+                           If Surf_Reconnection_Flag = NULL then this array is
+                           not used. This array uses "FORTRAN" style indexing
+                           with a primary index which ranges from one to
+                           Number_of_Surf_Trias+Number_of_Surf_Quads. The
+                           first one to Number_of_Surf_Trias entries correspond
+                           to boundary surface tria faces. The next
+                           Number_of_Surf_Trias+1 to Number_of_Surf_Trias+
+                           Number_of_Surf_Quads entries correspond to boundary
+                           surface quad faces. Array location zero is not used.
+                           This array is used primarily for grid generation.
+
+Surf_Quad_Connectivity   : Surface grid quad face connectivity.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Surf_Quads.
+                           Array location zero is not used. The secondary index
+                           uses "C" style indexing with an index which ranges
+                           from zero to three corresponding to the four nodes
+                           of a particular quad face. The node index value
+                           stored in this array can vary from one to
+                           Number_of_Nodes.
+
+Surf_Tria_Connectivity   : Surface grid tria face connectivity.
+                           This array uses "FORTRAN" style indexing with an
+                           index which ranges from one to Number_of_Surf_Trias.
+                           Array location zero is not used. The secondary index
+                           uses "C" style indexing with an index which ranges
+                           from zero to two corresponding to the three nodes of
+                           a particular tria face. The node index value stored
+                           in this array can vary from one to Number_of_Nodes.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing for boundary-layer
+                           type grids.
+                           If Initial_Normal_Spacing = NULL then this array is
+                           not used. This array uses "FORTRAN" style indexing
+                           with an index which ranges from one to
+                           Number_of_Nodes. Array location zero is not used.
+                           This array is used primarily for grid generation.
+
+BL_Thickness             : Thickness of boundary-layer region for boundary-layer
+                           type grids.
+                           If BL_Thickness = NULL then this array is
+                           not used. This array uses "FORTRAN" style indexing
+                           with an index which ranges from one to
+                           Number_of_Nodes. Array location zero is not used.
+                           This array is used primarily for grid generation.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred reading tags data file.
+<0                       : The tags data file name is blank or NULL or the tags
+                           data file name is not a standard UG tags data file.
+                           Nothing is done in this case.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred reading the tags data file.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Surf_Grid_BC_Flag        : Surface face grid boundary condition flag modified
+                           if tags file differs from input values.
+
+Surf_ID_Flag             : Surface face ID flag modified if tags file differs
+                           from input values.
+Surf_Reconnection_Flag   : Surface face reconnection flag modified if tags file
+                           differs from input values.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing for boundary-layer
+                           type grids modified if tags file differs from input
+                           values.
+
+BL_Thickness             : Thickness of boundary-layer region for boundary-layer
+                           type grids modified if tags file differs from input
+                           values.

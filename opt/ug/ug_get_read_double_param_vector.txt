@@ -1,0 +1,59 @@
+ROUTINE
+-------
+
+INT_ ug_get_read_double_param_vector (char _Double_Param_Name[],
+                                      char UG_Param_File_Name[],
+                                      INT_ *_Double_Param_Vector_Entries,
+                                      DOUBLE_1D **_Double_Param_Vector,
+                                      UG_Param_Struct * UG_Param_Struct_Ptr)
+
+
+DESCRIPTION
+-----------
+
+Get a pointer to a UG type double parameter vector from either the UG parameter
+file or if not found there from the UG parameter structure.
+
+INPUT ARGUMENTS
+---------------
+
+_Double_Param_Name             : Name of UG type double parameter vector.
+
+UG_Param_File_Name             : Name of UG parameter file.
+                                 If UG_Param_File_Name is blank then only the UG
+                                 parameter structure is searched.
+
+_Double_Param_Vector           : Pointer to the UG type double parameter vector.
+
+                                 The pointer must be set to NULL or initially
+                                 allocated some amount of memory space.
+
+UG_Param_Struct_Ptr            : UG parameter structure.
+
+
+RETURN VALUE
+---------------
+
+1                              : Then a parameter was found with a matching name
+                                 and the output arguments were set.
+0                              : Then no match was found and the output
+                                 arguments were not set.
+>400                           : An error occurred while reading the UG
+                                 parameter file or setting the parameter vector.
+
+
+OUTPUT ARGUMENTS
+---------------
+
+_Double_Param_Vector_Entries   : Number of entries in the UG type double
+                                 parameter vector.
+
+_Double_Param_Vector           : Pointer to the UG type double parameter vector.
+
+                                 If _Double_Param_Vector_Entries = 0 then the
+                                 pointer is not set.
+
+                                 The pointer is (re-)allocated within this
+                                 routine. Any subsequent memory management
+                                 (free, reallocate, etc.) of the pointer must
+                                 be explicitly performed outside this routine.

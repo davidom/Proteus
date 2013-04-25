@@ -1,0 +1,155 @@
+void lm5_version
+ (char[],
+  char[],
+  char[],
+  char[]);
+
+INT_ ug_io_read_mesh_2d_grid
+ (char File_Name[],
+  char Error_Message[],
+  INT_ Read_Task_Flag,
+  INT_ *Number_of_Bnd_Nodes,
+  INT_ *Number_of_Nodes,
+  INT_ *Number_of_Bnd_Edges,
+  INT_ *Number_of_Quads,
+  INT_ *Number_of_Trias,
+  INT_1D * ID_Flag,
+  INT_2D * Bnd_Edge_Connectivity,
+  INT_1D * Face_ID_Flag,
+  INT_4D * Quad_Connectivity,
+  INT_3D * Tria_Connectivity,
+  DOUBLE_2D * Coordinates);
+
+INT_ ug_io_write_mesh_2d_grid
+ (char File_Name[],
+  char Error_Message[],
+  INT_ Number_of_Nodes,
+  INT_ Number_of_Bnd_Edges,
+  INT_ Number_of_Quads,
+  INT_ Number_of_Trias,
+  INT_1D * ID_Flag,
+  INT_2D * Bnd_Edge_Connectivity,
+  INT_1D * Face_ID_Flag,
+  INT_4D * Quad_Connectivity,
+  INT_3D * Tria_Connectivity,
+  DOUBLE_2D * Coordinates);
+
+INT_ ug_io_read_mesh_grid
+ (char File_Name[],
+  char Error_Message[],
+  INT_ Read_Task_Flag,
+  INT_ *Number_of_Bnd_Nodes,
+  INT_ *Number_of_Nodes,
+  INT_ *Number_of_Surf_Quads,
+  INT_ *Number_of_Surf_Trias,
+  INT_ *Number_of_Vol_Hexs,
+  INT_ *Number_of_Vol_Pents_5,
+  INT_ *Number_of_Vol_Pents_6,
+  INT_ *Number_of_Vol_Tets,
+  INT_1D * Surf_ID_Flag,
+  INT_4D * Surf_Quad_Connectivity,
+  INT_3D * Surf_Tria_Connectivity,
+  INT_8D * Vol_Hex_Connectivity,
+  INT_1D * Vol_ID_Flag,
+  INT_5D * Vol_Pent_5_Connectivity,
+  INT_6D * Vol_Pent_6_Connectivity,
+  INT_4D * Vol_Tet_Connectivity,
+  DOUBLE_3D * Coordinates);
+
+INT_ ug_io_write_mesh_grid
+ (char File_Name[],
+  char Error_Message[],
+  INT_ Number_of_BL_Vol_Tets,
+  INT_ Number_of_Nodes,
+  INT_ Number_of_Surf_Quads,
+  INT_ Number_of_Surf_Trias,
+  INT_ Number_of_Vol_Hexs,
+  INT_ Number_of_Vol_Pents_5,
+  INT_ Number_of_Vol_Pents_6,
+  INT_ Number_of_Vol_Tets,
+  INT_1D * Surf_ID_Flag,
+  INT_4D * Surf_Quad_Connectivity,
+  INT_3D * Surf_Tria_Connectivity,
+  INT_8D * Vol_Hex_Connectivity,
+  INT_1D * Vol_ID_Flag,
+  INT_5D * Vol_Pent_5_Connectivity,
+  INT_6D * Vol_Pent_6_Connectivity,
+  INT_4D * Vol_Tet_Connectivity,
+  DOUBLE_3D * Coordinates);
+
+INT_ ug_io_mesh_2d_grid_lib_check (void);
+
+INT_ ug_io_mesh_grid_lib_check (void);
+
+void ug_io_mesh_register_read_2d_grid
+ (INT_ (*ext_routine) (char[],
+                       char[],
+                       INT_,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_1D *,
+                       INT_2D *,
+                       INT_1D *,
+                       INT_4D *,
+                       INT_3D *,
+                       DOUBLE_2D *));
+
+void ug_io_mesh_register_write_2d_grid
+ (INT_ (*ext_routine) (char[],
+                       char[],
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_1D *,
+                       INT_2D *,
+                       INT_1D *,
+                       INT_4D *,
+                       INT_3D *,
+                       DOUBLE_2D *));
+
+void ug_io_mesh_register_read_grid
+ (INT_ (*ext_routine) (char[],
+                       char[],
+                       INT_,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_ *,
+                       INT_1D *,
+                       INT_4D *,
+                       INT_3D *,
+                       INT_8D *,
+                       INT_1D *,
+                       INT_5D *,
+                       INT_6D *,
+                       INT_4D *,
+                       DOUBLE_3D *));
+
+void ug_io_mesh_register_write_grid
+ (INT_ (*ext_routine) (char[],
+                       char[],
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_,
+                       INT_1D *,
+                       INT_4D *,
+                       INT_3D *,
+                       INT_8D *,
+                       INT_1D *,
+                       INT_5D *,
+                       INT_6D *,
+                       INT_4D *,
+                       DOUBLE_3D *));

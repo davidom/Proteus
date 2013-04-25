@@ -1,0 +1,14 @@
+ROUTINE
+-------
+
+void ug_free_param (UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Free UG parameter structure arrays.
+
+INPUT ARGUMENTS
+---------------
+
+UG_Param_Struct_Ptr      : UG parameter structure.

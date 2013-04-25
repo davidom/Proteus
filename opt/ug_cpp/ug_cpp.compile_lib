@@ -1,0 +1,13 @@
+#!/bin/sh
+
+other_libs="${other_libs} -lstdc++"
+
+if [ "`echo ${arch_type} | grep SunOS`" != "" ]; then
+	other_libs="${other_libs} -lCstd -lCrun"
+fi
+
+cpp_opt2_files="
+ug_cpp_version.cpp
+ug3_extract_faces_from_volume_elements.cpp
+ug_io_write_OpenFOAM.cpp
+"

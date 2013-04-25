@@ -1,0 +1,24 @@
+ROUTINE
+-------
+
+INT_ ug_min_double (INT_ Start_Index,
+                    INT_ End_Index,
+                    INT_1D * Data)
+
+DESCRIPTION
+-----------
+
+Get minimum value in an INT_ array.
+
+
+INPUT ARGUMENTS
+---------------
+
+Start_Index              : Index of first data location to be copied.
+End_Index                : Index of last data location to be copied.
+Data                     : Source data array.
+
+RETURN VALUE
+----------------
+
+Minimum value.

@@ -1,0 +1,63 @@
+ROUTINE
+-------
+
+INT_ ug_io_malloc_flow (char Error_Message[],
+                        INT_ Number_of_Nodes,
+                        INT_ Number_of_U_Scalars,
+                        INT_ Number_of_U_Vectors,
+                        INT_1D * U_Scalar_Flags,
+                        INT_1D * U_Vector_Flags,
+                        DOUBLE_1D ** U_Scalars,
+                        DOUBLE_3D ** U_Vectors)
+
+DESCRIPTION
+-----------
+
+Malloc solution data arrays.
+
+INPUT ARGUMENTS
+---------------
+
+Number_of_Nodes          : Number of nodes.
+
+Number_of_U_Scalars      : Number of scalar solution variables.
+
+Number_of_U_Vectors      : Number of vector solution variables.
+
+U_Scalar_Flags           : Flag for each scalar solution variable available.
+                           If U_Scalar_Flags[U_Scalar_Index] = 1 then the
+                           scalar variable associated with U_Scalar_Index is
+                           allocated, read, and written.
+                           If U_Scalar_Flags[U_Scalar_Index] = -1 then the
+                           scalar variable associated with U_Scalar_Index is
+                           allocated and read.
+                           If U_Scalar_Flags[U_Scalar_Index] = 0 then the
+                           scalar variable associated with U_Scalar_Index is
+                           not allocated.
+
+U_Vector_Flags           : Flag for each vector solution variable available.
+                           If U_Vector_Flags[U_Vector_Index] = 1 then the
+                           vector variable associated with U_Vector_Index is
+                           allocated, read, and written.
+                           If U_Vector_Flags[U_Vector_Index] = -1 then the
+                           vector variable associated with U_Vector_Index is
+                           allocated and read.
+                           If U_Vector_Flags[U_Vector_Index] = 0 then the
+                           vector variable associated with U_Vector_Index is
+                           not allocated.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred mallocing arrays.
+>0                       : Errors occurred mallocing arrays.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+U_Scalars                : Scalar solution variables.
+
+U_Vectors                : Vector solution variables.

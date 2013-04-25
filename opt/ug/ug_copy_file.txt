@@ -1,0 +1,22 @@
+ROUTINE
+-------
+
+INT_ ug_copy_file (char File_Name[],
+                   char New_File_Name[])
+
+DESCRIPTION
+-----------
+
+Copy file.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+New_File_Name            : New file name.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred copying file.
+<0                       : Errors occurred copying file.

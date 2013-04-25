@@ -1,0 +1,20 @@
+#!/bin/sh
+
+main_program_base_name=ugc
+exe_base_name=ugc
+
+compile_lib_names="ug_io ug_cpp ug3 ug"
+
+if [ "${cgns_lib_flag}" = "yes" ]; then
+
+	opt_define_flags="${opt_define_flags} -D_USE_CGNS_LIB_"
+
+	compile_lib_names="${compile_lib_names} cgns"
+fi
+
+if [ "${mesh_lib_flag}" = "yes" ]; then
+
+	opt_define_flags="${opt_define_flags} -D_USE_MESH_LIB_"
+
+	compile_lib_names="${compile_lib_names} lm5"
+fi

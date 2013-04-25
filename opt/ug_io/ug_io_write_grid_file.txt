@@ -1,0 +1,145 @@
+ROUTINE
+-------
+
+INT_ ug_io_write_grid_file (char Grid_File_Name[],
+                            char Error_Message[],
+                            UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr,
+                            INT_ Message_Flag,
+                            INT_ Number_of_BL_Vol_Tets,
+                            INT_ Number_of_Nodes,
+                            INT_ Number_of_Surf_Quads,
+                            INT_ Number_of_Surf_Trias,
+                            INT_ Number_of_Vol_Hexs,
+                            INT_ Number_of_Vol_Pents_5,
+                            INT_ Number_of_Vol_Pents_6,
+                            INT_ Number_of_Vol_Tets,
+                            INT_1D * Surf_Grid_BC_Flag,
+                            INT_1D * Surf_ID_Flag,
+                            INT_1D * Surf_Reconnection_Flag,
+                            INT_4D * Surf_Quad_Connectivity,
+                            INT_3D * Surf_Tria_Connectivity,
+                            INT_8D * Vol_Hex_Connectivity,
+                            INT_1D * Vol_ID_Flag,
+                            INT_5D * Vol_Pent_5_Connectivity,
+                            INT_6D * Vol_Pent_6_Connectivity,
+                            INT_4D * Vol_Tet_Connectivity,
+                            DOUBLE_3D * Coordinates,
+                            DOUBLE_1D * Initial_Normal_Spacing,
+                            DOUBLE_1D * BL_Thickness)
+
+DESCRIPTION
+-----------
+
+Write grid data to a standard UG surface or volume grid file.
+
+INPUT ARGUMENTS
+---------------
+
+Grid_File_Name           : Grid file name.
+                           If the grid file name is blank or NULL then nothing
+                           is done.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+Message_Flag             : Output message flag.
+                           If Message_Flag =  0 then no information messages
+                           are written.
+                           If Message_Flag >= 1 then information messages are
+                           written to standard output.
+
+Number_of_BL_Vol_Tets    : Number of boundary-layer/structured-layer
+                           tetrahedral elements.
+
+Number_of_Nodes          : Number of nodes.
+
+Number_of_Surf_Quads     : Number of boundary surface quad faces.
+                           If < 0 then the absolute value is assumed to be the
+                           number of quad faces and the ID values from the
+                           Surf_ID_Flag array will be internally reordered
+                           consequtively 1,2,3... in the output grid file.
+
+Number_of_Surf_Trias     : Number of boundary surface tria faces.
+                           If < 0 then the absolute value is assumed to be the
+                           number of tria faces and the ID values from the
+                           Surf_ID_Flag array will be internally reordered
+                           consequtively 1,2,3... in the output grid file.
+
+Number_of_Vol_Hexs       : Number of volume grid hex elements.
+
+Number_of_Vol_Pents_5    : Number of volume grid pent elements with five nodes
+                           (pyramid).
+
+Number_of_Vol_Pents_6    : Number of volume grid pent elements with six nodes
+                           (prismatic).
+
+Number_of_Vol_Tets       : Number of volume grid tet elements.
+
+Surf_Grid_BC_Flag        : Surface face grid boundary condition flag.
+                           If Surf_Grid_BC_Flag = NULL then this array is not
+                           used and dummy values are written where required.
+
+Surf_ID_Flag             : Surface face ID flag.
+                           If Number_of_Surf_Quads or Number_of_Surf_Trias < 0
+                           then the ID values from the Surf_ID_Flag array will
+                           be internally reordered consequtively 1,2,3... in
+                           the output grid file.
+
+Surf_Reconnection_Flag   : Surface face reconnection flag.
+                           If Surf_Reconnection_Flag = NULL then this array is
+                           not used and dummy values are written where required.
+
+Surf_Quad_Connectivity   : Surface grid quad face connectivity.
+
+Surf_Tria_Connectivity   : Surface grid tria face connectivity.
+
+Vol_Hex_Connectivity     : Volume grid hexahedral element connectivity.
+
+Vol_ID_Flag              : Volume element ID flag.
+                           If Vol_ID_Flag = NULL then this array is not used
+                           and dummy values are written where required.
+			   If all elements of Vol_ID_Flag are set to to the same
+                           value and that value is <= 0 then the values of
+                           Vol_ID_Flag are determined and set, prior to writing
+                           the grid file, from the input surface and volume grid
+                           connectivity.
+
+Vol_Pent_5_Connectivity  : Volume grid 5-node pentahedral element connectivity.
+
+Vol_Pent_6_Connectivity  : Volume grid 6-node pentahedral element connectivity.
+
+Vol_Tet_Connectivity     : Volume grid tetrahedral element connectivity.
+
+Coordinates              : Grid node coordinates.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing for boundary-layer
+                           type grids.
+                           If Initial_Normal_Spacing = NULL then this array is
+                           not used and dummy values are written where
+                           required.
+
+BL_Thickness             : Thickness of boundary-layer region for boundary-layer
+                           type grids.
+                           If BL_Thickness = NULL then this array is
+                           not used and dummy values are written where
+                           required.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred writing grid file.
+<0                       : The grid file name is blank, NULL, or is not a
+                           standard UG grid file. Nothing is done in this case.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred writing grid file.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Vol_ID_Flag              : Volume element ID flag.
+                           If all elements of Vol_ID_Flag are set to -123456
+                           on input then the values of Vol_ID_Flag are
+                           determined and set from the input surface and volume
+                           grid connectivity.

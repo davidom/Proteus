@@ -1,0 +1,31 @@
+ROUTINE
+-------
+
+INT_ ug_get_double_data (char File_Name[],
+                         INT_ dim,
+                         INT_ *n,
+                         double *data)
+
+DESCRIPTION
+-----------
+
+Incrementally get double array data from a tmp file.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : Data file name.
+dim                      : Dimension of each data elements.
+data                     : Data array.
+
+OUTPUT ARGUMENTS
+----------------
+n                        : Number of data elements.
+
+RETURN VALUE
+------------
+
+0                        : Then data was read.
+-1                       : Then number of data elements is 0 and file was
+                           rewound.
+>400                     : Unable to read data.

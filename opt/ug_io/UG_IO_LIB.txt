@@ -1,0 +1,122 @@
+UG_IO LIBRARY : UNSTRUCTURED GRID INPUT/OUTPUT ROUTINES
+-------------------------------------------------------
+
+The following routines can be used to access, read, and write standard UG grid,
+node, flow and function files.
+
+   ug_io_case_name                : Extract case name from a standard UG file
+                                    name.
+   ug_io_check_file_name          : Check a file name and extract a case name.
+   ug_io_convert                  : Convert standard UG grid, node, flow, or
+                                    function files.
+   ug_io_convert_2d               : Convert standard UG 2D grid or node files.
+   ug_io_convert_mb               : Convert standard UG multi-block grid, node,
+                                    flow, or function files.
+   ug_io_file_format              : Determine file format from a standard UG
+                                    file name.
+   ug_io_file_info                : Determine file suffixes and case name from
+                                    a standard UG file name.
+   ug_io_file_mode                : Determine the file mode from a standard UG
+                                    file name.
+   ug_io_file_suffix              : Extract suffix from a standard UG file name.
+   ug_io_file_type                : Determine file type of a standard UG file
+                                    name.
+   ug_io_file_type_suffix         : Extract file type suffix from a standard UG
+                                    file name.
+   ug_io_find_file                : Find file name of an existing (and
+                                    readable) standard UG file.
+
+   ug_io_read_2d_grid_file        : Read grid data from a standard UG 2D grid
+                                    file.
+   ug_io_read_2d_node_file        : Read node data from a standard UG 2D node
+                                    data file.
+   ug_io_read_flow_file           : Read and create flow/function data from a
+                                    standard UG flow and/or function file.
+   ug_io_read_grid_file           : Read grid data from a standard UG grid
+                                    file.
+   ug_io_read_mb_flow_file        : Read and create flow/function data from a
+                                    standard UG multi-block flow and/or
+                                    function file.
+   ug_io_read_mb_grid_file        : Read grid data from a standard UG
+                                    multi-block grid file.
+   ug_io_read_node_file           : Read node data from a standard UG node data
+                                    file.
+
+   ug_io_read_tags_file           : Read surface grid BC and normal spacing data
+                                    from a standard UG tags data file.
+
+   ug_io_version                  : Get compile date and OS for ug_io library.
+
+   ug_io_write_2d_grid_file       : Write grid data to a standard UG 2D grid
+                                    file.
+   ug_io_write_2d_node_file       : Write node data to a standard UG 2D node
+                                    data file.
+   ug_io_write_flow_file          : Write flow/function data to a standard UG
+                                    flow and/or function file.
+   ug_io_write_grid_file          : Write grid data to a standard UG grid file.
+   ug_io_write_mb_flow_file       : Write flow/function data to a standard UG
+                                    multi-block flow and/or function file.
+   ug_io_write_mb_grid_file       : Write grid data to a standard UG
+                                    multi-block grid file.
+   ug_io_write_node_file          : Write node data to a standard UG node data
+                                    file.
+
+   ug_io_initialize_param         : Set the UG_IO file parameters.
+   ug_io_malloc_param             : Malloc UG_IO parameter structure arrays.
+   ug_io_free_param               : Free UG_IO parameter structure arrays.
+   ug_io_write_param_info         : Write information on all UG_IO parameters.
+
+   ug_io_malloc_2d_grid           : Malloc 2D grid data arrays.
+   ug_io_malloc_2d_node           : Malloc 2D node data arrays.
+   ug_io_malloc_flow              : Malloc flow/function data arrays.
+   ug_io_malloc_flow_flag         : Malloc flow/function flag arrays.
+   ug_io_malloc_grid              : Malloc grid data arrays.
+   ug_io_malloc_mb_block          : Malloc multi-block block arrays.
+   ug_io_malloc_mb_grid           : Malloc multi-block grid data arrays.
+   ug_io_malloc_node              : Malloc node data arrays.
+
+   ug_io_free_2d_grid             : Free 2D grid data arrays.
+   ug_io_free_2d_node             : Free 2D node data arrays.
+   ug_io_free_flow                : Free flow/function data arrays.
+   ug_io_free_flow_flag           : Free flow/function flag arrays.
+   ug_io_free_grid                : Free grid data arrays.
+   ug_io_free_mb_block            : Free multi-block block arrays.
+   ug_io_free_mb_grid             : Free multi-block grid data arrays.
+   ug_io_free_node                : Free node data arrays.
+
+   ug_io_error_message            : Write a UG_IO error message.
+
+To use these routines, the UG (general purpose routines) and UG_IO libraries
+must be linked using the compiler flags "-Lsimcenter_sys_dir -lug_io -lug
+-lug3". The directory simcenter_sys_dir is the SimCenter system directory that
+is stored in the environment variable $SIMCENTER_SYS_DIR. C or C++ source code
+which contains a call to one of the UG_IO routines must have the following
+include statement, #include "simcenter_sys_dir/src/ug_io/UG_IO_LIB.h". This
+statement includes the UG library include file, /src/ug/UG_LIB.h and the UG3
+library include file, simcenter_sys_dir/src/ug/UG3_LIB.h. See the UG_IO routine
+documentation files, simcenter_sys_dir/src/ug_io/ug_io_*.txt (for each of the
+above routines), UG library documentation file, 
+simcenter_sys_dir/src/ug/UG_LIB.txt, and the UG_IO file and grid documentation
+files, simcenter_sys_dir/doc/ug/UG_IO_*.html, for further information.
+
+Testing routines are also provided in directory simcenter_sys_dir/src/ug_io/.
+These routines are commented and provide examples for implementation of all
+primary UG_IO library routines. The executable ug_io.exe (which uses these
+routines and is accessible through the scripts ug_io and ugc) can be used to
+write parameter information, read files, or convert files. The testing routines
+are listed below.
+
+   ug_io.c                  : Test ug_io routines (main program). The
+                              corresponding executable ug_io.exe is used by the
+                              scripts ug_io and ugc. Each has several options.
+                              Run the script ug_io or ugc to see available
+                              options.
+
+   ug_io_test_2d.c          : Test ug_io 2D routines.
+   ug_io_test_2d_use.c      : Use 2D data.
+
+   ug_io_test_3d.c          : Test ug_io 3D routines.
+   ug_io_test_3d_use.c      : Use 3D data.
+
+   ug_io_test_3d_mb.c       : Test ug_io 3D multi-block routines.
+   ug_io_test_3d_mb_use.c   : Use 3D multi-block data.

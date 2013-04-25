@@ -1,0 +1,63 @@
+ROUTINE
+-------
+
+INT_ ug_mp_setup (INT_ iproc,
+                  INT_ nproc,
+                  char TMP_File_Dir[])
+
+DESCRIPTION
+-----------
+
+Setup parallel processing mode.
+
+INPUT ARGUMENTS
+---------------
+
+iproc                    : Current processor ID.
+nproc                    : Number of processors.
+TMP_File_Dir             : TMP file directory.
+
+RETURN VALUE
+---------------
+
+0                        : Parallel processing setup complete.
+>0                       : Error during setup of parallel processing mode.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_mp (char Task[])
+
+DESCRIPTION
+-----------
+
+Perform parallel processing task.
+
+INPUT ARGUMENTS
+---------------
+
+Task                     : Task label.
+                           If Task = "iproc" then return current processor ID.
+                           If Task = "nproc" then return the number of
+                           processors for current job.
+                           If Task = "mode" then return parallel processing
+                           mode flag (1 if in parallel mode or 0 if in serial
+                           mode).
+                           If Task = "setup" then setup parallel processing
+                           mode.
+                           If Task = "wait" then wait until all other processors
+                           are idle.
+                           If Task = "cleanup" then cleanup parallel processing
+                           files and data.
+                           If Task = "end" then end parallel processing mode.
+
+RETURN VALUE
+---------------
+
+Data                     : Data requested (iproc, nproc, or mode).
+
+OR
+
+0                        : Task completed.
+>0                       : Error completing tasks.

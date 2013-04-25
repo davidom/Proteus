@@ -1,0 +1,18 @@
+INT_ ug3_srch
+ (INT_ *,
+  INT_,
+  INT_,
+  INT_,
+  INT_4D *,
+  INT_4D *,
+  INT_1D *,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double *,
+  double *,
+  double *,
+  double *,
+  DOUBLE_3D *);

@@ -1,0 +1,30 @@
+ROUTINE
+-------
+
+void ug_io_error_message (char Error_Message[],
+                          INT_ Error_Flag,
+                          INT_ *Known_Error)
+
+DESCRIPTION
+-----------
+
+Write a UG_IO error message.
+
+INPUT ARGUMENTS
+---------------
+
+Error_Message            : Error message.
+
+Error_Flag               : Error flag.
+                           If the value of the error flag is between 600 and
+                           699 then the error is a UG_IO error and an error
+                           message will be written to standard error. Otherwise
+                           nothing will be done.
+
+OUTPUT ARGUMENTS
+----------------
+
+Known_Error              : Known error flag.
+                           If the value of the error flag is between 600 and
+                           699 then the error is a UG_IO error and the known
+                           error flag will be set to 1.

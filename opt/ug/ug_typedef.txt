@@ -1,0 +1,7 @@
+UG LIBRARY : TYPE DEFINITIONS AND STRUCTURES
+--------------------------------------------
+
+The UG include file, UG_LIB.h, includes UG library type definitions and
+structures (from files ug_typedef.h and UG_Param_Struct.h). The following types
+and structures are defined. The type INT_ allows all type int parameters to be
+changed to type short int or type long int if necessary.

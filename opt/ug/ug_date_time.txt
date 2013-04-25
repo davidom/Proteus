@@ -1,0 +1,16 @@
+ROUTINE
+-------
+
+void ug_date_time (char Current_Date[])
+                   char Current_Time[]);
+
+DESCRIPTION
+-----------
+
+Get current date and time.
+
+OUTPUT ARGUMENTS
+----------------
+
+Date                     : Current date in form DD Mon YEAR.
+Time                     : Current time in form HH:MM:SS.

@@ -1,0 +1,12 @@
+INT_ ug_get_param_from_arg_or_file
+ (char *argv[],
+  char Char_Param_Value[],
+  char Param_Name[],
+  char UG_Param_File_Name[],
+  INT_1D **Int_Param_Vector,
+  INT_ argc,
+  INT_ *Int_Param_Value,
+  INT_ Param_Type_Flag,
+  INT_ *Param_Vector_Entries,
+  DOUBLE_1D **Double_Param_Vector,
+  double *Double_Param_Value);

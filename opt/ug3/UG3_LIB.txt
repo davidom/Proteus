@@ -1,0 +1,266 @@
+
+UG3 LIBRARY      : UNSTRUCTURED GRID GENERAL PURPOSE 3D GRID RELATED ROUTINES
+-----------------------------------------------------------------------------
+
+The following 3D grid relate routines can be used to check existing grids for
+errors and create a variety of grid lists and connectivity maps.
+
+ug3_angmax                     : Find maximum dihedral angle for all tetrahedral
+                                 elements of volume grid.
+ug3_angmax2                    : Determine maximum dihedral angle and length
+                                 scale ratio for each set of flagged elements.
+ug3_angmaxb                    : Find maximum planar angle for all triangular
+                                 faces of surface grid.
+ug3_bfv                        : Determine a normal vector for each boundary
+                                 face.
+ug3_bnd_nodes                  : Determine node index map for boundary nodes
+                                 and optionally either remove interior nodes
+                                 from grid data or continue node index map with
+                                 interior nodes following boundary nodes.
+ug3_bnd_vol_nodes              : Reorder nodes so that boundary nodes are first
+                                 followed by interior nodes.
+ug3_bsmth                      : Smooth a boundary function value using centroid
+                                 averaging.
+ug3_bv                         : Determine a normal vector for each boundary
+                                 node.
+ug3_bv2                        : Determine a normal vector for each boundary
+                                 node.
+ug3_bvbcf                      : Determine a normal vector for each boundary
+                                 node attached to a frozen partition boundary
+                                 face.
+ug3_bvls                       : Determine a normal vector for a given set of
+                                 boundary surface faces using least-squares
+                                 optimization.
+ug3_chk                        : Check element connectivity and element volume.
+ug3_chkb                       : Check boundary face connectivity.
+ug3_chkbc                      : Check grid boundary condition flag values.
+ug3_chkbcf                     : Check frozen boundary surface faces to see if
+                                 they are actually satisfied boundary surface
+                                 faces.
+ug3_chkbcp1                    : Check to see that normal vectors are planar for
+                                 all automatically set intersecting BL surfaces.
+ug3_chkbcp2                    : Check included angle between intersecting BL
+                                 surfaces and adjacent surfaces for all
+                                 automatically set intersecting BL surfaces.
+ug3_chkbda                     : Check dihedral angle between adjacent
+                                 triangular faces of surface grid.
+ug3_chkblis                    : Check included angle between intersecting
+                                 boundary-layer surfaces and adjacent surfaces.
+ug3_chkblisbc                  : Check if boundary faces with a grid BC for a
+                                 surface that intersect the BL region are also
+                                 adjacent to a surface that generates a BL
+                                 region.
+ug3_chkbn                      : Check that all nodes are on a boundary surface
+                                 and that all faces reference included nodes.
+ug3_chkbq                      : Check planar face angles for each triangular
+                                 face of surface grid.
+ug3_chkbsurf                   : Check and prepare a boundary surface grid for
+                                 volume grid generation.
+ug3_chkplane                   : Check if a given surface grid is planar.
+ug3_chkq                       : Check dihedral angles for each tetrahedral
+                                 element of volume grid.
+ug3_chkvol                     : Check tetrahedral element volume.
+ug3_chkvolm                    : Check mixed element volume.
+ug3_disoel                     : Search for and delete isolated elements with
+                                 no neighbors.
+ug3_dv                         : Determine circum-radius and circum-center
+                                 coordinates for a given element.
+ug3_dx                         : Determine maximum dimension for a set of nodes.
+ug3_error_message              : Write UG3 error message.
+ug3_extract_id_surf            : Extract a component surface grid corresponding
+                                 to a given surface ID.
+ug3_extract_id_surf2           : Extract a component surface grid corresponding
+                                 to a given surface ID.
+ug3_face_sort                  : Face sorting routines for face based data
+                                 structures.
+ug3_file_format                : Check file format suffix and set byte order.
+ug3_ibfe                       : Determine boundary face to boundary face
+                                 connectivity for a multiply connected boundary
+                                 face.
+ug3_ibfibf                     : Determine boundary face to boundary face
+                                 connectivity. Simply connected (no more than
+                                 two boundary faces per boundary edge) surfaces
+                                 are reordered if all faces do not have the
+                                 same orientation.
+ug3_ibfibf0                    : Determine initial boundary face to boundary
+                                 face connectivity.
+                                 Also automatically set the grid boundary
+                                 condition flag for embedded/transparent
+                                 surfaces. If a surface has at least one edge
+                                 that is free then automatically set the grid
+                                 boundary condition flag for that surface to an
+                                 embedded/transparent surface. An embedded
+                                 surface is defined as a set of connected faces
+                                 that have one or more open outer edges and any
+                                 other outer edges connected to one or more
+                                 faces of another surface. 
+ug3_ibfin                      : Create a list of boundary faces surrounding a
+                                 node.
+ug3_iblisibf                   : Flag boundary faces that intersect the BL
+                                 region.
+ug3_ibnin                      : Create a list of boundary nodes surrounding a
+                                 node.
+ug3_iboibf                     : Determine the number of closed boundary
+                                 objects.
+ug3_ibor                       : Re-order the boundary surface grid connectivity
+                                 if any boundary object does not have RH
+                                 orientation. 
+ug3_idibf                      : Set boundary surface face IDs by boundary
+                                 surface face grid BC.
+ug3_idiel                      : Set volume ID flag.
+ug3_idielm                     : Set volume ID flag in mixed element region.
+ug3_idsmth                     : Distribute normal spacing and BL thickness on
+                                 surface faces set by individual surface face
+                                 ID.
+ug3_ielibf                     : Determine for each boundary face the element
+                                 that contains that face and set the element
+                                 neighbors at boundaries.
+ug3_ielibf0                    : Determine for each boundary face the element
+                                 that contains the face.
+ug3_ielibf2                    : Determine for each boundary face the element
+                                 that contains the face from the element to
+                                 element connectivity.
+ug3_ielibfm                    : Determine for each boundary face the element
+                                 that contains the face and an ID flag that
+                                 identifies the element face orientation.
+ug3_ieliel                     : Determine the element to element connectivity.
+ug3_ieliel2                    : Determine the element to element connectivity
+                                 from element node connectivity.
+ug3_ieliel2b                   : Add boundary faces to element to element
+                                 connectivity.
+ug3_ieliel3b                   : Add boundary faces to element to element
+                                 connectivity and determine for each boundary
+                                 face the element that contains that face.
+ug3_ielin                      : Create a list of elements surrounding a node.
+ug3_ielinm                     : Create a list of mixed elements surrounding a
+                                 node.
+ug3_ieljel                     : Create list of nearby elements for each
+                                 element.
+ug3_inix                       : Determine map based on physical location.
+ug3_injn                       : Reorder nodes to be connected or un-connected.
+ug3_interp                     : Interpolate data at new locations from
+                                 existing data and grid.
+ug3_iobjiel                    : Determine the number of solid objects.
+ug3_irfibf                     : Check the boundary face reconnection flag and
+                                 reset it so that the flag matches that of the
+                                 adjacent faces, and set the boundary
+                                 reconnection flag between faces of different
+                                 surface ID's.
+ug3_irfibfm                    : Reset the boundary face reconnection flag at
+                                 partition boundary surface faces and at
+                                 transparent boundary surface faces.
+ug3_iviel                      : Label elements that are fully connected as a
+                                 single volume .
+ug3_lrmin                      : Determine minimum edge length ratio.
+ug3_mbcf                       : Set grid boundary condition flag at frozen
+                                 partition boundary surface face nodes.
+ug3_mdisn                      : Set a flag at discontinuous boundary nodes.
+ug3_nelpnmax                   : Check maximum elements per node.
+ug3_nnodeb                     : Determine the maximum node index on the
+                                 boundary surface.
+ug3_nnodeb2                    : Determine the maximum node index on the
+                                 boundary surface from the element neighbor
+                                 connectivity.
+ug3_nstv                       : Normalize and check a given normal vector and
+                                 then create a suitable set of orthogonal
+                                 tangential vectors.
+ug3_octree                     : Create, search within, modify, and delete an
+                                 octree based data structure.
+ug3_qtria                      : Replace quad surface faces with tria surface
+                                 faces.
+ug3_read_surf_grid_file        : Read grid data from a SURF surface grid file.
+ug3_read_ufunc_func_file       : Incrementally read solution data from a UFUNC
+                                 function file.
+ug3_read_ugrid_grid_file       : Incrementally read grid data from a UGRID
+                                 volume grid file.
+ug3_reorder0                   : Re-orders the elements so that the elements
+                                 with mflag[ielem] == 0 are first in the
+                                 ordering if there are at least relem0*nelem
+                                 elements to be re-ordered.
+ug3_reorder0bf                 : Re-orders the boundary faces so that the
+                                 boundary faces with mflag[ibface] == 0 are
+                                 first in the ordering.
+ug3_reorder0bn                 : Re-orders the boundary nodes so that the
+                                 boundary nodes with mflag[inode] == 0 are
+                                 first in the ordering.
+ug3_reorder0n                  : Re-orders the nodes so that the nodes with
+                                 mflag[inode] == 0 are first in the ordering.
+ug3_reorderb                   : Re-orders nodes so that all boundary nodes are
+                                 first in the ordering.
+ug3_reorderid                  : Re-order the boundary faces and nodes so that
+                                 the boundary faces and nodes with the same ID
+                                 are grouped and consecutively ordered together.
+                                 Also, create new duplicate boundary nodes such
+                                 that each boundary face group with the same ID
+                                 have unique nodes that are not shared by any
+                                 other ID group.
+ug3_reordern                   : Re-orders the nodes so that the nodes of
+                                 elements less than ielem0 are first in the
+                                 ordering.
+ug3_rmtbf                      : Remove internal transparent/embedded surface
+                                 faces from boundary surface connectivity and
+                                 reset element neighbor connectivity.
+ug3_rmtbfd                     : Remove duplicate faces and nodes from
+                                 transparent boundary surface faces.
+ug3_set_irfibf                 : Set reconnection flag based on dihedral angle
+                                 between adjacent triangular faces of surface
+                                 grid and turn reconnection off between faces
+                                 with different surface ID flags.
+ug3_setbcp                     : Check for planar surfaces that are not BL
+                                 generating surfaces and automatically set the
+                                 grid boundary condition flag for them to that
+                                 for an intersecting surface.
+ug3_sgins                      : Insert re-generated sub-grid into grid.
+ug3_sign                       : Check the element connectivity ordering for RH
+                                 rule.
+ug3_sliver_info                : Get information about sliver elements.
+ug3_srch                       : Find the element that contains the node
+                                 x01,x02,x03.
+ug3_srchbf                     : Find the boundary surface face that contains
+                                 the node x01, x02, x03.
+ug3_subgrid                    : Extract sub-grid for a specified element
+                                 region.
+ug3_surf_error_message         : Write a UG3 boundary surface grid error message
+                                 and grid file.
+ug3_tbfd                       : Create duplicate faces and nodes for
+                                 transparent boundary surface faces.
+ug3_tbfd0                      : Perform primary tasks required to create
+                                 duplicate faces and nodes for transparent
+                                 boundary surface faces.
+ug3_tvol                       : Compute total element volume.
+ug3_version                    : Put compile date, compile OS, version date, and
+                                 version number in text string.
+ug3_vol                        : Compute element volumes.
+ug3_volm                       : Compute tet, prism, pyramid, and hex element
+                                 volumes.
+ug3_volr                       : Determine ratio of minimum to maximum element
+                                 volume at each node.
+ug3_vsmth                      : Smooth a function value using centroid
+                                 averaging.
+ug3_write_surf_grid_error_file : Write a UG3 boundary surface grid file with
+                                 faces in error identified or a surface grid
+                                 node error file with nodes in error listed.
+ug3_write_surf_grid_file       : Write grid data to a SURF surface grid file.
+ug3_write_ufunc_func_file      : Incrementally write solution data to a UFUNC
+                                 function file.
+ug3_write_ugrid_grid_file      : Incrementally write grid data to a UGRID
+                                 volume grid file.
+ug3_write_ugrid_grid_file2     : Incrementally write (tet only) grid data to a
+                                 UGRID volume grid file.
+ug3_write_vnode_node_file      : Write node data to a 3D VNODE directional
+                                 source node data file.
+ug3_x2x3                       : Transform to 3d coordinates from 2d plane
+                                 orientated coordinates.
+ug3_xmax                       : Determine min/max coordinates for a given set
+                                 of nodes.
+
+To use these routines, the UG (general purpose routines), UG3 (general purpose
+3D routines), and DFTR3 (3D distribution function and transformation vector
+library) must be linked using the compiler flags "-Lsimcenter_sys_dir -lug3
+-lug". The directory simcenter_sys_dir is the SimCenter system directory
+that is stored in the environment variable $SIMCENTER_SYS_DIR. C or C++ source
+code that contains a call to one of the UG3 routines must have the following
+include statement, #include "simcenter_sys_dir/src/ug3/UG3_LIB.h". This
+statement includes the UG library include file,
+simcenter_sys_dir/src/ug/UG_LIB.h. See the UG library documentation file,
+simcenter_sys_dir/src/ug/UG_LIB.txt, for further information.

@@ -1,0 +1,32 @@
+ROUTINE
+-------
+
+INT_ ug_get_char_param (char _Char_Param_Name[],
+                        char _Char_Param_Value[],
+                        UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Get the value and type of a UG type char parameter.
+
+INPUT ARGUMENTS
+---------------
+
+_Char_Param_Name         : Name of UG type char parameter.
+
+UG_Param_Struct_Ptr      : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+1                        : Then a parameter was found with a matching name and
+                           the output arguments were set.
+0                        : Then no match was found and the output arguments were
+                           not set.
+
+
+OUTPUT ARGUMENTS
+---------------
+
+_Char_Param_Value        : UG type char parameter value.

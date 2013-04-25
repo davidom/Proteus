@@ -1,0 +1,35 @@
+ROUTINE
+-------
+
+void ug_io_free_2d_grid (INT_2D * Bnd_Edge_Connectivity,
+                         INT_1D * Bnd_Edge_Grid_BC_Flag,
+                         INT_1D * Bnd_Edge_ID_Flag,
+                         INT_4D * Quad_Connectivity,
+                         INT_3D * Tria_Connectivity,
+                         DOUBLE_2D * Coordinates,
+                         DOUBLE_1D * Initial_Normal_Spacing,
+                         DOUBLE_1D * BL_Thickness)
+
+DESCRIPTION
+-----------
+
+Free 2D grid data arrays.
+
+INPUT ARGUMENTS
+---------------
+
+Bnd_Edge_Connectivity    : Boundary edge connectivity.
+
+Bnd_Edge_Grid_BC_Flag    : Boundary edge grid boundary condition flag.
+
+Bnd_Edge_ID_Flag         : Boundary edge ID flag.
+
+Quad_Connectivity        : Quad face connectivity.
+
+Tria_Connectivity        : Tria face connectivity.
+
+Coordinates              : Grid node coordinates.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing for boundary-layer.
+
+BL_Thickness             : Thickness of boundary-layer for boundary-layer grids.

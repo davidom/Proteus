@@ -1,0 +1,56 @@
+ROUTINE
+-------
+
+INT_ ug_get_byte_order ()
+
+DESCRIPTION
+-----------
+
+Set host byte ordering.
+
+RETURN VALUE
+------------
+
+1                        : Big endian byte ordering.
+-1                       : Little endian byte ordering.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+void ug_reverse_byte_order (void * Data,
+                            size_t Size,
+                            INT_ Number)
+
+DESCRIPTION
+-----------
+
+Reverse byte order if file format and host byte ordering differ.
+
+INPUT ARGUMENTS
+---------------
+
+Data                     : Data.
+Size                     : Size of data in bytes.
+Number                   : Number of data items.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+void ug_set_byte_order (INT_ File_Format)
+
+DESCRIPTION
+-----------
+
+Set file format and host to big or little endian byte ordering.
+
+INPUT ARGUMENTS
+---------------
+
+File_Format              : File format.
+                           If File_Format is less than 0 then set big
+                           endian ordering.
+                           If File_Format is greater than 0 then set little
+                           endian ordering.
+

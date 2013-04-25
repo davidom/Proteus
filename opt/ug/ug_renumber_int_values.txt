@@ -1,0 +1,39 @@
+ROUTINE
+-------
+
+INT_ ug_renumber_int_values (INT_ n,
+                             INT_ *number_of_new_int_values,
+                             INT_ *max_int_value,
+                             INT_ *min_int_value,
+                             INT_1D * int_values,
+                             INT_1D * new_int_values,
+                             INT_1D ** map_ptr)
+
+DESCRIPTION
+-----------
+
+Renumber a list of integer values so that the values are in either
+consecutive and ascending order 1,2,3... or consecutive and first encountered
+order and save a map of the new values.
+
+
+INPUT ARGUMENTS
+---------------
+
+n                        : Number of values.
+number_of_new_int_values : Ordering flag.
+                           If number_of_new_int_values = -1 then use first
+                           encountered order otherwise use ascending order.
+int_values               : List of values. Index varies from 1 to n.
+
+OUTPUT ARGUMENTS
+----------------
+
+number_of_new_int_values : Number of new values.
+max_int_value            : Maximum value in list of values.
+min_int_value            : Minimum value in list of values.
+new_int_values           : List of new values in ascending order. Index varies
+                           from 1 to n. If new_int_values is set to NULL on
+                           input then skip setting new values.
+map_ptr                  : Pointer to map of new values. Index varies from 0 to
+                           max_int_value-min_int_value.

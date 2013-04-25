@@ -1,0 +1,272 @@
+ROUTINE
+-------
+
+INT_ ug_close_data (char File_Name[])
+
+DESCRIPTION
+-----------
+
+Close a binary TMP file by file name.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+RETURN VALUE
+------------
+
+<0                       : Unable to close binary TMP file.
+0                        : Binary TMP file closed.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_close_dataf (char File_Name[])
+
+DESCRIPTION
+-----------
+
+Close a binary TMP file by file name but don't delete the file or remove it
+from the data structure. If the file is not a true file then it is rewound.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+RETURN VALUE
+------------
+
+<0                       : Unable to close binary TMP file.
+0                        : Binary TMP file closed.
+
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_fclose (FILE * File_Stream)
+
+DESCRIPTION
+-----------
+
+Close a binary TMP or regular file. Equivalent to fclose.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+void ug_file_status_monitor (char *Flag)
+
+DESCRIPTION
+-----------
+
+Turn file status monitor on if Flag="on" or off if Flag="off" (or if Flag!="on).
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+FILE * ug_fopen (char File_Name[],
+                 char File_Mode[])
+
+DESCRIPTION
+-----------
+
+Open a binary TMP or regular file. Equivalent to fopen.
+
+--------------------------------------------------------------------------------
+
+ROUTINE
+-------
+
+INT_ ug_fread (void * Data,
+               size_t Size,
+               INT_ Number_of_Items,
+               FILE * File_Stream)
+
+DESCRIPTION
+-----------
+
+Read from binary TMP or regular file. Equivalent to fread.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+void ug_free_tmp_files ()
+
+DESCRIPTION
+-----------
+
+Close all binary TMP files and free TMP file arrays.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_fwrite (void * Data,
+                size_t Size,
+                INT_ Number_of_Items,
+                FILE * File_Stream)
+
+DESCRIPTION
+-----------
+
+Write to binary TMP or regular file. Equivalent to fwrite.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_get_file_name_tmp_file_index (char File_Name[])
+
+DESCRIPTION
+-----------
+
+Get index for a named binary TMP file that corresponds to a file name.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+RETURN VALUE
+------------
+
+<0                       : No binary TMP file index found for file name.
+Index                    : Binary TMP file index.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_get_file_stream_mode_flag (FILE * File_Stream)
+
+DESCRIPTION
+-----------
+
+Determine if a file stream is associated with a binary TMP file.
+
+INPUT ARGUMENTS
+---------------
+
+File_Stream              : File stream.
+
+RETURN VALUE
+------------
+
+UG_FIO_TMP_FILE_MODE     : TMP file. See UG_LIB.h for define.
+0                        : Regular file.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_get_file_stream_tmp_file_index (FILE * File_Stream)
+
+DESCRIPTION
+-----------
+
+Get index for a named binary TMP file that corresponds to a file stream.
+
+INPUT ARGUMENTS
+---------------
+
+File_Stream              : File stream.
+
+RETURN VALUE
+------------
+
+<0                       : No binary TMP file index found for file stream.
+Index                    : Binary TMP file index.
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+void ug_get_tmp_file_name (char File_Name[],
+                           char UG_TMP_File_Name[])
+
+DESCRIPTION
+-----------
+
+Set binary TMP file name including directory path.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+OUTPUT ARGUMENTS
+----------------
+
+UG_TMP_File_Name         : TMP file name. If a named TMP file directory is not
+                           being used (see ug_set_tmp_file_dir) then
+                           UG_TMP_File_Name is simply set to File_Name. If a
+                           named TMP file directory is being used then the TMP
+                           file name is set to the TMP file directory followed
+                           by the input file name. If the input file name ends
+                           in a + sign then the process ID is added as a suffix.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_rewind (FILE * File_Stream)
+
+DESCRIPTION
+-----------
+
+Rewind a binary TMP or regular file. Equivalent to rewind.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+INT_ ug_set_tmp_file_dir (char UG_TMP_File_Dir[])
+
+DESCRIPTION
+-----------
+
+Set binary TMP file directory and create it if directory doesn't exist.
+
+INPUT ARGUMENTS
+---------------
+
+UG_TMP_File_Dir          : TMP file directory.
+
+RETURN VALUE
+------------
+
+>0                       : Unable to find or create TMP file directory.
+0                        : TMP file directory found or created.
+
+--------------------------------------------------------------------------------
+ROUTINE
+-------
+
+FILE *ug_tmpfile (void)
+
+DESCRIPTION
+-----------
+
+Open a binary TMP file. This routine is equivalent to the system routine
+FILE *tmpfile(). TMP files are given unique names with a ug_tmpfile_ prefix and
+opened in the TMP file directory. If a named TMP file directory is being used
+(see ug_set_tmp_file_dir) then it is used. If not the system TMP file directory
+is used. On all UNIX/Linux type systems the environment variable TMPDIR is used
+as the TMP file directory. If TMPDIR is not set then /tmp is used as the TMP
+file directory. On Windows systems multiple environment variables are checked
+and the first one set is used or if none are set the return value is set to
+NULL. THe environment variables checked in order are TMP, TEMP, APPDATA,
+LOCALAPPDATA, and USERPROFILE.
+
+RETURN VALUE
+------------
+
+NULL                     : Unable to open a valid TMP file.
+File Stream              : File stream for TMP file.
+
+

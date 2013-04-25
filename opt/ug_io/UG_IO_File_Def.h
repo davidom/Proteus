@@ -1,0 +1,22 @@
+#ifndef __UG_IO_FILE_DEF_H__
+
+#define __UG_IO_FILE_DEF_H__
+
+#define UG_IO_2D_EDGE_GRID 1
+#define UG_IO_2D_GEOM_DATA 10
+#define UG_IO_2D_GRID 2
+#define UG_IO_2D_NODE_DATA 9
+#define UG_IO_SURFACE_GRID 3
+#define UG_IO_VOLUME_GRID 4
+#define UG_IO_FUNCTION_DATA 6
+#define UG_IO_GEOM_DATA 7
+#define UG_IO_NODE_DATA 8
+#define UG_IO_TAGS_DATA 11
+
+#define UG_IO_FORMATTED 1
+#define UG_IO_UNFORMATTED_DOUBLE 2
+#define UG_IO_UNFORMATTED_SINGLE 3
+#define UG_IO_BINARY_DOUBLE 4
+#define UG_IO_BINARY_SINGLE 5
+
+#endif

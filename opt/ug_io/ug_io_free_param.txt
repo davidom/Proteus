@@ -1,0 +1,14 @@
+ROUTINE
+-------
+
+void ug_io_free_param (UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Free UG_IO parameter structure arrays.
+
+INPUT ARGUMENTS
+---------------
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.

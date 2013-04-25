@@ -1,0 +1,25 @@
+ROUTINE
+-------
+
+void ug_case_name (char Case_Name[])
+
+DESCRIPTION
+-----------
+
+Set or get case name. On the first call to ug_case_name the value of case name
+is an input argument. On all subsequent calls to ug_case_name the case name is
+an output argument set to the value saved from the first call.
+
+INPUT ARGUMENTS
+---------------
+
+Case_Name                : Case name to set. Case_Name is an input argument
+                           only on the first call. If Case_Name is equal to NULL
+			   or set to a blank string the the case name that is
+			   saved is set to "DEBUG".
+
+OUTPUT ARGUMENTS
+---------------
+
+Case_Name                : Case name from previously set value. Case_Name is
+                           an output argument on all calls past the first one.

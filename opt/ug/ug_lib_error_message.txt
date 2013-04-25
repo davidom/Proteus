@@ -1,0 +1,28 @@
+ROUTINE
+-------
+
+void ug_lib_error_message (INT_ Error_Flag,
+                           INT_ *Known_Error)
+
+DESCRIPTION
+-----------
+
+Write a UG error message.
+
+INPUT ARGUMENTS
+---------------
+
+Error_Flag               : Error flag. If the value of the error flag is
+                           between 400 and 401 then the error is a UG error and
+                           a UG error message will be written to standard error.
+                           Otherwise an error message with an unknown error will
+                           be written to standard error. This routine should be
+                           called last in any sequence of ug related error
+                           message routines (*_error_message).
+
+OUTPUT ARGUMENTS
+----------------
+
+Known_Error              : Known error flag. If the value of the error flag is
+                           between 400 and 499 then the error is a UG error and
+                           the known error flag will be set to 1.

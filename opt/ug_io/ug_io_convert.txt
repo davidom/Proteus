@@ -1,0 +1,49 @@
+ROUTINE
+-------
+
+INT_ ug_io_convert (char Input_File_Name[],
+                    char Output_File_Name[],
+                    INT_ Task_Flag)
+
+DESCRIPTION
+-----------
+
+Convert standard UG grid, node, flow, or function files.
+
+INPUT ARGUMENTS
+---------------
+
+Input_File_Name          : Input grid, node, flow, or function file name.
+
+Output_File_Name         : Output grid, node, flow, or function file name.
+                           If the input file is a grid file then the output
+                           file must also be a grid file type.
+                           If the input file is a flow file then the output
+                           file must either be a flow or function file type.
+                           If the input file is a function file then the output
+                           file must either be a function file type.
+
+Quad_Flag                : Quad flag.
+                           If Quad_Flag = 0 then convert surface grid quads to
+                           trias.
+                           If Quad_Flag = 1 then do not convert surface grid
+                           quads.
+
+Task_Flag                : Task flag.
+                           If Task_Flag =  1 then no output summary of parameter
+                           information.
+                           If Task_Flag =  2 then no output full parameter
+                           information.
+                           If Task_Flag =  3 then convert a grid, node, flow, or
+                           function file.
+                           If Task_Flag =  -3 then convert a grid, node, flow,
+                           or function file and enable interactive allocation/
+                           de-allocation of output file function variables.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred reading or writing the files.
+!=0                      : Errors occurred reading or writing the files.
+                           The return value will be between 600 and 699 or
+                           between -600 and -699.

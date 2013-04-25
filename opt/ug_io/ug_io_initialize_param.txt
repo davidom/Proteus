@@ -1,0 +1,52 @@
+ROUTINE
+-------
+
+INT_ ug_io_initialize_param (char Error_Message[],
+                             INT_ Set_2D_Types,
+                             INT_ Set_3D_Types,
+                             INT_ Set_MBS_Types,
+                             INT_ Set_Func_Types,
+                             INT_ Set_Geom_Types,
+                             INT_ Set_Grid_Types,
+                             INT_ Set_Node_Types,
+                             UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Set the UG_IO grid file type, format, and compression parameters.
+
+INPUT ARGUMENTS
+---------------
+
+Set_2D_Types             : Set 2D file types if set to a value of 1.
+
+Set_3D_Types             : Set 3D file types if set to a value of 1.
+
+Set_MBS_Types            : Set multi-block structured file types if set to a
+                           value of 1.
+
+Set_Func_Types           : Set flow and function data file types if set to a
+                           value of 1.
+
+Set_Geom_Types           : Set geometry data file types if set to a value of 1.
+
+Set_Grid_Types           : Set grid file types if set to a value of 1.
+
+Set_Node_Types           : Set node data file types if set to a value of 1.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred setting file parameters.
+>0                       : Errors occurred setting file parameters.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.

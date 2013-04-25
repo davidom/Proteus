@@ -1,0 +1,20 @@
+ROUTINE
+-------
+
+void ug_version (char Compile_Date[])
+                 char Compile_OS[],
+                 char Version_Date[],
+                 char Version_Number[]);
+
+DESCRIPTION
+-----------
+
+Get compile date, compile OS, version date, and version number for ug library.
+
+OUTPUT ARGUMENTS
+----------------
+
+Compile_Date             : Compile date.
+Compile_OS               : Compile OS information.
+Version_Date             : Version date.
+Version_Number           : Version number.

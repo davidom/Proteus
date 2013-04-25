@@ -1,0 +1,55 @@
+ROUTINE
+-------
+
+INT_ ug_read_param (char UG_Param_File_Name[],
+                    INT_ Message_Flag,
+                    UG_Param_Struct * UG_Par_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Search a UG parameter file for UG parameters to read and reset. If the UG
+parameter file contains a parameter name which matches a UG parameter name then
+that parameter value is reset to that in the file.
+
+A UG parameter file must be a formatted ASCII file of the following form.
+
+  name_1 value_1
+  name_2 value_2
+  name_3 value_3
+  .
+  .
+  .
+  name_N value_N
+
+where name_# is the name of a UG parameter and value_# is the corresponding
+value. Any number of blank lines may be included in the file and any number of
+blank spaces may be contained before, after, and between "name_#" and "value_#".
+A name, "name_#", must exactly match a UG parameter name for a value to be set.
+
+INPUT ARGUMENTS
+---------------
+
+UG_Param_File_Name       : Name of UG parameter file.
+                           If UG_Param_File_Name is blank then nothing is done.
+
+Message_Flag             : Message flag.
+                           If Message_Flag >= 1 then information on each
+                           parameter found and reset is written to standard
+                           output.
+
+UG_Param_Struct          : UG parameter structure.
+
+OUTPUT ARGUMENTS
+----------------
+
+UG_Param_Struct          : UG parameter structure with parameters reset if
+                           found in the UG parameter file.
+
+RETURN VALUE
+------------
+
+0                        : UG parameter file was read and UG parameters were set
+                           succesfully.
+>400                     : An error occurred while reading the UG parameter file
+                           or setting the UG parameters.

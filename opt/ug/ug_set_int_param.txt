@@ -1,0 +1,27 @@
+ROUTINE
+-------
+
+INT_ ug_set_int_param (char _Int_Param_Name[],
+                       INT_ _Int_Param_value,
+                       UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Set the value of a UG type int parameter.
+
+INPUT ARGUMENTS
+---------------
+
+_Int_Param_Name          : Name of UG type int parameter to set.
+
+_Int_Param_value         : Value of UG type int parameter.
+
+UG_Param_Struct          : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+1                        : Then a parameter was found with a matching name and
+                           was set.
+0                        : Then no match was found.

@@ -1,0 +1,15 @@
+ROUTINE
+-------
+
+void ug_cpu_message
+ (char * Label)
+
+DESCRIPTION
+-----------
+
+Write CPU time since last call to standard output.
+
+INPUT ARGUMENTS
+---------------
+
+Label                    : Prefix Text string preceding CPU time output.

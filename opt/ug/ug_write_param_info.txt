@@ -1,0 +1,23 @@
+ROUTINE
+-------
+
+void ug_write_param_info (INT_ UG_Param_Output_Flag,
+                          UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Write information on all UG parameters to standard output.
+
+INPUT ARGUMENTS
+---------------
+
+UG_Param_Output_Flag     : Output flag.
+                           If UG_Param_Output_Flag = 0 then write no
+                           information.
+                           If UG_Param_Output_Flag = 1 then write summary
+                           information.
+                           If UG_Param_Output_Flag = 2 then write all
+                           information.
+
+UG_Param_Struct_Ptr      : UG parameter structure.

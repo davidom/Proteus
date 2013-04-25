@@ -1,0 +1,35 @@
+ROUTINE
+-------
+
+INT_ ug_compress_file (char Error_Message[],
+                       char File_Compression_Suffix[],
+                       char File_Name[])
+
+DESCRIPTION
+-----------
+
+Compress file. The file name suffix is used to determine the compression method.
+
+blank                    : no compression
+.gz                      : gzip file
+.Z                       : compress file
+
+INPUT ARGUMENTS
+---------------
+
+File_Compression_Suffix  : Compression suffix.
+                           If File_Compression_Suffix is blank then nothing is
+                           done.
+
+File_Name                : File name.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred compressing file.
+<0                       : Errors occurred compressing file.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is <0.

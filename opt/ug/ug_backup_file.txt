@@ -1,0 +1,21 @@
+ROUTINE
+-------
+
+INT_ ug_backup_file (char File_Name[])
+
+DESCRIPTION
+-----------
+
+Backup file. The backup file will have the save name as the existing file with
+a suffix of ".bak".
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred backing up file.
+<0                       : Errors occurred backing up file.
