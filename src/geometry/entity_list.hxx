@@ -17,13 +17,13 @@ namespace Proteus
 
 	public:
 	  entity_list() = default;
-	  entity_list(size_t n) { container_.reserve(n); }
+	  entity_list(std::size_t n) { container_.reserve(n); }
 	  ~entity_list() = default;
 
 	  template<typename ...Args>
 	  void push(Args&& ...args) { container_.emplace_back( std::forward<Args>(args)... ); }
-	  size_t size() { return container_.size(); }
-	  const T& operator[] (size_t n) { return container_[n]; }
+	  auto size() const -> decltype(container_.size()) { return container_.size(); }
+	  auto operator[] (std::size_t n) const -> decltype(container_[n]) { return container_[n]; }
   };
 
 }

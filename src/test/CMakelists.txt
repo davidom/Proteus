@@ -12,6 +12,7 @@ Entity_Tests
 Entity_Trait_Tests
 Geometry_Tests
 Entity_List_Tests
+Entity_Iterator_Tests
 )
 
 set(TEST_SOURCES
@@ -19,6 +20,7 @@ entity_tests.cxx
 entity_trait_tests.cxx
 geometry_tests.cxx
 entity_list_tests.cxx
+entity_iterator_tests.cxx
 )
 
 list(LENGTH TEST_NAMES TEST_NAMES_LENGTH_TEMP)

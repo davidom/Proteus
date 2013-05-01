@@ -11,7 +11,7 @@ namespace Proteus
   {
 	typedef entity<std::array<double,2>> node2d;
 	typedef entity<std::array<double,3>> node3d;
-	typedef entity<std::vector<double>> nodeNd;
+	typedef entity<std::vector<double>> node;
 
 	typedef entity<std::array<size_t,2>> edge;
 	typedef entity<std::vector<size_t>> curve;
@@ -29,7 +29,7 @@ namespace Proteus
 
   template
   <
-	typename node_type = Geometry::nodeNd,
+	typename node_type = Geometry::node,
 	typename edge_type = Geometry::edge,
 	typename face_type = Geometry::face,
 	typename cell_type = Geometry::cell
@@ -39,17 +39,17 @@ namespace Proteus
 	private:
 
 	public:
-	  geometry() {};
+	  geometry() = default;
 	  ~geometry() = default;
 
 	  template<typename ...Args> 
-	  node_type create_node(Args&& ...args) { return node_type( std::forward<Args>(args)... ); }
+	  node_type create_node(Args&& ...args) const { return node_type( std::forward<Args>(args)... ); }
 	  template<typename ...Args> 
-	  edge_type create_edge(Args&& ...args) { return edge_type( std::forward<Args>(args)... ); }
+	  edge_type create_edge(Args&& ...args) const { return edge_type( std::forward<Args>(args)... ); }
 	  template<typename ...Args> 
-	  face_type create_face(Args&& ...args) { return face_type( std::forward<Args>(args)... ); }
+	  face_type create_face(Args&& ...args) const { return face_type( std::forward<Args>(args)... ); }
 	  template<typename ...Args> 
-	  cell_type create_cell(Args&& ...args) { return cell_type( std::forward<Args>(args)... ); }
+	  cell_type create_cell(Args&& ...args) const { return cell_type( std::forward<Args>(args)... ); }
   };
 }
 

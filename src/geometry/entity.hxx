@@ -19,12 +19,12 @@ namespace Proteus
 	  entity(const entity<T> && rhs) : def_( std::move(rhs.def_) ) {}
 	  template<typename ...Args> entity(Args&& ...args) :
 	    def_{{ std::forward<Args>(args)... }} {}
-	  auto operator[] (const std::size_t & n) const -> decltype(def_[n]) 
-	    {return def_[n];}
 	  const entity<T> & operator= (const entity<T> & rhs)
 	    { this->def_ = rhs.def_;}
 	  const entity<T> & operator= (const entity<T> && rhs)
 	    { this->def_ = std::move(rhs.def_);}
+	  auto operator[] (const std::size_t & n) const -> decltype(def_[n]) 
+	    {return def_[n];}
   };
 }
 
