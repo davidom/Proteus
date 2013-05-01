@@ -2,9 +2,6 @@
 #include <geometry/geometry.hxx>
 #include "gtest/gtest.h"
 
-#include <vector>
-#include <array>
-#include <map>
 #include <typeinfo>
 
 TEST(GeometryTest, Construction)

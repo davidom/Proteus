@@ -1,5 +1,3 @@
-//#include <geometry/entity.hxx>
-//#include <geometry/geometry.hxx>
 #include <geometry/entity_trait.hxx>
 #include "gtest/gtest.h"
 

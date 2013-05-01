@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <array>
-#include <map>
 
 TEST(EntityTest, CreationVectorValue)
 {

@@ -7,6 +7,10 @@
 
 namespace Proteus
 {
+  /** \brief Geometry Namespace
+   *
+   * This namespace holds some common typdefs for used in creating geometry
+  */
   namespace Geometry
   {
 	typedef entity<std::array<double,2>> node2d;
@@ -27,6 +31,12 @@ namespace Proteus
 	typedef entity<std::vector<size_t>> cell;
   }
 
+  /** \brief Entity Factory
+   *
+   * This class is a factory-type definition for creating defined types of
+   *  entities. The four functions define the four dimension of entities and
+   *  offer a unified interface.
+  */
   template
   <
 	typename node_type = Geometry::node,
