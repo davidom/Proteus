@@ -6,6 +6,7 @@ enable_testing()
 
 include_directories("/Users/dom9/Installed_Applications/gtest/gtest/include")
 include_directories("/Users/dom9/Work/Proteus/src")
+include_directories("/Users/dom9/Work/Proteus/opt/ug_io")
 
 set(TEST_NAMES
 Entity_Tests

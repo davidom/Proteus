@@ -4,7 +4,7 @@
 
 TEST(UGIOTest, FileReadErrorNoFile)
 {
-  char *Grid_File_Name = "non-existent_file.fale_extension";
+  char *Grid_File_Name = "non-existent_file.false_extension";
   int error_flag;
   char Error_Message[1024] = {0};
   int Message_Flag = 1, Number_of_BL_Vol_Tets, Number_of_Nodes, Number_of_Surf_Quads, Number_of_Surf_Trias, Number_of_Vol_Hexes, Number_of_Vol_Pents_5, Number_of_Vol_Pents_6, Number_of_Vol_Tets = 1;
