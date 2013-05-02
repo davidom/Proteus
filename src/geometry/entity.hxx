@@ -1,79 +1,41 @@
 #ifndef __PROTEUS_ENTITY_CLASS__
 #define __PROTEUS_ENTITY_CLASS__
 
-#include <memory>
+#include <utility>
 
 namespace Proteus
 {
-  /**
-  	* \brief Entity Class Template Implementation
-	*/
+  /** \brief Entity Class
+   *
+   * This class is a wrapper for a container and was designed with the STL
+   *  containers in mind. To that end, the entity must be defined at the time
+   *  it is instantiated. Once defined, the data the class wraps cannot be
+   *  changed except through the supplied API for the command class.
+  */
 
   template<typename T>
-  class
-  entity_impl
+  class entity
   {
-	private:
-	  entity_impl() = delete;
-	  T def_;
-	public:
-	  template<typename ...Args> entity_impl(Args&& ...);
-	  entity_impl(const entity_impl<T> & rhs);
-	  ~entity_impl();
+    private:
+      entity() = delete;
+      T def_;
 
-	  auto operator[](const size_t & n) -> decltype(def_[n])
-	  { return def_[n]; };
+    public:
+      entity(entity<T> & rhs) : def_( rhs.def_ ) {}
+      entity(const entity<T> & rhs) : def_( rhs.def_ ) {}
+      entity(entity<T> && rhs) : def_( std::move(rhs.def_) ) {}
+      entity(const entity<T> && rhs) : def_( std::move(rhs.def_) ) {}
+      /// Constructor
+      template<typename ...Args> entity(Args&& ...args) :
+        def_{{ std::forward<Args>(args)... }} {}
+      const entity<T> & operator= (const entity<T> & rhs)
+        { this->def_ = rhs.def_;}
+      const entity<T> & operator= (const entity<T> && rhs)
+        { this->def_ = std::move(rhs.def_);}
+      /// Data Access
+      auto operator[] (const std::size_t & n) const -> decltype(def_[n]) 
+        {return def_[n];}
   };
-
-  template<typename T>
-  template<typename ...Args>
-  entity_impl<T>::entity_impl(Args&& ...args)
-    : def_{{ std::forward<Args>(args)... }}
-	  {}
-
-  template<typename T>
-  entity_impl<T>::entity_impl(const entity_impl<T> & rhs)
-    : def_{{ rhs.def_ }}
-	  {}
-
-  template<typename T>
-  entity_impl<T>::~entity_impl() {}
-
-  /**
-    * \brief Entity Class Template Interface
-	*/
-
-  template<typename T>
-  class
-  entity
-  {
-	private:
-	  entity() = delete;
-	  std::unique_ptr<T> pimpl_;
-
-	public:
-	  template<typename ...Args> entity(Args&& ...);
-	  entity(const entity<T> & rhs);
-	  ~entity();
-
-	  auto operator[](const size_t & n) -> decltype((*pimpl_)[n])
-	  { return (*pimpl_)[n]; };
-  };
-
-  template<typename T>
-  template<typename ...Args>
-  entity<T>::entity(Args&& ...args)
-    : pimpl_{{ new T{ std::forward<Args>(args)... } }}
-	  {}
-
-  template<typename T>
-  entity<T>::entity(const entity<T> & rhs)
-    : pimpl_{{ new T(*(rhs.pimpl_)) }}
-	  {}
-
-  template<typename T>
-  entity<T>::~entity() {}
-
 }
 
 #endif

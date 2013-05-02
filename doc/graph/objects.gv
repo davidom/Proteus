@@ -1,0 +1,54 @@
+digraph geometry {
+	n001 [label="entity"];
+	n002 [label="container \n wrapper \n operator[]"];
+	n003 [label="entity \n list"];
+	n004 [label="thread-safe \n container"];
+	n005 [label="std::array"];
+	n006 [label="std::vector"];
+	n007 [label="queue"];
+	n008 [label="stack"];
+	n009 [label="node"];
+	n010 [label="edge"];
+	n011 [label="face"];
+	n012 [label="cell"];
+	n013 [label="geometry \n factory"];
+	n014 [label="cloud \n (node)"];
+	n015 [label="graph \n (edge)"];
+	n016 [label="surface \n (face)"];
+	n017 [label="volume \n (cell)"];
+	n018 [label="collection"];
+	n019 [label="geometry"];
+	n020 [label="entity \n trait"];
+	n021 [label="hash map"]
+	n022 [label="topology"]
+
+  n019 -> {n001; n003; n020;}
+
+  subgraph cluster_entity {
+	{clusterrank=min}
+	/* entity */
+	n001 -> n002;
+	n001 -> n013 [label="implementation"];
+	n002 -> {n005; n006;}
+
+	/* geometry */
+	{rank=same; n001 n013}
+	n013 -> {n009; n010; n011; n012;}
+  }
+  subgraph cluster_entity_list {
+	/* entity list */
+	n003 -> n004;
+	n003 -> n018 [label="implementation"];
+	n004 -> {n007; n008;}
+
+	/* collection */
+	{rank=same; n018 n003}
+	n018 -> {n014; n015; n016; n017;}
+  }
+  subgraph cluster_entity_trait {
+	/* entity trait */
+	{rank=same; n020; n021;}
+	n020 -> n021 [label="implementation"];
+	n021 -> n003;
+  }
+}
