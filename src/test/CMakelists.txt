@@ -15,6 +15,7 @@ Geometry_Tests
 Entity_List_Tests
 Entity_Iterator_Tests
 UG_IO_Tests
+Topology_Tests
 )
 
 set(TEST_SOURCES
@@ -24,6 +25,7 @@ geometry_tests.cxx
 entity_list_tests.cxx
 entity_iterator_tests.cxx
 ug_io_tests.cxx
+topology_tests.cxx
 )
 
 list(LENGTH TEST_NAMES TEST_NAMES_LENGTH_TEMP)
