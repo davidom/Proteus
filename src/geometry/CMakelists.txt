@@ -9,6 +9,7 @@ entity_list.hxx
 )
 
 set(geom_lib_srcs
+topology.cxx
 )
 
 include_directories("../")
