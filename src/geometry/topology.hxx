@@ -2,47 +2,49 @@
 #define __PROTEUS_TOPOLOGY_CLASS__
 
 #include <vector>
+#include <iostream>
 
 namespace Proteus
 {
-  class topology_constructor
-  {
-	private:
-
-	public:
-	  virtual void construct() const = 0; 
-  };
-
   template
   <
-	typename from_list,
-	typename to_list,
-	typename constructor_class,
-	typename container=std::vector<std::vector<std::size_t>>
+    typename from_list,
+    typename to_list,
+    typename constructor_class,
+    typename container=std::vector<std::vector<std::size_t>>
   >
   class topology
   {
-	friend constructor_class;
+    friend constructor_class;
 
-	private:
-	  container container_;
-	  topology() = delete;
+    private:
+      container container_;
+      topology() = delete;
 
-	public:
-	  topology(from_list fl, to_list tl) : fl_(fl), tl_(tl) { container_.resize(fl.size()); };
-	  auto operator[](std::size_t n) const -> decltype(container_[n]) { return container_[n]; }
-	  const from_list & fl_;
-	  const to_list & tl_;
+    public:
+      const from_list & fl_;
+      const to_list & tl_;
+
+      topology(const from_list & fl, const to_list & tl) : fl_(fl), tl_(tl) {}
+      
+      auto operator[](std::size_t n) const -> decltype(container_[n]) { return container_[n]; }
+
   };
 
-  class node_to_face_topo_ctr : public topology_constructor
+  class node_to_face_topo_ctr
   {
-	private:
-	  Proteus::topology<Proteus::Geometry::node_list, Proteus::Geometry::face_list, Proteus::node_to_face_topo_ctr> & t_;
+    private:
 
 	public:
-	  node_to_face_topo_ctr(Proteus::topology<Proteus::Geometry::node_list, Proteus::Geometry::face_list, Proteus::node_to_face_topo_ctr> t) : t_(t) {}
-	  void construct() const;
+      void construct(
+        Proteus::topology
+        <
+          Proteus::Geometry::node_list,
+          Proteus::Geometry::face_list,
+          Proteus::node_to_face_topo_ctr
+        > & t
+      );
+	  node_to_face_topo_ctr() = default;
   };
 }
 

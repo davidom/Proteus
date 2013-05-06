@@ -4,8 +4,11 @@ project(Test)
 
 set(geom_lib_headers
 entity.hxx
-geometry.hxx
 entity_list.hxx
+entity_iterator.hxx
+entity_trait.hxx
+geometry.hxx
+topology.hxx
 )
 
 set(geom_lib_srcs
@@ -17,7 +20,7 @@ include_directories("../")
 add_library(geom_lib SHARED ${geom_lib_headers} ${geom_lib_srcs})
 
 set(CMAKE_CXX_COMPILER g++4.7)
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-m64 -std=c++11")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic")
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
