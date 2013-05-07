@@ -55,11 +55,54 @@ Proteus::node_to_face_topo_ctr::construct(
 
 	++itr;
   }
+}
 
+void
+Proteus::node_to_tria_topo_ctr::construct(
+  Proteus::topology
+  <
+	Proteus::Geometry::node_list,
+	Proteus::Geometry::tria_list,
+	Proteus::node_to_tria_topo_ctr
+  > &
+  t
+)
+{
+
+  // Resize the topology
+  t.container_.resize(t.fl_.size());
+
+  // Push counter variable for allocation later
   for(auto & itr : t.container_) {
-	for(auto & iitr : itr) {
-	  std::cout <<iitr<<" ";
-	}
-	std::cout <<std::endl;
+	if(!itr.empty())
+	  itr.clear();
+	itr.push_back(0);
+  }
+  
+  Proteus::all_range<decltype(t.tl_)> al(t.tl_);
+  Proteus::entity_iterator<decltype(t.tl_), Proteus::all_range<decltype(t.tl_)>> ei(t.tl_, al);
+
+  // Increment counter for each entity sharing that node
+  auto eit = ei.begin();
+  while(eit != ei.end()) {
+	t.container_[eit[0]][0] += 1;
+	t.container_[eit[1]][0] += 1;
+	t.container_[eit[2]][0] += 1;
+	++eit;
+  }
+
+  // Reserve the space for all of the push_back
+  for(auto & itr : t.container_) {
+	itr.reserve(itr[0]);
+	itr.pop_back();
+  }
+
+  // Construct map
+  auto itr = ei.begin();
+  while(itr != ei.end()) {
+	t.container_[itr[0]].push_back(itr.index());
+	t.container_[itr[1]].push_back(itr.index());
+	t.container_[itr[2]].push_back(itr.index());
+	++itr;
   }
 }

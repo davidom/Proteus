@@ -1,6 +1,7 @@
 #ifndef __PROTEUS_TOPOLOGY_CLASS__
 #define __PROTEUS_TOPOLOGY_CLASS__
 
+#include <memory>
 #include <vector>
 #include <iostream>
 
@@ -24,10 +25,13 @@ namespace Proteus
     public:
       const from_list & fl_;
       const to_list & tl_;
+	  std::unique_ptr<constructor_class> cc_;
 
-      topology(const from_list & fl, const to_list & tl) : fl_(fl), tl_(tl) {}
+      topology(const from_list & fl, const to_list & tl) : fl_(fl), tl_(tl), cc_(new constructor_class) {}
       
       auto operator[](std::size_t n) const -> decltype(container_[n]) { return container_[n]; }
+
+	  void construct() { cc_->construct(*this); }
 
   };
 
@@ -45,6 +49,22 @@ namespace Proteus
         > & t
       );
 	  node_to_face_topo_ctr() = default;
+  };
+
+  class node_to_tria_topo_ctr
+  {
+    private:
+
+	public:
+      void construct(
+        Proteus::topology
+        <
+          Proteus::Geometry::node_list,
+          Proteus::Geometry::tria_list,
+          Proteus::node_to_tria_topo_ctr
+        > & t
+      );
+	  node_to_tria_topo_ctr() = default;
   };
 }
 

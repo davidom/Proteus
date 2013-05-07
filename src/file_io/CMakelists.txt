@@ -1,0 +1,29 @@
+cmake_minimum_required(VERSION 2.6)
+
+project(Test)
+
+include_directories("/Users/dom9/Work/Proteus/opt/ug_io")
+include_directories("/Users/dom9/Work/Proteus/src/")
+
+set(file_io_lib_headers
+ug_io_utility.hxx
+)
+
+set(file_io_lib_srcs
+ug_io_utility.cxx
+)
+
+add_library(file_io_lib SHARED ${file_io_lib_headers} ${file_io_lib_srcs})
+
+target_link_libraries(file_io_lib /Users/dom9/Work/Proteus/opt/ug/build/libug.a)
+target_link_libraries(file_io_lib /Users/dom9/Work/Proteus/opt/ug3/build/libug3.a)
+target_link_libraries(file_io_lib /Users/dom9/Work/Proteus/opt/ug_io/build/libug_io.a)
+
+
+set(CMAKE_CXX_COMPILER g++4.7)
+set(CMAKE_CXX_FLAGS "-m64 -std=c++11")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic")
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+  set(CMAKE_VERBOSE_MAKEFILE ON)
+endif(CMAKE_BUILD_TYPE STREQUAL Debug)
