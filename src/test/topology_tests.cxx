@@ -1,6 +1,7 @@
 #include <geometry/entity.hxx>
 #include <geometry/geometry.hxx>
 #include <geometry/topology.hxx>
+#include <geometry/topology_constructor.hxx>
 #include <file_io/ug_io_utility.hxx>
 
 #include "gtest/gtest.h"

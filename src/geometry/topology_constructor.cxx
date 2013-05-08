@@ -3,6 +3,7 @@
 #include <geometry/entity_iterator.hxx>
 #include <geometry/geometry.hxx>
 #include <geometry/topology.hxx>
+#include <geometry/topology_constructor.hxx>
 
 #include <algorithm>
 #include <iostream>
