@@ -167,7 +167,7 @@ TEST(UGIOTest, ReadSurfFileSuccess)
   EXPECT_EQ(error_flag,0);
 }
 
-TEST(UGIOTest, FileIOUtility)
+TEST(UGIOTest, FileIOUtilityRead)
 {
   Proteus::Geometry::node_list node_list;
   Proteus::Geometry::tria_list tria_list;
@@ -188,4 +188,41 @@ TEST(UGIOTest, FileIOUtility)
    pent5_list,
    pent6_list,
    hex_list));
+}
+
+TEST(UGIOTest, FileIOUtilityWrite)
+{
+  Proteus::Geometry::node_list node_list;
+  Proteus::Geometry::tria_list tria_list;
+  Proteus::Geometry::quad_list quad_list;
+  Proteus::Geometry::tet_list tet_list;
+  Proteus::Geometry::pent5_list pent5_list;
+  Proteus::Geometry::pent6_list pent6_list;
+  Proteus::Geometry::hex_list hex_list;
+
+  std::string file_name = "../test_data/horse.surf";
+  EXPECT_NO_THROW(
+    create_entity_lists_from_file_ug_io
+    (file_name,
+     node_list,
+     tria_list,
+     quad_list,
+     tet_list,
+     pent5_list,
+     pent6_list,
+     hex_list)
+  );
+
+  std::string new_file_name = "../test_data/horse_write.surf";
+  EXPECT_NO_THROW(
+    write_entity_lists_to_file_ug_io
+    (new_file_name,
+     node_list,
+     tria_list,
+     quad_list,
+     tet_list,
+     pent5_list,
+     pent6_list,
+     hex_list)
+  );
 }

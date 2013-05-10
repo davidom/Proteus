@@ -1,14 +1,14 @@
-project(ug_cpp CC)
+project(ug_cpp)
 
 set(UG_CPP_HDRS
 UG_CPP_LIB.h
-ug_cpp_extract_faces_from_volume_elements.h
+ug3_extract_faces_from_volume_elements.h
 ug_cpp_version.h
 ug_io_write_OpenFOAM.h
 )
 
 set(UG_CPP_SRCS_2
-ug_cpp_extract_faces_from_volume_elements.cpp
+ug3_extract_faces_from_volume_elements.cpp
 ug_cpp_version.cpp
 ug_io_write_OpenFOAM.cpp
 )
