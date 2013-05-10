@@ -2,34 +2,11 @@
 #define __PROTEUS_GEOMETRY_CLASS__
 
 #include <geometry/entity.hxx>
-#include <array>
-#include <vector>
+#include <geometry/entity_list.hxx>
+#include <geometry/geometry_namespace.hxx>
 
 namespace Proteus
 {
-  /** \brief Geometry Namespace
-   *
-   * This namespace holds some common typdefs for used in creating geometry
-  */
-  namespace Geometry
-  {
-	typedef entity<std::array<double,2>> node2d;
-	typedef entity<std::array<double,3>> node3d;
-	typedef entity<std::vector<double>> node;
-
-	typedef entity<std::array<size_t,2>> edge;
-	typedef entity<std::vector<size_t>> curve;
-
-	typedef entity<std::array<size_t,3>> tria;
-	typedef entity<std::array<size_t,4>> quad;
-	typedef entity<std::vector<size_t>> face;
-
-	typedef entity<std::array<size_t,4>> tet;
-	typedef entity<std::array<size_t,5>> pent5;
-	typedef entity<std::array<size_t,6>> pent6;
-	typedef entity<std::array<size_t,8>> hex;
-	typedef entity<std::vector<size_t>> cell;
-  }
 
   /** \brief Entity Factory
    *

@@ -1,6 +1,6 @@
 #ifndef __PROTEUS_ENTITY_ITERATOR_CLASS__
 #define __PROTEUS_ENTITY_ITERATOR_CLASS__
-
+#include <iostream>
 namespace Proteus
 {
   /** \brief Entity Iterator
@@ -13,7 +13,7 @@ namespace Proteus
   template
   <
     typename list,
-	typename range 
+	typename range
   >
   class entity_iterator
   {
@@ -37,9 +37,17 @@ namespace Proteus
 		{}
 
       /// \brief Dereference Operator
+	  auto operator->() const -> decltype(&(list_[*range_itr_]))
+	  {
+		return &(list_[*range_itr_]);
+	  }
 	  auto operator*() const -> decltype(list_[*range_itr_])
 	  {
 		return list_[*range_itr_];
+	  }
+	  auto operator[](std::size_t n) const -> decltype(list_[*range_itr_][n])
+	  {
+		return list_[*range_itr_][n];
 	  }
 	  /// Pre-increment operator
 	  const entity_iterator & operator++() { ++range_itr_; return *this; }
@@ -73,6 +81,37 @@ namespace Proteus
 	  auto index() -> decltype(*range_itr_) { return *range_itr_; } 
   };
 
+  template
+  <
+    typename list
+  >
+  class all_range
+  {
+	private:
+	  const list & list_;
+	  all_range() = delete;
+
+    class index_adapter {
+	  private:
+	    std::size_t index_;
+		index_adapter() = delete;
+
+	  public:
+		~index_adapter() = default;
+		index_adapter(const std::size_t index) : index_(index) {}
+		auto operator*() const -> decltype(index_) { return index_; }
+		index_adapter & operator=(const index_adapter & rhs) { this->index_ = rhs.index_; return *this; }
+		const index_adapter & operator++() { ++index_; return *this; }
+		const index_adapter & operator--() { --index_; return *this; }
+		bool operator!=(const index_adapter &ia) const { return ia.index_ != this->index_; }
+	};
+
+	public:
+	  ~all_range() = default;
+	  all_range(list l) : list_(l) {}
+	  index_adapter begin() const { return index_adapter(static_cast<std::size_t>(0)); }
+	  index_adapter end() const { return index_adapter(static_cast<std::size_t>(list_.size())); }
+  };
 }
 
 #endif

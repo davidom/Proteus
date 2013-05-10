@@ -35,6 +35,7 @@ namespace Proteus
       /// Data Access
       auto operator[] (const std::size_t & n) const -> decltype(def_[n]) 
         {return def_[n];}
+	  auto size() const -> decltype(def_.size()) { return def_.size(); }
   };
 }
 
