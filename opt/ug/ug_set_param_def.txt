@@ -1,0 +1,23 @@
+ROUTINE
+-------
+
+void ug_set_param_def (INT_ Number_of_Char_Params_i,
+                       INT_ Number_of_Double_Params_i,
+                       INT_ Number_of_Int_Params_i,
+                       UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Set UG structure parameters to default values.
+
+INPUT ARGUMENTS
+---------------
+
+Number_of_Char_Params_i   : Number of UG type char parameters already set.
+
+Number_of_Double_Params_i : Number of UG type double parameters already set.
+
+Number_of_Int_Params_i    : Number of UG type int parameters already set.
+
+UG_Param_Struct_Ptr       : UG parameter structure.

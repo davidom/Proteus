@@ -1,0 +1,20 @@
+ROUTINE
+-------
+
+INT_ ug_system (char Sys_Command[])
+
+DESCRIPTION
+-----------
+
+Run a system command.
+
+INPUT ARGUMENTS
+---------------
+
+Sys_Command              : System command.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred runing system command.
+<0                       : Errors occurred runing system command.

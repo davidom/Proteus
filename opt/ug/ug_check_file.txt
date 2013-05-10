@@ -1,0 +1,24 @@
+ROUTINE
+-------
+
+INT_ ug_check_file (char File_Name[],
+                    INT_ mrepeat)
+
+DESCRIPTION
+-----------
+
+Check if file exists.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+                           If File_Name = "set_ug_check_file_nrepeat" then set
+                           number of times to repeat check.
+mprepeat                 : Number of times to repeat check.
+
+RETURN VALUE
+---------------
+
+0                        : File exists.
+<0                       : File doesn't exist or errors occurred checing file.

@@ -1,0 +1,39 @@
+ROUTINE
+-------
+
+INT_ ug_set_double_param_vector (char _Double_Param_Name[],
+                                 INT_ _Double_Param_Vector_Entries,
+                                 DOUBLE_1D *_Double_Param_Vector,
+                                 UG_Param_Struct * UG_Param_Struct_Ptr)
+
+
+DESCRIPTION
+-----------
+
+Set the values for a UG type double parameter vector.
+
+
+INPUT ARGUMENTS
+---------------
+
+_Double_Param_Name             : Name of UG type double parameter vector.
+
+_Double_Param_Vector_Entries   : Number of entries in the UG type double
+                                 parameter vector.
+
+_Double_Param_Vector           : Array of values for the UG type double
+                                 parameter vector.
+
+UG_Param_Struct_Ptr            : UG parameter structure.
+
+
+RETURN VALUE
+---------------
+
+1                              : Then a parameter was found with a matching name
+                                 and the parameter vector was set.
+0                              : Then no match was found and the parameter
+                                 vector was not set.
+>400                           : An error occurred while allocating space for
+                                 the parameter vector within the parameter
+                                 structure.

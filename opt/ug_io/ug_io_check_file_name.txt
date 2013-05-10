@@ -1,0 +1,132 @@
+ROUTINE
+-------
+
+INT_ ug_io_check_file_name (char Case_Name[],
+                            char Error_Message[],
+                            char File_Name[],
+                            INT_ Check_File_Flag,
+                            INT_ File_Data_Type_1,
+                            INT_ Output_File_Check,
+                            UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Check a file name and extract case name.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : Input file name.
+                           The input file name must be either a blank, a case
+                           name, or a full file name.
+                           If the input file name is a blank then the output
+                           file name must be a full file name. In this case the
+                           case name from the output file name is used to search
+                           for a matching input file.
+                           If the input file name is a case name then a matching
+                           input file will be searched for.
+                           If the input file name is a full name it is checked
+                           for validity.
+
+Check_File_Flag          : Check option flag.
+
+                           If Check_File_Flag = 1 or 3 then check to see if the
+                           file name string contains a full file name or file
+                           name suffix. If it is a suffix then use the input
+                           argument case name as the case name. The following
+                           two possible cases are allowed.
+                          
+                           1) If the file name string is a full file name of the
+                              correct data type then the returned case name
+                              string will be derived from the full file name and
+                              the returned file name string will be unchanged.
+
+                           2) If the file name string is a suffix of the correct
+                              data type (full file name minus case name) and the
+                              case name string is not blank then the returned
+                              case name string will be unchanged and the
+                              returned file name string will be unchanged with
+                              Check_File_Flag = 1 or derived from the input case
+                              and file name strings with Check_File_Flag = 3.
+
+                           If Check_File_Flag = 2 then search for a matching
+                           file name to either the case name string or file name
+                           string. The following three possible cases are
+                           allowed.
+                          
+                           1) If the file name string is empty then search for
+                              an existing file with a matching case name string.
+                              The returned case name string will be unchanged
+                              and the returned file name string will be the
+                              matching file name.
+
+                           2) If the file name string is a case name (with no
+                              suffix) then search for an existing file with a
+                              matching case name string. The returned file name
+                              string will be the matching file name and the
+                              returned case name string will be derived from the
+                              returned file name.
+
+                           3) If the file name string is a full file name of the
+                              correct type then search for an existing file
+                              (with or without compression) which matches that
+                              string. The returned file name string will be the
+                              matching file name (unchanged unless only a
+                              compressed version of the file matches) and the
+                              returned case name string will be derived from the
+                              returned file name.
+
+File_Data_Type_1         : Primary file type.
+
+                           The file type is used to search for matching files
+                           and to check validity of a file name. The numeric
+                           values associated with each file data type are
+                           defined in the include file, "UG_IO_File_Def.h". A
+                           secondary file type is also used after the primary
+                           type has been used for searching or checking. The
+                           secondary file type is set as follows.
+
+                           Primary File Type           Secondary File Type
+                           (File_Data_Type_1)          (File_Data_Type_2)
+                           -------------------------   -------------------------
+                           2D node data                2D node data
+                           2D boundary edge grid       2D planar grid
+                           2D planar grid              2D boundary edge grid
+                           node data                   node data
+                           boundary surface grid       volume grid
+                           volume grid                 boundary surface grid
+                           solution data               function data
+                           function data               solution data
+                           m-block surface grid        m-block volume grid
+                           m-block volume grid         m-block surface grid
+                           m-block solution data       m-block function data
+                           m-block function data       m-block solution data
+
+Output_File_Check        : Input/Output file check option flag.
+                           If Output_File_Check = 0 then do not check if the
+                           file type derived from the returned file name string
+                           is valid for an input or output file.
+                           If Output_File_Check = -1 then check if the file type
+                           derived from the returned file name string is valid
+                           for an input file.
+                           If Output_File_Check = 1 then check if the file type
+                           derived from the returned file name string is valid
+                           for an output file.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred determining file information.
+>0                       : The file name is blank or NULL or errors occurred
+                           determining file information. The return value will
+                           be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+File_Name                : File name.
+
+Case_Name                : File case name.
+
+Error_Message            : Error message if the return value is not equal to 0.

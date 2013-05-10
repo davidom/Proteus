@@ -1,0 +1,103 @@
+ROUTINE
+-------
+
+INT_ ug_io_read_2d_node_file (char Node_Data_File_Name[],
+                              char Error_Message[],
+                              UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr,
+                              INT_ Message_Flag,
+                              INT_ *Number_of_Nodes,
+                              DOUBLE_2D * Coordinates,
+                              DOUBLE_1D * Spacing)
+
+DESCRIPTION
+-----------
+
+Read 2D node data from a standard UG 2D node data file.
+
+This routine is designed to be called twice for each node data file. The first
+call reads the node data file dimensions and the second reads the node data file
+arrays.
+
+Before the second call the node data arrays must be allocated to provide at
+least as much space as required by the node data file dimensions.
+
+INPUT ARGUMENTS (FIRST CALL)
+----------------------------
+
+Node_Data_File_Name      : Node data file name.
+                           If the node data file name is blank or NULL then
+                           nothing is done.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+Message_Flag             : Output message flag.
+                           If Message_Flag =  0 then no information messages
+                           are written.
+                           If Message_Flag >= 1 then information messages are
+                           written to standard output.
+
+RETURN VALUE (FIRST CALL)
+-------------------------
+
+0                        : No errors occurred reading node data file.
+<0                       : The node data file name is blank or NULL or the node
+                           data file name is not a standard UG node data file.
+                           Nothing is done in this case.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred reading node data file.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS (FIRST CALL)
+-----------------------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Number_of_Nodes          : Number of nodes.
+
+INPUT ARGUMENTS (SECOND CALL)
+-----------------------------
+
+Node_Data_File_Name      : Node data file name.
+                           If the node data file name is blank or NULL then
+                           nothing is done.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+Message_Flag             : Output message flag.
+                           If Message_Flag =  0 then no information messages
+                           are written.
+                           If Message_Flag >= 1 then information messages are
+                           written to standard output.
+
+Number_of_Nodes          : Number of nodes.
+
+RETURN VALUE (SECOND CALL)
+--------------------------
+
+0                        : No errors occurred reading node data file.
+<0                       : The node data file name is blank or NULL or the node
+                           data file name is not a standard UG node data file.
+                           Nothing is done in this case.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred reading node data file.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS (SECOND CALL)
+------------------------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Coordinates              : Node coordinates.
+                           This array uses "FORTRAN" style indexing with a
+                           primary index which ranges from one to
+                           Number_of_Nodes. Array location zero is not used.
+                           The secondary index uses "C" style indexing with an
+                           index which ranges from zero to one corresponding to
+                           the two coordinates (X,Y) for a particular node.
+
+Spacing                  : Node spacing.
+                           If Spacing = NULL then this array is not used. This
+                           array uses "FORTRAN" style indexing with an index
+                           which ranges from one to Number_of_Nodes. Array
+                           location zero is not used. This array is used
+                           primarily for grid generation.

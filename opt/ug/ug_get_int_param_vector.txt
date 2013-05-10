@@ -1,0 +1,44 @@
+ROUTINE
+-------
+
+INT_ ug_get_int_param_vector (char _Int_Param_Name[],
+                              INT_ *_Int_Param_Vector_Entries,
+                              INT_1D **_Int_Param_Vector,
+                              UG_Param_Struct_Ptr)
+
+
+DESCRIPTION
+-----------
+
+Get a pointer to a UG type int parameter vector.
+
+INPUT ARGUMENTS
+---------------
+
+_Int_Param_Name                : Name of UG type int parameter vector.
+
+UG_Param_Struct_Ptr            : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+1                              : Then a parameter was found with a matching name
+                                 and the output arguments were set.
+0                              : Then no match was found and the output
+                                 arguments were not set.
+
+OUTPUT ARGUMENTS
+---------------
+
+_Int_Param_Vector_Entries      : Number of entries in the UG type int
+                                 parameter vector.
+
+_Int_Param_Vector              : Pointer to the UG type int parameter vector
+                                 within the UG parameter structure.
+
+                                 If _Int_Param_Vector_Entries = 0 then the
+                                 pointer is not set.
+
+                                 Do not reallocate or free this pointer.
+                                 Modification of the entries will also modify
+                                 the UG parameter structure.

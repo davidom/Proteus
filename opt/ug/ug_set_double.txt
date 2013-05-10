@@ -1,0 +1,25 @@
+ROUTINE
+-------
+
+void ug_set_double (INT_ Start_Index,
+                    INT_ End_Index,
+                    double Value,
+                    DOUBLE_1D * Array)
+
+DESCRIPTION
+-----------
+
+Set a double array.
+
+
+INPUT ARGUMENTS
+---------------
+
+Start_Index              : Index of first data location to be set.
+End_Index                : Index of last data location to be set.
+Value                    : Value for data array.
+
+OUTPUT ARGUMENTS
+----------------
+
+Array                    : Data array.

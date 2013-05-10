@@ -2,50 +2,26 @@ cmake_minimum_required(VERSION 2.6)
 
 project(Test)
 
-add_executable(Test main.cxx)
-
 set(geom_lib_headers
-node_impl.hxx
-node.hxx
-node_list.hxx
-node_list_impl.hxx
-edge_impl.hxx
-edge.hxx
-edge_list.hxx
-edge_list_impl.hxx
-face_impl.hxx
-face.hxx
-face_list.hxx
-face_list_impl.hxx
-cell_impl.hxx
-cell.hxx
-cell_list.hxx
-cell_list_impl.hxx)
+entity.hxx
+entity_list.hxx
+entity_iterator.hxx
+entity_trait.hxx
+geometry.hxx
+topology.hxx
+topology_constructor.hxx
+)
 
 set(geom_lib_srcs
-node_impl.cxx
-node.cxx
-node_list_impl.cxx 
-node_list.cxx
-edge_impl.cxx
-edge.cxx
-edge_list_impl.cxx 
-edge_list.cxx
-face_impl.cxx
-face.cxx
-face_list_impl.cxx 
-face_list.cxx
-cell_impl.cxx
-cell.cxx
-cell_list_impl.cxx 
-cell_list.cxx)
+topology_constructor.cxx
+)
+
+include_directories("../")
 
 add_library(geom_lib SHARED ${geom_lib_headers} ${geom_lib_srcs})
 
-target_link_libraries(Test geom_lib)
-
 set(CMAKE_CXX_COMPILER g++4.7)
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-m64 -std=c++11")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -pedantic")
 if(CMAKE_BUILD_TYPE STREQUAL Debug)

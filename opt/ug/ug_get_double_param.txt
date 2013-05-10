@@ -1,0 +1,41 @@
+ROUTINE
+-------
+
+INT_ ug_get_double_param (char _Double_Param_Name[],
+                          double *_Double_Param_Value,
+                          UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Get the value of a UG type double parameter.
+
+INPUT ARGUMENTS
+---------------
+
+_Double_Param_Name       : Name of UG type double parameter.
+                           If name ends in "@def" then trailing "@def" is
+                           removed for comparison and the default value is
+                           output.
+                           If name ends in "@max" then trailing "@max" is
+                           removed for comparison and the maximum value allowed
+                           is output.
+                           If name ends in "@min" then trailing "@min" is
+                           removed for comparison and the minimum value allowed
+                           is output.
+
+UG_Param_Struct_Ptr      : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+1                        : Then a parameter was found with a matching name and
+                           the output arguments were set.
+0                        : Then no match was found and the output arguments were
+                           not set.
+
+
+OUTPUT ARGUMENTS
+---------------
+
+_Double_Param_Value      : UG type double parameter value.

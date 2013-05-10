@@ -1,0 +1,17 @@
+ROUTINE
+-------
+
+void ug_io_free_2d_node (DOUBLE_2D * Coordinates,
+                         DOUBLE_1D * Spacing)
+
+DESCRIPTION
+-----------
+
+Free 2D node data arrays.
+
+INPUT ARGUMENTS
+---------------
+
+Coordinates              : Node coordinates.
+
+Spacing                  : Node spacing.

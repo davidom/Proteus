@@ -1,0 +1,33 @@
+ROUTINE
+-------
+
+INT_ ug_save_int_array (char Label[],
+                        INT_ dim,
+                        INT_ ilabel,
+                        INT_ n,
+                        INT_ *data)
+
+DESCRIPTION
+-----------
+
+Save integer array data in a tmp file. The tmp file name is "'Label'_Data" if
+ilabel<0 or "'Label'_Data_'ilabel'" if ilabel>=0.
+
+
+INPUT ARGUMENTS
+---------------
+
+Label                    : Data file name prefix label.
+dim                      : Dimension of each data elements.
+ilabel                   : Data file name suffix integer label.
+n                        : Number of data elements.
+data                     : Data array.
+
+OUTPUT ARGUMENTS
+----------------
+
+RETURN VALUE
+------------
+
+0                        : Then data was written.
+>400                     : Unable to write data.

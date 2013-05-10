@@ -1,0 +1,9 @@
+INT_ ug_get_param_from_value
+ (char Char_Param_Value[],
+  char Value[],
+  INT_ *Entries,
+  INT_ *Int_Param_Value,
+  INT_ *Param_Type_Flag,
+  INT_1D **_Int_Param_Vector,
+  double *Double_Param_Value,
+  DOUBLE_1D **_Double_Param_Vector);

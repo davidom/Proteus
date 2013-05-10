@@ -1,0 +1,17 @@
+void ug3_volr
+ (INT_,
+  INT_,
+  INT_,
+  INT_,
+  INT_,
+  INT_,
+  INT_4D *,
+  INT_5D *,
+  INT_6D *,
+  INT_8D *,
+  double *,
+  double *,
+  DOUBLE_1D *,
+  DOUBLE_1D *,
+  DOUBLE_1D *,
+  DOUBLE_3D *);

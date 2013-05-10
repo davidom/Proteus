@@ -1,0 +1,21 @@
+INT_
+ug3_extract_faces_from_volume_elements
+(INT_ Number_of_Surf_Quads,
+ INT_ Number_of_Surf_Trias,
+ INT_ Number_of_Vol_Hexs,
+ INT_ Number_of_Vol_Pents_5,
+ INT_ Number_of_Vol_Pents_6,
+ INT_ Number_of_Vol_Tets,
+ INT_1D * Surf_ID_Flag,
+ INT_4D * Surf_Quad_Connectivity,
+ INT_3D * Surf_Tria_Connectivity,
+ INT_8D * Vol_Hex_Connectivity,
+ INT_5D * Vol_Pent_5_Connectivity,
+ INT_6D * Vol_Pent_6_Connectivity,
+ INT_4D * Vol_Tet_Connectivity,
+ INT_ *Number_of_Tria_Faces_,
+ INT_ *Number_of_Quad_Faces_,
+ INT_ *Number_of_Surfaces_,
+ INT_1D **Groups_,
+ INT_5D **Tria_Faces_,
+ INT_6D **Quad_Faces_);

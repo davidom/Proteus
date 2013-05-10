@@ -1,0 +1,39 @@
+ROUTINE
+-------
+
+INT_ ug_io_file_suffix (char File_Name[],
+                        char File_Suffix[],
+                        char Error_Message[],
+                        UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Extract suffix from a standard UG file name.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred determining file information.
+<0                       : The file name is blank or NULL.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred determining file information.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+File_Name                : File name. If File_Name has a trailing dot, ".", the
+                           dot will be ignored and removed on output.
+
+File_Suffix              : File name suffix including file format, type, and
+                           compression suffixes.
+
+Error_Message            : Error message if the return value is not equal to 0.

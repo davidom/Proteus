@@ -1,0 +1,27 @@
+ROUTINE
+-------
+
+INT_ ug_set_char_param (char _Char_Param_Name[],
+                        char _Char_Param_Value[],
+                        UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Set the value of a UG type char parameter.
+
+INPUT ARGUMENTS
+---------------
+
+_Char_Param_Name         : Name of UG type char parameter to set.
+
+_Char_Param_Value        : Value of UG type char parameter.
+
+UG_Param_Struct          : UG parameter structure.
+
+RETURN VALUE
+------------
+
+1                        : Then a parameter was found with a matching name and
+                           was set.
+0                        : Then no match was found.

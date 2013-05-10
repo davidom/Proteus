@@ -1,0 +1,17 @@
+INT_ ug_io_read_2d_grid_file
+ (char[],
+  char[],
+  UG_IO_Param_Struct *,
+  INT_,
+  INT_ *,
+  INT_ *,
+  INT_ *,
+  INT_ *,
+  INT_2D *,
+  INT_1D *,
+  INT_1D *,
+  INT_4D *,
+  INT_3D *,
+  DOUBLE_2D *,
+  DOUBLE_1D *,
+  DOUBLE_1D *);

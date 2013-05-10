@@ -1,0 +1,41 @@
+ROUTINE
+-------
+
+INT_ ug_get_int_param (char _Int_Param_Name[],
+                       INT_ *_Int_Param_Value,
+                       UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Get the value of a UG type int parameter.
+
+INPUT ARGUMENTS
+---------------
+
+_Int_Param_Name          : Name of UG type int parameter.
+                           If name ends in "@def" then trailing "@def" is
+                           removed for comparison and the default value is
+                           output.
+                           If name ends in "@max" then trailing "@max" is
+                           removed for comparison and the maximum value allowed
+                           is output.
+                           If name ends in "@min" then trailing "@min" is
+                           removed for comparison and the minimum value allowed
+                           is output.
+
+UG_Param_Struct_Ptr      : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+1                        : Then a parameter was found with a matching name and
+                           the output arguments were set.
+0                        : Then no match was found and the output arguments were
+                           not set.
+
+
+OUTPUT ARGUMENTS
+---------------
+
+_Int_Param_Value         : UG type int parameter value.

@@ -1,0 +1,20 @@
+ROUTINE
+-------
+
+void ug_version_info (char Lib_Name[],
+                      void (*Version_Function) (char[],
+                                                char[],
+                                                char[],
+                                                char[]))
+
+DESCRIPTION
+-----------
+
+Write library version information.
+
+INPUT ARGUMENTS
+---------------
+
+Lib_Name                 : Name of library (e.g. ug, ug2, ...)
+Version_Function         : Version function for library (e.g. ug_version,
+                           ug2_version, ...)

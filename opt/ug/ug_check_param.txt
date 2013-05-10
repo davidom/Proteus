@@ -1,0 +1,15 @@
+ROUTINE
+-------
+
+void ug_check_param (UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Check UG parameters. UG parameters are reset if needed so that they do not
+exceed the maximum and minimum allowable values.
+
+INPUT ARGUMENTS
+---------------
+
+UG_Param_Struct_Ptr      : UG parameter structure.

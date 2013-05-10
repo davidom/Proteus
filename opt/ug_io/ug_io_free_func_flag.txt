@@ -1,0 +1,24 @@
+ROUTINE
+-------
+
+void ug_io_free_flow_flag (CHAR_21 * U_Scalar_Labels,
+                           CHAR_21 * U_Vector_Labels,
+                           INT_1D * U_Scalar_Flags,
+                           INT_1D * U_Vector_Flags)
+
+
+DESCRIPTION
+-----------
+
+Free solution label and flag arrays.
+
+INPUT ARGUMENTS
+---------------
+
+U_Scalar_Labels          : Label for each scalar solution variable.
+
+U_Vector_Labels          : Label for each vector solution variable.
+
+U_Scalar_Flags           : Flag for each scalar solution variable.
+
+U_Vector_Flags           : Flag for each vector solution variable.

@@ -1,0 +1,39 @@
+ROUTINE
+-------
+
+INT_ ug_get_read_char_param (char _Char_Param_Name[],
+                             char UG_Param_File_Name[],
+                             char _Char_Param_Value[],
+                             UG_Param_Struct * UG_Param_Struct_Ptr)
+
+
+DESCRIPTION
+-----------
+
+Get the value and type of a UG type char parameter from either the UG
+parameter file or if not found there from the UG parameter structure.
+
+INPUT ARGUMENTS
+---------------
+
+_Char_Param_Name         : Name of UG type char parameter.
+
+UG_Param_File_Name       : Name of UG parameter file.
+                           If UG_Param_File_Name is blank then only the UG
+                           parameter structure is searched.
+
+UG_Param_Struct_Ptr      : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+1                        : Then a parameter was found with a matching name and
+                           the output arguments were set.
+0                        : Then no match was found and the output arguments were
+                           not set.
+
+
+OUTPUT ARGUMENTS
+---------------
+
+_Char_Param_Value        : UG type char parameter value.

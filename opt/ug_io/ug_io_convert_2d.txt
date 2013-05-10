@@ -1,0 +1,33 @@
+ROUTINE
+-------
+
+INT_ ug_io_convert_2d (char Input_File_Name[],
+                       char Output_File_Name[],
+                       INT_ Task_Flag)
+
+DESCRIPTION
+-----------
+
+Convert standard UG 2D grid or node files.
+
+INPUT ARGUMENTS
+---------------
+
+Input_File_Name          : Input 2D grid or node file name.
+
+Output_File_Name         : Output 2D grid or node file name.
+
+Task_Flag                : Task flag.
+                           If Task_Flag = 1 then no output summary of parameter
+                           information.
+                           If Task_Flag = 2 then no output full parameter
+                           information.
+                           If Task_Flag = 3 then convert a 2D grid or node file.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred reading or writing the files.
+!=0                      : Errors occurred reading or writing the files.
+                           The return value will be between 600 and 699 or
+                           between -600 and -699.

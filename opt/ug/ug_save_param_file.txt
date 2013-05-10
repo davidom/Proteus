@@ -1,0 +1,35 @@
+ROUTINE
+-------
+
+INT_ ug_save_param_file (char Case_Name[],
+                         char Suffix_Name[],
+                         char UG_Param_File_Name[],
+                         char Error_Message[])
+
+DESCRIPTION
+-----------
+
+Save UG parameter file. The existing parameter file is moved to a file named
+"Case_Name.Suffix_Name.par". Typically the existing file is in /tmp with a
+name unique to the USER and PID. 
+
+INPUT ARGUMENTS
+---------------
+
+Case_Name                : Case name for new UG parameter file name.
+
+Suffix_Name              : Suffix name for new UG parameter file name.
+
+UG_Param_File_Name       : Existing UG parameter file name.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred writing new parameter file.
+>0                       : Errors occurred writing new parameter file.
+                           The return value will be between 400 and 499
+
+OUTPUT ARGUMENTS
+---------------
+
+Error_Message            : Error message if the return value is >0.

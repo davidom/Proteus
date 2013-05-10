@@ -1,0 +1,515 @@
+
+===============================================================
+ug_io RELEASE NOTES: 03/16/13 RELEASE VERSION 4.14.30
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added modifications to allow for very long file names. Previous
+  versions are limited to file path names with about 100 characters 
+  or less. The current version allows path names with about 1000
+  characters (500 on Windows) or less.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug_io RELEASE NOTES: 12/19/12 RELEASE VERSION 4.13.28
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Moved C++ code to UG_CPP library.
+
+* Updated CMake files.
+
+* Removed debug test mode routines.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug_io RELEASE NOTES: 11/12/12 RELEASE VERSION 4.13.26
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to set the maximum number of BL layers to be
+  generated for each surface patch (faces with the same surface
+  face ID). The TAGS data file may now contatin 10 fields (with
+  maximum number of layers field and no fixed rebuild surface
+  field, or 11 fields (with no maximum number of layers field),
+  or 12 fields (with maximum maximum number of layers field and
+  with fixed rebuild surface field). With 12 fields the last
+  field is assumed to be the maximum number of BL layers to be
+  generated for the specified surface face ID.
+
+  If the number of BL layers is zero it has no effect.
+
+  For example a 10-field tags file could be.
+#									Trans	Initial	BL
+#ID	Group			Visc	Recon	Rebuild	Source	Trans	Delete	Spacing	Thck
+3	Body			1	1	0	0	0	0	3e-5	3
+
+  Or, or for example an 11-field tags file could be.
+#										Trans	Initial	BL
+#ID	Group			Visc	Recon	Rebuild	Fixed	Source	Trans	Delete	Spacing	Thck
+3	Body			1	1	0	0	0	0	0	3e-5	3
+
+  Or, or for example a 12-field tags file could be.
+#										Trans	Initial	BL	BL
+#ID	Group			Visc	Recon	Rebuild	Fixed	Source	Trans	Delete	Spacing	Thck	Layers
+3	Body			1	1	0	0	0	0	0	3e-5	3	0
+
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug_io RELEASE NOTES: 10/23/12 RELEASE VERSION 4.11.24
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* 
+
+Bugs Fixed:
+-----------
+
+* Corrected TAGS data file reader for data with 10 or 11 fields.
+
+===============================================================
+ug_io RELEASE NOTES: 08/25/12 RELEASE VERSION 4.11.23
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added PSDATA periodic surface data file reader from ANBL3
+
+* Added SNSDATA specified normal spacing data file reader from ANBL3
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug_io RELEASE NOTES: 08/15/12 RELEASE VERSION 4.11.21
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified FLUENT file writer to be compatible with current UG library.
+
+* Removed socket file mode option.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug_io RELEASE NOTES: 10/17/11 RELEASE VERSION 4.10.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* 
+
+Bugs Fixed:
+-----------
+
+* Corrected an error in the Fluent file write that resulted in
+  files usally being unreadable in Fluent. This error was
+  introduced when face sorting routines were geralized and the
+  OpenFoam writer added (03/09/11 VERSION 4.3.6).
+
+
+===============================================================
+ug_io RELEASE NOTES: 08/02/11 RELEASE VERSION 4.9.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added 2D grid MESH file (.mesh & .meshb) capability.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug_io RELEASE NOTES: 07/04/11 RELEASE VERSION 4.8.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added binary MESH file (.meshb) capability.
+
+* Modified routines to allow integration of MESH file type
+  using the libmesh5 library from INRIA. Integration allows the
+  dependencies on the MESH I/O library to be turned on/off at
+  compile time with a registration callback function.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug_io RELEASE NOTES: 06/14/11 RELEASE VERSION 4.7.14
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added an additional BC field to the TAGS file type for a total
+  of 11 now. The additional field "Fixed" is for fixed surfaces
+  that intersect the BL region. The ug_io TAGS file reader is
+  backward compatibile with the previous 10 field type. With
+  previous versions a fixed surface can be specified by setting
+  both the Recon and Rebuild flags to 1.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug_io RELEASE NOTES: 05/19/11 RELEASE VERSION 4.7.13
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added error message to more correctly describe issues when an
+  incorrect Tags file was used for surface ID labels with CGNS
+  output files.
+
+* Modified routines to allow integration of and dependencies on
+  the CGNS I/O library to be turned on/off at compile time with
+  a registration callback function.
+
+Bugs Fixed:
+-----------
+
+* Corrected initialization error that was causing errors in the
+  Cobalt, Fluent, and OPENFoam ug_io grid file readers.
+
+===============================================================
+ug_io RELEASE NOTES: 03/09/11 RELEASE VERSION 4.3.6
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added grid file writer for OpenFOAM polyMesh grid files.
+
+* Moved face extraction routines to UG3 library.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug_io RELEASE NOTES: 02/25/11 RELEASE VERSION 4.2.3
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified global include files to minimize dependencies.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug_io RELEASE NOTES: 11/09/09 RELEASE VERSION 4.2.0
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added grid file reader for NSU3D grid files.
+
+* Added grid and function file writer for Ensight Gold case, grid, boundary
+  surface node map, and function data files.
+
+* Added command line option -vol_id to allocate, read, set and
+  write the volume ID. Previously this was the default and the
+  overhead of setting the volume ID is excessive for large
+  mixed element grid files.
+
+* Removed flow file types from UG_IO.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug_io RELEASE NOTES: 09/04/09 RELEASE VERSION 3.43.30
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added .bdf file extension for NASTRAN files. The .bdf and .nas
+  suffixes are equivalent.
+
+Bugs Fixed:
+-----------
+
+* Corrected NASTRAN input file reader to correct errors when
+  all of the coordinates fields are not listed before any face
+  of element field.
+
+===============================================================
+ug_io RELEASE NOTES: 08/27/09 RELEASE VERSION 3.41.30
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to reset the Grid BC Flag using a TAGS file
+  (from SolidMesh) for a transparent/embedded and rebuild
+  surface that intersects the BL region and with the. Previous
+  versions of the TAGS file reader only supported transparent/
+  embedded surfaces that were non-rebuild type.
+
+Bugs Fixed:
+-----------
+
+* Fixed memory leak from memory that was never free'd in the
+  NASTRAN input file reader.
+
+===============================================================
+ug_io RELEASE NOTES: 06/14/09 RELEASE VERSION 3.40.30
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+
+Bugs Fixed:
+-----------
+
+* Fixed memory leak from memory that was never free'd in the
+  NASTRAN input file reader.
+
+===============================================================
+ug_io RELEASE NOTES: 02/05/09 RELEASE VERSION 3.40.25
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+
+Bugs Fixed:
+-----------
+
+* Added re-initialization of static variables to routines that
+  read grid data as needed so they can be used recursively.
+
+* Corrected node indexing error renumbering nodes for cases
+  that use node index zero in the input element connectivity
+  or that include a volume grid and do not have the boundary
+  nodes first in the node ordering.
+
+* Corrected an error reading a SURF surface grid file that 
+  contains all quad faces.
+
+
+===============================================================
+ug_io RELEASE NOTES: 12/16/08 RELEASE VERSION 3.39.22
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to write grid files for Fieldview grid
+  files (uses a suffix of .fvuns).
+
+Bugs Fixed:
+-----------
+
+* Corrected error writing Fluent *.fluent.cas grid file for
+  cases with embedded surface faces.
+
+===============================================================
+ug_io RELEASE NOTES: 11/23/08 RELEASE VERSION 3.37.22
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to read/write boundary surface grid BC and
+  reconnection flag with a UGRID or FGRID volume grid.
+
+* Added renumbering of nodes, after reading an input grid file,
+  so that boundary nodes are always first in the ordering.
+
+* Added option to renumber surface face IDs in consequtive order
+  1,2,3... after reading the input grid file or before writing
+  the output grid file.
+
+* Added option flag to ugc script to renumber surface face IDs
+  in consequtive order 1,2,3... before writing the output grid
+  file.
+
+* Modified NSU3D output routine so that surface IDs are always
+  renumbered in consequtive order 1,2,3...
+
+Bugs Fixed:
+-----------
+
+* Corrected the "Vertices" heading in the MESH file type writer.
+
+===============================================================
+ug_io RELEASE NOTES: 11/19/08 RELEASE VERSION 3.34.20
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added support for VGRID surface and volume grid file.
+
+* Reduced maximum static array size to 512 elements for
+  compatibility with Windows.
+
+* Modified element id flag for multi-material cases with
+  embedded surfaces and BL/SL/SNS regions.
+
+* Changed calculated value of volume element ID flag so that
+  in the BL region it is the same as the adjacent isotropic
+  volume region.
+
+Bugs Fixed:
+-----------
+
+* Corrected volume element ID flag for cases where the input
+  values are not set.
+
+===============================================================
+UGC RELEASE NOTES: JULY 28, 2008 RELEASE VERSION 3.9.9
+UG_IO RELEASE NOTES: JULY 28, 2008 RELEASE VERSION 3.16.9
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+Bugs Fixed:
+-----------
+
+* Corrected output routine for NSU3D volume grid file and
+  revised type name from mcell.unf to mcell.
+
+===============================================================
+UGC RELEASE NOTES: JULY 15, 2008 RELEASE VERSION 3.8.9
+UG_IO RELEASE NOTES: JULY 15, 2008 RELEASE VERSION 3.15.9
+===============================================================
+
+===============================================================
+UGC RELEASE NOTES: JULY 10, 2008 RELEASE VERSION 3.7.9
+UG_IO RELEASE NOTES: JULY 10, 2008 RELEASE VERSION 3.14.9
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added output routine for NSU3D volume grid file.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+UGC RELEASE NOTES: MAY 15, 2008 RELEASE VERSION 3.6.7
+UG_IO RELEASE NOTES: MAY 15, 2008 RELEASE VERSION 3.13.7
+===============================================================
+
+===============================================================
+UGC RELEASE NOTES: MAY 1, 2008 RELEASE VERSION 3.6.5
+UG_IO RELEASE NOTES: MAY 1, 2008 RELEASE VERSION 3.13.5
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added output routine for CART3D TRI files.
+
+* Modified STL grid file reader memory allocation to avoid
+  excessive CPU usage for large surface grids.
+
+* Modified procedure to reduce the grid to only boundary
+  surface faces and nodes.
+
+Bugs Fixed:
+-----------
+
+* Fixed a bug in TAGS file reader within the CGNS grid file
+  writer.
+
+===============================================================
+UGC RELEASE NOTES: SEPTEMBER 26, 2007 RELEASE VERSION 3.5.5
+UG_IO RELEASE NOTES: SEPTEMBER 26, 2007 RELEASE VERSION 3.11.5
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* 
+
+Bugs Fixed:
+-----------
+
+* Fixed a bug in STL grid file reader.
+
+* Fixed a bug in the FLUENT grid file writer.
+
+
+===============================================================
+ug_io RELEASE NOTES: 09/29/08 RELEASE VERSION 3.29.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added output for total number of elements.
+
+* Changed volume element ID flag so that it is unique in the
+  BL region.
+
+* Added geometry definition file types for SolidMesh.
+
+* Added support for a volume element ID flag. The APIs were
+  changed to pass this data to/from routines
+  ug_io_read_grid_file and ug_io_write_grid_file, along with
+  the APIs and internals of other UG_IO routines.
+
+* Added capability in UGC to generate converted SURF surface
+  grid files compatible with the previous version. The
+  previous version of the SURF type definition didn't include
+  include the Intial Normal Spacing or BL Thickness.
+
+* Added support for bzip2 compression.
+
+* Combined source code for UG_IO and UGC. The UGC script and
+  executable names for UGC are unchanged.
+
+* Dropped support for CRD and GRID (2D) grid file types.
+
+* Removed test routines from library.
+
+Bugs Fixed:
+-----------
+

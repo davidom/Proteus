@@ -1,0 +1,161 @@
+ROUTINE
+-------
+
+void ug_memory_monitor (char *Flag)
+
+DESCRIPTION
+-----------
+
+Turn memory monitor on or off. If the memory monitor is on then output messages
+are generated each time memory is allocated, re-allocated or freed.
+
+
+INPUT ARGUMENTS
+---------------
+
+Flag                     : Text string
+                           If Flag = "on" then turn on memory monitor.
+                           If Flag = "off" (or anything else) then turn off
+                           memory monitor.
+
+
+ROUTINE
+-------
+
+void ug_free (void * Pointer)
+
+DESCRIPTION
+-----------
+
+Free memory for array space previously allocated using ug_calloc, ug_malloc, or
+ug_realloc. The system routine "free" is used to free memory within ug_free.
+
+
+INPUT ARGUMENTS
+---------------
+
+Pointer                  : Array pointer.
+                           If the value of Pointer is NULL then nothing is done.
+
+
+ROUTINE
+-------
+
+void *ug_calloc (INT_ *Error_Flag,
+                 size_t Number_of_Elements, size_t Size_of_Each)
+
+DESCRIPTION
+-----------
+
+Allocate memory for array space and set each array element to zero. The system
+routine "calloc" is used to allocate space within ug_calloc.
+
+
+INPUT ARGUMENTS
+---------------
+
+Error_Flag               : Error Flag.
+                           On input Error_Flag must be set.
+
+Number_of_Element        : Number of elements to allocate for array.
+                           If Number_of_Elements is equal to zero then the array
+                           pointer returned is set to NULL. This is not
+                           considered an error.
+Size_of_Each             : Number of bytes to allocate for each array element.
+                           If Size_of_Each is equal to zero then the array
+                           pointer returned is set to NULL. This is not
+                           considered an error.
+
+RETURN VALUE
+------------
+
+Array pointer.
+
+If an error occurred reallocating memory then the array pointer returned is set
+to NULL.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Flag               : Error Flag.
+                           The value of Error_Flag is incremented by one if an
+                           error occurred allocating memory.
+
+
+ROUTINE
+-------
+
+void *ug_malloc (INT_ *Error_Flag, size_t Size)
+
+DESCRIPTION
+-----------
+
+Allocate memory for array space. The system routine "malloc" is used to allocate
+space within ug_malloc.
+
+INPUT ARGUMENTS
+---------------
+
+Error_Flag               : Error Flag.
+                           On input Error_Flag must be set.
+
+Size                     : Number of bytes to allocate for array.
+                           If Size is equal to zero then the array pointer
+                           returned is set to NULL. This is not considered an
+                           error.
+
+RETURN VALUE
+------------
+
+Array pointer.
+
+If an error occurred reallocating memory then the array pointer returned is set
+to NULL.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Flag               : Error Flag.
+                           The value of Error_Flag is incremented by one if an
+                           error occurred allocating memory.
+
+
+ROUTINE
+-------
+
+void *ug_realloc (INT_ *Error_Flag, void * Pointer, size_t Size)
+
+DESCRIPTION
+-----------
+
+Re-allocate memory for array space previously allocated using ug_calloc,
+ug_malloc, or ug_realloc. The system routine "realloc" is used to re-allocate
+space within ug_realloc.
+
+INPUT ARGUMENTS
+---------------
+
+Error_Flag               : Error Flag.
+                           On input Error_Flag must be set.
+
+Pointer                  : Array pointer to be reallocated.
+
+Size                     : Number of bytes to allocate to reallocated array.
+                           If Size is equal to zero then the array pointer
+                           returned is set to NULL. This is not considered an
+                           error.
+
+RETURN VALUE
+------------
+
+Reallocated array pointer.
+
+If an error occurred reallocating memory then the array pointer returned is set
+to the input pointer, Pointer.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Flag               : Error Flag.
+                           The value of Error_Flag is incremented by one if an
+                           error occurred reallocating memory.

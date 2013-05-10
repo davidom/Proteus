@@ -1,0 +1,46 @@
+ROUTINE
+-------
+
+INT_ ug_io_find_file (char Case_Name[],
+                      char Error_Message[],
+                      char File_Name[],
+                      UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr,
+                      INT_ File_Data_Type_)
+
+DESCRIPTION
+-----------
+
+Find file name of an existing (and readable) standard UG file with given case
+name and data type.
+
+INPUT ARGUMENTS
+---------------
+
+Case_Name                : File case name with leading path if necessary.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+File_Data_Type_          : File data type flag.
+                           The numeric values associated with each file data
+                           type are defined in the include file,
+                           "UG_IO_File_Def.h".
+
+RETURN VALUE
+------------
+
+0                        : An existing file was found.
+<0                       : No existing file was found.
+                           The return value will be between -600 and -699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Case_Name                : File case name. If Case_Name has a trailing dot,
+                           ".", then the dot will be ignored and removed on
+                           output.
+
+File_Name                : File name with file format suffix, file type suffix,
+                           and file compression suffix.
+                           This will not be set if a file was not found.
+
+Error_Message            : Error message if the return value is not equal to 0.

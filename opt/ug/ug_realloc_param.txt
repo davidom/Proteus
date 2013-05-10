@@ -1,0 +1,24 @@
+ROUTINE
+-------
+
+INT_ ug_realloc_param (char Error_Message[],
+                       UG_Param_Struct ** UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Realloc UG parameter structure arrays.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred reallocing arrays.
+>0                       : Errors occurred reallocing arrays.
+                           The return value will be between 400 and 499
+
+OUTPUT ARGUMENTS
+---------------
+
+Error_Message            : Error message if the return value is >0.
+
+UG_Param_Struct_Ptr      : UG parameter structure.

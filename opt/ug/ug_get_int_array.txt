@@ -1,0 +1,40 @@
+ROUTINE
+-------
+
+INT_ ug_get_int_array (char Label[],
+                       INT_ dim,
+                       INT_ ilabel,
+                       INT_ mclose,
+                       INT_ *n,
+                       INT_ **data_ptr)
+
+DESCRIPTION
+-----------
+
+Get integer array data from a tmp file. The tmp file name is "'Label'_Data" if
+ilabel<0 or "'Label'_Data_'ilabel'" if ilabel>=0.
+
+
+INPUT ARGUMENTS
+---------------
+
+Label                    : Data file name prefix label.
+dim                      : Dimension of each data elements.
+ilabel                   : Data file name suffix integer label.
+mclose                   : If mclose = 1 then permanently close the data file.
+                           If mclose = 0 then close the data file but retain the
+                           file and entry in the tmp file data structure.
+data_ptr                 : Pointer to data array.
+
+OUTPUT ARGUMENTS
+----------------
+
+n                        : Number of data elements.
+data_ptr                 : Pointer to data array allocated with space for n+1
+                           entries.
+
+RETURN VALUE
+------------
+
+0                        : Then data was read.
+>400                     : Unable to read data.

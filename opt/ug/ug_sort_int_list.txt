@@ -1,0 +1,27 @@
+ROUTINE
+-------
+
+INT_ ug_sort_int_list  (INT_ m,
+                        INT_ n,
+                        INT_1D * int_values,
+                        INT_1D * list)
+
+DESCRIPTION
+-----------
+
+Sort a list of integer values and create a corresponding index.
+
+INPUT ARGUMENTS
+---------------
+
+m                        : Mode flag.
+                           If m = 0 then leave the list of values alone.
+                           If m = 1 then change the order of the list of values.
+n                        : Number of values.
+int_values               : List of values.
+
+OUTPUT ARGUMENTS
+----------------
+
+int_values               : List of sorted values if m = 1.
+list                     : Index list of sorted values.

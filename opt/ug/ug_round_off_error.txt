@@ -1,0 +1,15 @@
+ROUTINE
+-------
+
+void ug_round_off_error (double *round_off_error)
+
+DESCRIPTION
+-----------
+
+Determine machine round-off error.
+
+OUTPUT ARGUMENTS
+----------------
+
+round_off_error          : Machine round-off error using double floating point
+                           arithmetic.

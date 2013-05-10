@@ -1,0 +1,39 @@
+ROUTINE
+-------
+
+INT_ ug_set_int_param_vector (char _Int_Param_Name[],
+                              INT_ _Int_Param_Vector_Entries,
+                              INT_1D *_Int_Param_Vector,
+                              UG_Param_Struct * UG_Param_Struct_Ptr)
+
+
+DESCRIPTION
+-----------
+
+Set the values for a UG type int parameter vector.
+
+
+INPUT ARGUMENTS
+---------------
+
+_Int_Param_Name                : Name of UG type int parameter vector.
+
+_Int_Param_Vector_Entries      : Number of entries in the UG type int
+                                 parameter vector.
+
+_Int_Param_Vector              : Array of values for the UG type int
+                                 parameter vector.
+
+UG_Param_Struct_Ptr            : UG parameter structure.
+
+
+RETURN VALUE
+---------------
+
+1                              : Then a parameter was found with a matching name
+                                 and the parameter vector was set.
+0                              : Then no match was found and the parameter
+                                 vector was not set.
+>400                           : An error occurred while allocating space for
+                                 the parameter vector within the parameter
+                                 structure.

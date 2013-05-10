@@ -1,0 +1,25 @@
+ROUTINE
+-------
+
+void ug_copy_double (INT_ Start_Index,
+                     INT_ End_Index,
+                     DOUBLE_1D * Source,
+                     DOUBLE_1D * Destination)
+
+DESCRIPTION
+-----------
+
+Copy a double array.
+
+
+INPUT ARGUMENTS
+---------------
+
+Start_Index              : Index of first data location to be copied.
+End_Index                : Index of last data location to be copied.
+Source                   : Source data array.
+
+OUTPUT ARGUMENTS
+----------------
+
+Destination              : Destination data array.

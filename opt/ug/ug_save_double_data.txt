@@ -1,0 +1,31 @@
+ROUTINE
+-------
+
+INT_ ug_save_double_data (char File_Name[],
+                          INT_ dim,
+                          INT_ n,
+                          INT_ npw,
+                          double *data)
+
+DESCRIPTION
+-----------
+
+Incrementally save double array data in a tmp file. Incrementally write all
+array data if the number of data elements to save per write (npw) is less than
+the number of data elements (n) otherwise write only the number of data elements
+to save per write (npw).
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : Data file name.
+dim                      : Dimension of each data elements.
+n                        : Number of data elements.
+npw                      : Number of data elements to save per write.
+data                     : Data array.
+
+RETURN VALUE
+------------
+
+0                        : Then data was written.
+>400                     : Unable to write data.

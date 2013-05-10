@@ -1,0 +1,27 @@
+ROUTINE
+-------
+
+INT_ ug_set_double_param (char _Double_Param_Name[],
+                          double _Double_Param_value,
+                          UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Set the value of a UG type double parameter.
+
+INPUT ARGUMENTS
+---------------
+
+_Double_Param_Name       : Name of UG type double parameter to set.
+
+_Double_Param_value      : Value of UG type double parameter.
+
+UG_Param_Struct          : UG parameter structure.
+
+RETURN VALUE
+------------
+
+1                        : Then a parameter was found with a matching name and
+                           was set.
+0                        : Then no match was found.

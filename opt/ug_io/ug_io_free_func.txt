@@ -1,0 +1,18 @@
+ROUTINE
+-------
+
+void ug_io_free_flow (DOUBLE_1D * U_Scalars,
+                      DOUBLE_3D * U_Vectors)
+
+
+DESCRIPTION
+-----------
+
+Free solution data arrays.
+
+INPUT ARGUMENTS
+---------------
+
+U_Scalars                : Scalar solution variables.
+
+U_Vectors                : Vector solution variables.

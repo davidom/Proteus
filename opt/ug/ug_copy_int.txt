@@ -1,0 +1,26 @@
+ROUTINE
+-------
+
+void ug_copy_int (INT_ Start_Index,
+                  INT_ End_Index,
+                  INT_1D * Source,
+                  INT_1D * Destination)
+
+DESCRIPTION
+-----------
+
+Copy an interger array.
+
+
+INPUT ARGUMENTS
+---------------
+
+Start_Index              : Index of first data location to be copied.
+End_Index                : Index of last data location to be copied.
+Source                   : Source data array.
+
+OUTPUT ARGUMENTS
+----------------
+
+Destination              : Destination data array.
+

@@ -1,0 +1,14 @@
+ROUTINE
+-------
+
+void ug_message (char *Text)
+
+DESCRIPTION
+-----------
+
+Write a message to standard output.
+
+INPUT ARGUMENTS
+---------------
+
+Text                     : Text string.

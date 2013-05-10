@@ -1,0 +1,40 @@
+ROUTINE
+-------
+
+void ug_iaib (INT_ na,
+              INT_ nb,
+              INT_1D * ibia,
+              INT_1D * iaib,
+              INT_1D * liaib)
+
+DESCRIPTION
+-----------
+
+Create an inverse list.
+
+
+INPUT ARGUMENTS
+---------------
+
+na                       : Number of "a" items.
+nb                       : Number of "b" items.
+
+ibia                     : List of the "b" index at each "a" index.
+                           The first "a" index is 1 and the last is "na".
+                           The first "b" index is 1 and the last is "nb".
+                           If the value of the "ibia" array is 0 at a given "a"
+                           index then there is no corresponding "b" index.
+
+OUTPUT ARGUMENTS
+----------------
+
+iaib                     : List of the "a" index at each "b" index.
+                           The first "a" index is 1 and the last is "na".
+                           The first "b" index is 1 and the last is "nb".
+                           If the value of the "iaib" array is 0 at a given "b"
+                           index then there is no corresponding "a" index.
+                           If the "a" index has a value of 0 then there is no
+                           corresponding "a" index for the given "b" index.
+
+liaib                    : List of locations in the "iaib" array for the
+                           first "a" index corresponding to a given "b" index.

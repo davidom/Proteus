@@ -1,0 +1,121 @@
+ROUTINE
+-------
+
+INT_ ug_io_malloc_grid (char Error_Message[],
+                        INT_ M_BL_Thickness,
+                        INT_ M_Initial_Normal_Spacing,
+                        INT_ M_Surf_Grid_BC_Flag,
+                        INT_ M_Surf_ID_Flag,
+                        INT_ M_Surf_Reconnection_Flag,
+                        INT_ Number_of_Nodes,
+                        INT_ Number_of_Surf_Quads,
+                        INT_ Number_of_Surf_Trias,
+                        INT_ Number_of_Vol_Hexs,
+                        INT_ Number_of_Vol_Pents_5,
+                        INT_ Number_of_Vol_Pents_6,
+                        INT_ Number_of_Vol_Tets,
+                        INT_1D ** Surf_Grid_BC_Flag,
+                        INT_1D ** Surf_ID_Flag,
+                        INT_1D ** Surf_Reconnection_Flag,
+                        INT_4D ** Surf_Quad_Connectivity,
+                        INT_3D ** Surf_Tria_Connectivity,
+                        INT_8D ** Vol_Hex_Connectivity,
+                        INT_1D ** Vol_ID_Flag,
+                        INT_5D ** Vol_Pent_5_Connectivity,
+                        INT_6D ** Vol_Pent_6_Connectivity,
+                        INT_4D ** Vol_Tet_Connectivity,
+                        DOUBLE_3D ** Coordinates,
+                        DOUBLE_1D ** Initial_Normal_Spacing,
+                        DOUBLE_1D ** BL_Thickness)
+
+DESCRIPTION
+-----------
+
+Malloc grid data arrays.
+
+INPUT ARGUMENTS
+---------------
+
+M_BL_Thickness           : Malloc flag for thickness of boundary-layer.
+                           If M_BL_Thickness = 1 then malloc BL_Thickness.
+                           If M_BL_Thickness = 0 then set BL_Thickness to NULL.
+
+M_Initial_Normal_Spacing : Malloc flag for grid node initial normal spacing.
+                           If M_Initial_Normal_Spacing = 1 then malloc
+                           Initial_Normal_Spacing.
+                           If M_Initial_Normal_Spacing = 0 then set
+                           Initial_Normal_Spacing to NULL.
+
+M_Surf_Grid_BC_Flag      : Malloc flag for surface face grid boundary condition
+                           flag.
+                           If M_Surf_Grid_BC_Flag = 1 then malloc
+                           Surf_Grid_BC_Flag.
+                           If M_Surf_Grid_BC_Flag = 0 then set
+                           Surf_Grid_BC_Flag to NULL.
+
+M_Surf_ID_Flag           : Malloc flag for surface face ID flag.
+                           If M_Surf_ID_Flag = 1 then malloc Surf_ID_Flag.
+                           If M_Surf_ID_Flag = 0 then set Surf_ID_Flag to NULL.
+
+M_Surf_Reconnection_Flag : Malloc flag for surface face reconnection flag.
+                           If M_Surf_Reconnection_Flag = 1 then malloc
+                           Surf_Reconnection_Flag.
+                           If M_Surf_Reconnection_Flag = 0 then set
+                           Surf_Reconnection_Flag to NULL.
+
+M_Vol_ID_Flag            : Malloc flag for volume element ID flag.
+                           If M_Vol_ID_Flag = 1 then malloc Vol_ID_Flag.
+                           If M_Vol_ID_Flag = 0 then set Vol_ID_Flag to NULL.
+
+Number_of_Nodes          : Number of nodes.
+
+Number_of_Surf_Quads     : Number of boundary surface quad faces.
+
+Number_of_Surf_Trias     : Number of boundary surface tria faces.
+
+Number_of_Vol_Hexs       : Number of volume grid hex elements.
+
+Number_of_Vol_Pents_5    : Number of volume grid pent elements with five nodes.
+
+Number_of_Vol_Pents_6    : Number of volume grid pent elements with six nodes.
+
+Number_of_Vol_Tets       : Number of volume grid tet elements.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred mallocing arrays.
+>0                       : Errors occurred mallocing arrays.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+Surf_Grid_BC_Flag        : Surface face grid boundary condition flag.
+
+Surf_ID_Flag             : Surface face ID flag.
+
+Surf_Reconnection_Flag   : Surface face reconnection flag.
+
+Surf_Quad_Connectivity   : Surface grid quad face connectivity.
+
+Surf_Tria_Connectivity   : Surface grid tria face connectivity.
+
+Vol_Hex_Connectivity     : Volume grid hexahedral element connectivity.
+
+Vol_ID_Flag              : Volume element ID flag. All elements are intialized
+                           to a value of -123456.
+
+Vol_Pent_5_Connectivity  : Volume grid 5-node pentahedral element connectivity.
+
+Vol_Pent_6_Connectivity  : Volume grid 6-node pentahedral element connectivity.
+
+Vol_Tet_Connectivity     : Volume grid tetrahedral element connectivity.
+
+Coordinates              : Grid node coordinates.
+
+Initial_Normal_Spacing   : Grid node initial normal spacing.
+
+BL_Thickness             : Thickness of boundary-layer.

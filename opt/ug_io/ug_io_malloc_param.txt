@@ -1,0 +1,24 @@
+ROUTINE
+-------
+
+INT_ ug_io_malloc_param (char Error_Message[],
+                         UG_IO_Param_Struct ** UG_IO_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Malloc UG_IO parameter structure arrays.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred mallocing parameter structure.
+>0                       : Errors occurred mallocing parameter structure.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.

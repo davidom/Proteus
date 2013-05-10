@@ -1,0 +1,613 @@
+
+===============================================================
+ug3 RELEASE NOTES: 04/08/13 RELEASE VERSION 4.25.45
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* 
+
+Bugs Fixed:
+-----------
+
+* Modified algorithm to determine Least-Squares surface normal
+  vectors. Previous versions could produce erroneous results
+  due to an ill-conditioned matrix.
+
+
+===============================================================
+ug3 RELEASE NOTES: 03/18/13 RELEASE VERSION 4.25.44
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added modifications to allow for very long file names. Previous
+  versions are limited to file path names with about 100 characters 
+  or less. The current version allows path names with about 1000
+  characters (500 on Windows) or less.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug3 RELEASE NOTES: 01/17/13 RELEASE VERSION 4.24.42
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routine ugv_bfv_i to evaluate boundary face normals at
+  a specific boundary surface face.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug3 RELEASE NOTES: 12/27/12 RELEASE VERSION 4.23.42
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added identification of boundary surface faces that surround
+  invalid faces with duplicate nodes for improved debugging 
+  information.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug3 RELEASE NOTES: 12/19/12 RELEASE VERSION 4.23.41
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Moved C++ code to UG_CPP library.
+
+* Updated CMake files.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug3 RELEASE NOTES: 11/29/12 RELEASE VERSION 4.23.38
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified read and write routines for UGRID files to be compatible
+  with the current UG library.
+
+Bugs Fixed:
+-----------
+
+* Corrected an issue in the creation of duplicate embedded surface
+  faces that included quad faces.
+
+* Corrected a possible issue during boundary face reordering
+  that rejected boundary normals that were valid. The typical
+  result if the error was encountered was "UG (3D) LIBRARY FATAL
+  ERROR (312)" with the message "unable to check boundary
+  object face ordering."
+
+===============================================================
+ug3 RELEASE NOTES: 07/11/12 RELEASE VERSION 4.23.33
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* The quad splitting algorithm was modified so that trias are always created
+  with no more than one free edge on an embedded surface. The previous quad
+  splitting algorithm could create trias with two free edges from quads with
+  two free edges. 
+
+Bugs Fixed:
+-----------
+
+* Corrected an issue in the creation of duplicate embedded surface faces that
+  included quad faces.
+
+* Corrected a possible issue during boundary face reordering
+  that rejected boundary normals that were valid. The typical
+  result if the error was encountered was "UG (3D) LIBRARY FATAL
+  ERROR (312)" with the message "unable to check boundary
+  object face ordering."
+
+===============================================================
+ug3 RELEASE NOTES: 11/29/11 RELEASE VERSION 4.22.31
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to use the UG_LIB File_Status_Monitor_Flag=1
+  option to output file I/O information in routines ug3_read_*
+  and ug3_write_*.
+
+* Added routines to deal with pyramid transition elements.
+
+* Added capability to remove leading directory names from file
+  names when writing TMP files to a named TMP_File_Dir in
+  ug3_read_ugrid_grid_file and ug3_write_ugrid_grid_file.
+
+* Replaced rewind calls with ug_rewind in ug3_read_* and
+  ug3_write_* routines.
+
+* Modified option for pyramid transition elements to allow for
+  an option to form pyramids from all surfaces with quad-faces.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug3 RELEASE NOTES: 10/18/11 RELEASE VERSION 4.20.25
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added option to turn off checking surfaces that intersect
+  the BL region if the included angle is 0 or 180 or more.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug3 RELEASE NOTES: 07/03/11 RELEASE VERSION 4.20.24
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to generate pyramid transition elements that
+  replace surface quad-faces with tria-faces. If there are
+  quad-faces on fixed surfaces that intersect the BL region or
+  optionally on BL generating surfaces then for each a pyramid
+  transition element is generated. Pyramid point spacing can be
+  adjusted by two new input parameters cdfqp and cdfnqp. The
+  height of pyramids from the quad-face base is scaled by cdfqp
+  and the proximity of adjacent pyramid tip points is limited
+  by cdfnqp.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug3 RELEASE NOTES: 07/03/11 RELEASE VERSION 4.20.24
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified LS BL normal calculation to prevent large errors due
+  to LS matrix condition number.
+
+* Added check for boundary surface faces with duplicate nodes.
+
+* Removed expressions from C-macro calls.
+
+Bugs Fixed:
+-----------
+
+* Corrected surface grid BC check for closed transparent surfaces.
+
+* Fixed incorrect surface grid BC error message.
+
+===============================================================
+ug3 RELEASE NOTES: 06/13/11 RELEASE VERSION 4.19.20
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added grid BC capability for fixed surfaces with BL regions
+  that intersect the volume BL region. The grid BC type
+  definition for these fixed surfaces is FIXED_BL_INT_UG3_GBC
+  and has a value of 7.
+
+* Added grid BC checks for closed transparent BL generating
+  surface and invalid neighbor grid BCs for fixed surfaces
+  that intersect the BL region.
+
+Bugs Fixed:
+-----------
+
+* Corrected initialization error in routine
+  ug3_extract_faces_from_volume_elements.c that was causing
+  errors in the Cobalt, Fluent, and OPENFoam ug_io grid file
+  readers.
+
+===============================================================
+ug3 RELEASE NOTES: 03/09/11 RELEASE VERSION 4.17.17
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routines ug3_extract_faces_from_volume_elements.c and
+  ug3_face_sort.c for extracting faces from volume elements.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug3 RELEASE NOTES: 12/11/10 RELEASE VERSION 4.16.15
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added boundary surface quality check for surface face
+  reconnection in ug3_chkbsurf.
+
+* Added threshold for splitting quads into trias when the max
+  angle is near 90 +/-.
+
+* Revised least-squares algorithm for determining boundary
+  surface normal vectors. The modified routine produces more
+  consistent normal vectors. Also added quad face capability.
+
+* Added compatibility with tmp file naming convention.
+
+Bugs Fixed:
+-----------
+
+* Fixed allocation and initialization of iqibf to ug3_qtria.
+
+* Corrected transformation metrics in ug3_tbfd0.
+
+===============================================================
+ug3 RELEASE NOTES: 09/08/10 RELEASE VERSION 4.13.11
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added setting of iqibf to ug3_tbfd & ug3_tbfd0.
+
+Bugs Fixed:
+-----------
+
+* Fixed allocation and initialization of iqibf to ug3_qtria.
+
+* Corrected transformation metrics in ug3_tbfd0.
+
+===============================================================
+ug3 RELEASE NOTES: 08/27/10 RELEASE VERSION 4.11.11
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routine ug3_chkplane to check if a given surface is
+  planar.
+
+* Added allocation and initialization of iqibf to ug3_qtria.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug3 RELEASE NOTES: 08/21/10 RELEASE VERSION 4.10.10
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Replaced routines ug3_extract_id_surf and ug3_extract_id_surf2
+  with ug3_extract_surf that can extract a subset of a surface
+  grid for a specified generic surface flag.
+
+* Added open surface flag to boundary surface grid reordering
+  routine ug3_ibor and boundary surface grid checking routine
+  ug3_chkbsurf.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug3 RELEASE NOTES: 07/08/10 RELEASE VERSION 4.9.10
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routines ug3_extract_id_surf and ug3_extract_id_surf2
+  to extract a subset of a surface grid for a specified surface
+  ID flag.
+
+* Added output message option to ug3_write_surf_grid_file and
+  ug3_write_ufunc_func_file.
+
+Bugs Fixed:
+-----------
+
+* Corrected error in setting file name with multiple calls to
+  routine ug3_read_surf_grid_file.
+
+===============================================================
+ug3 RELEASE NOTES: 05/10/10 RELEASE VERSION 4.8.8
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to identify surfaces that intersect the BL
+  region and are composed of multiple logical surfaces with the
+  same surface ID.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug3 RELEASE NOTES: 02/08/10 RELEASE VERSION 4.7.8
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added primary routine ug3_tbfd to duplicate transparent
+  boundary surface faces.
+
+* Set reconnection flag between boundary surface faces that are
+  attached to transparent boundary surfaces.
+
+* Added option to not remove unreferenced nodes from a surface
+  grid file.
+
+* Added routine ug3_ieljel to create list of nearby elements
+  for each element.
+
+* Changed file format byte ordering to be the same as the host
+  byte ordering for internal data files.
+
+Bugs Fixed:
+-----------
+
+* Corrected error in transparent boundary surface face
+  duplication within routine ug3_tbfd (now ug3_tbfd0).
+
+* Corrected *.FAIL.node file coordinate output. In previous
+  versions the correct index along with the wrong coordinates
+  are output. Now both are correct.
+
+===============================================================
+ug3 RELEASE NOTES: 01/21/10 RELEASE VERSION 4.4.6
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added limits to boundary function smoothing in routine ug3_bsmth.
+
+Bugs Fixed:
+-----------
+
+* 
+
+
+===============================================================
+ug3 RELEASE NOTES: 06/29/09 RELEASE VERSION 3.77.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability for embedded surfaces within a sub-grid
+  extracted using routine ug3_subgrid or inserted using routine
+  ug3_sgins.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug3 RELEASE NOTES: 06/29/09 RELEASE VERSION 3.77.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added routine to flag boundary faces that intersect the BL region.
+
+* Added routine to check if boundary faces with a grid BC for a surface that
+  intersect the BL region are also adjacent to a surface that generates a BL
+  region.
+
+Bugs Fixed:
+-----------
+
+* 
+
+===============================================================
+ug3 RELEASE NOTES: 06/14/09 RELEASE VERSION 3.76.19
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Activated capability for transparent/embedded surfaces that
+  intersect the BL region (BC = 4).
+
+Bugs Fixed:
+-----------
+
+* Corrected boundary face neighbor map problem with transparent
+  multiply connected or freee-edge faces that have all nodes on
+  the free- or multiply connected edges.
+
+* Corrected issue checking surfaces that intersect te BL region.
+
+===============================================================
+ug3 RELEASE NOTES: 05/01/09 RELEASE VERSION 3.75.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Removed setting arrays to NULL in routine
+  ug3_read_ugrid_grid_file.
+
+* Extracted automatic boundary condition (auto-BC) option from
+  routine ug3_ibfibf and created a new routine ug3_ibfibf0. The
+  new routine determines boundary surface face neighbor
+  connectivity for the auto-BC option.
+
+Bugs Fixed:
+-----------
+
+* Added additional corrections to face neighbor map set with the
+  set grid boundary condition flag option on (msetbc=1).
+
+
+===============================================================
+ug3 RELEASE NOTES: 02/26/09 RELEASE VERSION 3.72.18
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified transformation metrics evaluated on boundary surface
+  faces that have free edges.
+
+Bugs Fixed:
+-----------
+
+* Corrected face neighbor map set with the set grid boundary
+  condition flag option on (msetbc=1).
+
+
+===============================================================
+ug3 RELEASE NOTES: 02/05/09 RELEASE VERSION 3.72.17
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added capability to auto-detect multiply connected transparent
+  boundary faces and to reorder transparent boundary faces with
+  the set grid boundary condition flag option on (msetbc=1) in
+  routine ug3_ibfibf.
+
+Bugs Fixed:
+-----------
+
+* Corrected node indexing error in routine ug3_bnd_nodes and 
+  ug3_bnd_vol_nodes.
+
+
+===============================================================
+ug3 RELEASE NOTES: 01/12/09 RELEASE VERSION 3.69.17
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* 
+
+Bugs Fixed:
+-----------
+
+* Modified routine ug3_sgins to prevent a potential error 
+  inserting re-generated sub-grid.
+
+===============================================================
+ug3 RELEASE NOTES: 12/07/08 RELEASE VERSION 3.68.17
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified routines related to surface grid with a grid BC for
+  surfaces that interect BL regions.
+
+* Separated out checking grid BC related issues and replaced
+  routine ug3_chkbcp with ug3_chkbcp1, ug3_chkbcp2, and
+  ug3_chkbcis.
+
+* Modified automatic BC setting process to reset the surface ID
+  for groups of contiguous surface faces that represent smooth
+  surface patches.
+
+* Modified routine ug3_bvls that determines least-squares
+  optimized boundary surface normal vector to allow for
+  optimization over any number of nodes.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug3 RELEASE NOTES: 11/20/08 RELEASE VERSION 3.67.17
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added boundary node index map routines.
+
+* Added element boundary face routine for mixed element grids.
+
+Bugs Fixed:
+-----------
+
+
+===============================================================
+ug3 RELEASE NOTES: 10/31/08 RELEASE VERSION 3.66.16
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Modified element id flag routine ug3_idiel for multi-material
+  cases with embedded surfaces and BL/SL/SNS regions.
+
+* Added element id flag routine ug3_idielm for cases with
+  BL/SL/SNS regions and mixed element types.
+
+* Added capability to limit boundary surface searches to a
+  particular boundary surface ID.
+
+Bugs Fixed:
+-----------
+
+===============================================================
+ug3 RELEASE NOTES: 10/25/08 RELEASE VERSION 3.65.13
+===============================================================
+
+Enhancements/ Additions:
+------------------------
+
+* Added  sub-grid routines.
+
+Bugs Fixed:
+-----------
+
+* Corrected a possible error during evaluation of the
+  distribution function and/or transformation vectors with
+  specified growth if any of the contributing locations are the
+  same as the evaluation location.

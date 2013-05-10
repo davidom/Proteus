@@ -1,0 +1,36 @@
+ROUTINE
+-------
+
+void ug_kword_error_message (INT_ Error_Flag,
+                             INT_ *Known_Error,
+                             char Program[])
+
+DESCRIPTION
+-----------
+
+Write a KWORD error message.
+
+INPUT ARGUMENTS
+---------------
+
+Error_Message            : Error message.
+
+Error_Flag               : Error flag.
+                           If the value of the error flag is between
+                           130000 and 130099 then the error is a KWORD error and
+                           an error message will be written to standard error.
+                           Otherwise nothing will be done.
+
+Known_Error              : Known error flag.
+                           If the value of the known error flag is 1 then
+                           nothing will be done.
+
+Program                  : Program name.
+
+OUTPUT ARGUMENTS
+----------------
+
+Known_Error              : Known error flag.
+                           If the value of the error flag is between
+                           130000 and 130099 then the error is a KWORD error and
+                           the known error flag will be set to 1.

@@ -1,0 +1,22 @@
+ROUTINE
+-------
+
+void ug_random_list (INT_ n,
+                     INT_ imax,
+                     INT_1D *random_list)
+
+DESCRIPTION
+-----------
+
+Create a random list of numbers;
+
+INPUT ARGUMENTS
+---------------
+
+n                        : Number of array elements.
+imax                     : Maximum value for random list.
+
+OUTPUT ARGUMENTS
+----------------
+
+random_list              : Data array with list of random numbers.

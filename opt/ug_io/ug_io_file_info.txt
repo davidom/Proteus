@@ -1,0 +1,107 @@
+ROUTINE
+-------
+
+INT_ ug_io_file_info (char File_Name[],
+                      char Case_Name[],
+                      char Error_Message[],
+                      char File_Compression_Suffix_[],
+                      char File_Format_Suffix_[],
+                      char File_Mode_Suffix_[],
+                      char File_Type_Suffix_[],
+                      UG_IO_Param_Struct * UG_IO_Param_Struct_Ptr,
+                      INT_ Check_File_Flag,
+                      INT_ *File_Data_Type_,
+                      INT_ *File_Format_,
+                      INT_ *File_Mode_,
+                      INT_ *File_Type_Format_Flag_)
+
+DESCRIPTION
+-----------
+
+Determine file compression suffix, format suffix, type suffix, data type,
+format flag, type format flag, and extract the case name (with leading path if
+any) from a standard UG file name.
+
+INPUT ARGUMENTS
+---------------
+
+File_Name                : File name.
+
+UG_IO_Param_Struct_Ptr   : UG_IO parameter structure.
+
+Check_File_Flag          : File check flag.
+                           If Check_File_Flag = 1 then check to see that the
+                           file exists and return with an error if it does not.
+                           If Check_File_Flag = 0 then do no check to see that
+                           the file exists.
+
+RETURN VALUE
+------------
+
+0                        : No errors occurred determining file information.
+<0                       : The file name is blank or NULL.
+                           The return value will be between -600 and -699.
+>0                       : Errors occurred determining file information.
+                           The return value will be between 600 and 699.
+
+OUTPUT ARGUMENTS
+----------------
+
+File_Name                : File name. If File_Name has a trailing dot, ".", the
+                           dot will be ignored and removed on output.
+
+Case_Name                : File case name with file format suffix and file type
+                           suffix removed (leading path if any will remain).
+                           This will not be set if the file name is empty.
+
+Error_Message            : Error message if the return value is not equal to 0.
+
+File_Compression_Suffix_ : File compression suffix.
+
+File_Format_Suffix_      : File format suffix.
+
+File_Mode_Suffix_        : File format suffix.
+
+File_Type_Suffix_        : File type suffix.
+
+File_Data_Type_          : File data type flag.
+                           The numeric values associated with each file data
+                           type are defined in the include file,
+                           "UG_IO_File_Def.h".
+
+File_Format_             : File format flag.
+                           The numeric values associated with each file format
+                           are defined in the include file, "UG_IO_File_Def.h".
+
+File_Mode_               : File mode flag.
+                           The numeric values associated with each file mode
+                           are defined in the include file, "UG_IO_File_Def.h".
+
+File_Type_Format_Flag_   : File type format flag.
+                           The file type format flag specifies the input,
+                           output, mode, and format options for the current
+                           file type.
+
+                              File_Type_Format_Flag_ = Input_Option
+                                                     + Output_Option * 2
+                                                     + Mode_Option * 4
+                                                     + Format_Option * 8
+
+                           If Input_Option = 0 then the file type is not valid
+                           for input files.
+                           If Input_Option = 2 then the file type is valid for
+                           input files.
+
+                           If Output_Option = 0 then the file type is not
+                           valid for output files.
+                           If Output_Option = 2 then the file type is valid
+                           for output files.
+
+                           If Mode_Option = 0 then only standard file mode is
+                           valid.
+                           If Mode_Option = 1 then all file modes are valid.
+
+                           If Format_Option = 0 then ASCII formatted is the
+                           only valid file format.
+                           If Format_Option = 1 then all file formats are
+                           valid.

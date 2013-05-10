@@ -1,0 +1,30 @@
+ROUTINE
+-------
+
+INT_ ug_write_param_file (char UG_Param_File_Name[],
+                          char Error_Message[],
+                          UG_Param_Struct * UG_Param_Struct_Ptr)
+
+DESCRIPTION
+-----------
+
+Write a UG parameter file with UG parameters that differ from default.
+
+INPUT ARGUMENTS
+---------------
+
+UG_Param_File_Name       : UG parameter file name.
+
+UG_Param_Struct_Ptr      : UG parameter structure.
+
+RETURN VALUE
+---------------
+
+0                        : No errors occurred writing parameter file.
+>0                       : Errors occurred writing parameter file.
+                           The return value will be between 400 and 499
+
+OUTPUT ARGUMENTS
+---------------
+
+Error_Message            : Error message if the return value is >0.

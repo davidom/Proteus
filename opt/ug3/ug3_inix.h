@@ -1,0 +1,17 @@
+INT_ ug3_inix
+ (INT_,
+  INT_,
+  INT_ *,
+  INT_ *,
+  INT_ *,
+  INT_1D *,
+  INT_1D *,
+  INT_1D *,
+  double,
+  double *,
+  double *,
+  double *,
+  double *,
+  double *,
+  double *,
+  DOUBLE_3D *);
