@@ -21,7 +21,7 @@ construct(Proteus::topology <> & t, const node_list &nl, const face_list &fl)
   //resize the map
   t.resize(nl.size());
 
-  //increment the counters
+  //fill in the map
   for(int i=0; i<fl.size(); ++i) {
 	for(int j=0; j<fl[i].size(); ++j) {
 	  t.push(fl[i][j],i);
