@@ -1,168 +1,138 @@
 #include <geometry/entity_trait.hxx>
 #include "gtest/gtest.h"
 
-TEST(EntityTraitTest, Creation)
-{
-  int size = 0;
-  int value = 1;
+class EntityTraitTestingF : public ::testing::Test {
+  protected:
+    virtual void SetUp() {
+	  size0 = 0;
+	  index = 1;
+	  value = 1;
+	  index1 = 1; index2 = 2; index3 = 3;
+	  value1 = 1; value2 = 2; value3 = 3;
+	  large_index = 100;
+	  all_value = 4.0;
+	}
 
-  Proteus::entity_trait<int> et;
-  EXPECT_EQ(et.size(),size);
+    Proteus::entity_trait<int> et_i;
+    Proteus::entity_trait<double> et_d;
+	int size0, index, value, large_index, index1, index2, index3;
+    int value1, value2, value3;
+	double all_value;
+};
+
+TEST_F(EntityTraitTestingF, CreationEmpty)
+{
+  EXPECT_EQ(et_i.size(),size0);
 }
 
-TEST(EntityTraitTest, IsEqual)
+TEST_F(EntityTraitTestingF, IsEqualWhenEmpty)
 {
-  int index = 1;
-  int value = 1;
-
-  Proteus::entity_trait<int> et;
-
-  EXPECT_EQ(et.is_equal(index,value), false);
+  EXPECT_EQ(et_i.is_equal(index,value), false);
 }
 
-TEST(EntityTraitTest, SetTrait)
+TEST_F(EntityTraitTestingF, SetTrait)
 {
-  int index = 1, large_index = 100;
-  int value = 1;
-
-  Proteus::entity_trait<int> et;
-
-  et.set_trait(index,value);
-  EXPECT_EQ(et.is_equal(index,value), true);
-  EXPECT_NO_THROW(et.is_equal(large_index,value));
-  EXPECT_EQ(et.is_equal(index,value+1), false);
+  et_i.set_trait(index,value);
+  EXPECT_EQ(et_i.is_equal(index,value), true);
+  EXPECT_NO_THROW(et_i.is_equal(large_index,value));
+  EXPECT_EQ(et_i.is_equal(index,value+1), false);
 }
 
-TEST(EntityTraitTest, UnsetTrait)
+TEST_F(EntityTraitTestingF, UnsetTrait)
 {
-  int index = 1, large_index = 100;
-  int value = 1;
-
-  Proteus::entity_trait<int> et;
-
-  et.set_trait(index,value);
-  EXPECT_EQ(et.is_equal(index,value), true);
-  et.unset_trait(index);
-  EXPECT_EQ(et.is_equal(index,value), false);
-  EXPECT_NO_THROW(et.unset_trait(large_index));
+  et_i.set_trait(index,value);
+  EXPECT_EQ(et_i.is_equal(index,value), true);
+  et_i.unset_trait(index);
+  EXPECT_EQ(et_i.is_equal(index,value), false);
+  EXPECT_NO_THROW(et_i.unset_trait(large_index));
 }
 
 
-TEST(EntityTraitTest, UnsetEach)
+TEST_F(EntityTraitTestingF, UnsetEach)
 {
-  int index1 = 1, index2 = 2, index3 = 3;
-  int value1 = 1, value2 = 2, value3 = 3;
-
-  Proteus::entity_trait<int> et;
-
-  et.set_trait(index1,value1);
-  et.set_trait(index2,value2);
-  et.set_trait(index3,value3);
-  EXPECT_EQ(et.is_equal(index1,value1), true);
-  EXPECT_EQ(et.is_equal(index2,value2), true);
-  EXPECT_EQ(et.is_equal(index3,value3), true);
-  et.unset_each();
-  EXPECT_EQ(et.is_equal(index1,value1), false);
-  EXPECT_EQ(et.is_equal(index2,value2), false);
-  EXPECT_EQ(et.is_equal(index3,value3), false);
+  et_i.set_trait(index1,value1);
+  et_i.set_trait(index2,value2);
+  et_i.set_trait(index3,value3);
+  EXPECT_EQ(et_i.is_equal(index1,value1), true);
+  EXPECT_EQ(et_i.is_equal(index2,value2), true);
+  EXPECT_EQ(et_i.is_equal(index3,value3), true);
+  et_i.unset_each();
+  EXPECT_EQ(et_i.is_equal(index1,value1), false);
+  EXPECT_EQ(et_i.is_equal(index2,value2), false);
+  EXPECT_EQ(et_i.is_equal(index3,value3), false);
 }
 
-TEST(EntityTraitTest, SetAll)
+TEST_F(EntityTraitTestingF, SetAll)
 {
-  int index1 = 1, index2 = 2, index3 = 3;
-  double value1 = 1, value2 = 2, value3 = 3, all_value = 4.0;
-
-  Proteus::entity_trait<double> et;
-
   //set all values to all_value
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
 }
 
-TEST(EntityTraitTest, SetAllSetTraitInteraction)
+TEST_F(EntityTraitTestingF, SetAllSetTraitInteraction)
 {
-  int index1 = 1, index2 = 2, index3 = 3;
-  double value1 = 1, value2 = 2, value3 = 3, all_value = 4.0;
-
-  Proteus::entity_trait<double> et;
-
   //set all values to all_value and then test that set_trait changes flag
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
-  et.set_trait(index1, value1); //unset the all_value
-  EXPECT_EQ(et.is_equal(index1,value1), true); //set correctly
-  EXPECT_NE(et.is_equal(index3,all_value), true); //all_value is out of date
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
+  et_d.set_trait(index1, value1); //unset the all_value
+  EXPECT_EQ(et_d.is_equal(index1,value1), true); //set correctly
+  EXPECT_NE(et_d.is_equal(index3,all_value), true); //all_value is out of date
 }
 
-TEST(EntityTraitTest, SetAllUnsetTraitInteraction)
+TEST_F(EntityTraitTestingF, SetAllUnsetTraitInteraction)
 {
-  int index1 = 1, index2 = 2, index3 = 3;
-  double value1 = 1, value2 = 2, value3 = 3, all_value = 4.0;
-
-  Proteus::entity_trait<double> et;
-
   //set all values to all_value and then test that unset_all changes flag
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
 
   //unset_trait with value that is not in trait has not effect on set_all flag
-  et.unset_trait(index1);
-  EXPECT_EQ(et.is_equal(index2,all_value), true); //all_value still good
+  et_d.unset_trait(index1);
+  EXPECT_EQ(et_d.is_equal(index2,all_value), true); //all_value still good
 
   //set some trait
-  et.set_trait(index1, value1); //put something in the trait
-  et.set_all(all_value); //set_all with something in the trait
-  et.unset_trait(index1); //unset a value that's in the trait 
-  EXPECT_NE(et.is_equal(index2,all_value), true); //all_value out of date
+  et_d.set_trait(index1, value1); //put something in the trait
+  et_d.set_all(all_value); //set_all with something in the trait
+  et_d.unset_trait(index1); //unset a value that's in the trait 
+  EXPECT_NE(et_d.is_equal(index2,all_value), true); //all_value out of date
 }
 
-TEST(EntityTraitTest, SetAllUnsetAllInteraction)
+TEST_F(EntityTraitTestingF, SetAllUnsetAllInteraction)
 {
-  int index1 = 1, index2 = 2, index3 = 3;
-  double value1 = 1, value2 = 2, value3 = 3, all_value = 4.0;
-
-  Proteus::entity_trait<double> et;
-
   //set all values to all_value and then test that unset_all changes flag
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
-  et.unset_all();
-  EXPECT_NE(et.is_equal(index2,all_value), true); //all_value is out of date
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
+  et_d.unset_all();
+  EXPECT_NE(et_d.is_equal(index2,all_value), true); //all_value is out of date
 
   //set some trait
-  et.set_trait(index1,value1);
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
-  et.unset_all();
-  EXPECT_NE(et.is_equal(index2,all_value), true); //all_value is out of date
-  EXPECT_EQ(et.is_equal(index1,value1), true); //trait existed before set_all
+  et_d.set_trait(index1,value1);
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
+  et_d.unset_all();
+  EXPECT_NE(et_d.is_equal(index2,all_value), true); //all_value is out of date
+  EXPECT_EQ(et_d.is_equal(index1,value1), true); //trait existed before set_all
 }
 
-TEST(EntityTraitTest, SetAllUnsetEachInteraction)
+TEST_F(EntityTraitTestingF, SetAllUnsetEachInteraction)
 {
-  int index1 = 1, index2 = 2, index3 = 3;
-  double value1 = 1, value2 = 2, value3 = 3, all_value = 4.0;
-
-  Proteus::entity_trait<double> et;
-
   //set all values to all_value and then test that unset_each changes flag
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
-  et.unset_each();
-  EXPECT_NE(et.is_equal(index2,all_value), true); //all_value is out of date
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
+  et_d.unset_each();
+  EXPECT_NE(et_d.is_equal(index2,all_value), true); //all_value is out of date
 
   //set some trait
-  et.set_trait(index1,value1);
-  et.set_all(all_value);
-  EXPECT_EQ(et.is_equal(index1,value1), false); //value1 != all_value
-  EXPECT_EQ(et.is_equal(index3,all_value), true); //all_value for any index
-  et.unset_each();
-  EXPECT_NE(et.is_equal(index2,all_value), true); //all_value is out of date
-  EXPECT_NE(et.is_equal(index1,value1), true); //traits cleared
+  et_d.set_trait(index1,value1);
+  et_d.set_all(all_value);
+  EXPECT_EQ(et_d.is_equal(index1,value1), false); //value1 != all_value
+  EXPECT_EQ(et_d.is_equal(index3,all_value), true); //all_value for any index
+  et_d.unset_each();
+  EXPECT_NE(et_d.is_equal(index2,all_value), true); //all_value is out of date
+  EXPECT_NE(et_d.is_equal(index1,value1), true); //traits cleared
 }
