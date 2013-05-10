@@ -9,30 +9,22 @@ namespace Proteus
 {
   template
   <
-    typename from_list,
-    typename to_list,
-    typename constructor_class,
     typename container=std::vector<std::vector<std::size_t>>
   >
   class topology
   {
-    friend constructor_class;
-
     private:
-      container container_;
-      topology() = delete;
+	  container _container;
 
     public:
-      const from_list & fl_;
-      const to_list & tl_;
-	  std::unique_ptr<constructor_class> cc_;
-
-      topology(const from_list & fl, const to_list & tl) : fl_(fl), tl_(tl), cc_(new constructor_class) {}
-      
-      auto operator[](std::size_t n) const -> decltype(container_[n]) { return container_[n]; }
-
-	  void construct() { cc_->construct(*this); }
-
+	  topology() = default;
+	  auto size() -> decltype(_container.size()) { return _container.size(); }
+	  auto size(std::size_t n) -> decltype(_container[n].size()) { return _container[n].size(); }
+	  void resize(std::size_t n) { _container.resize(n); }
+	  void resize(std::size_t i, std::size_t n) { _container[i].resize(n); }
+	  void push(std::size_t i, std::size_t n) { _container[i].emplace_back(n); }
+	  void pull(std::size_t i, std::size_t n) { remove(_container[i].begin(), _container[i].end(), n); }
+      auto operator[](std::size_t n) const -> decltype(_container[n]) { return _container[n]; }
   };
 
 }

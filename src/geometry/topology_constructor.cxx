@@ -9,101 +9,22 @@
 #include <iostream>
 #include <typeinfo>
 
+template
+<
+  typename node_list,
+  typename face_list
+>
 void
-Proteus::node_to_face_topo_ctr::construct(
-  Proteus::topology
-  <
-	Proteus::Geometry::node_list,
-	Proteus::Geometry::face_list,
-	Proteus::node_to_face_topo_ctr
-  > &
-  t
-)
+Proteus::node_to_face_topo_ctr::
+construct(Proteus::topology <> & t, const node_list &nl, const face_list &fl)
 {
+  //resize the map
+  t.resize(nl.size());
 
-  // Resize the topology
-  t.container_.resize(t.fl_.size());
-
-  // Push counter variable for allocation later
-  for(auto & itr : t.container_) {
-	if(!itr.empty())
-	  itr.clear();
-	itr.push_back(0);
-  }
-  
-  Proteus::all_range<decltype(t.tl_)> al(t.tl_);
-  Proteus::entity_iterator<decltype(t.tl_), Proteus::all_range<decltype(t.tl_)>> ei(t.tl_, al);
-
-  // Increment counter for each entity sharing that node
-  for(auto & eit : ei) {
-	for(decltype(eit.size()) i = 0; i< eit.size(); ++i) {
-	  t.container_[eit[i]][0] += 1;
+  //increment the counters
+  for(int i=0; i<fl.size(); ++i) {
+	for(int j=0; j<fl[i].size(); ++j) {
+	  t.push(fl[i][j],i);
 	}
-  }
-
-  // Reserve the space for all of the push_back
-  for(auto & itr : t.container_) {
-	itr.reserve(itr[0]);
-	itr.pop_back();
-  }
-
-  // Construct map
-  auto itr = ei.begin();
-  while(itr != ei.end()) {
-	for(decltype(itr->size()) i = 0; i<itr->size(); ++i) {
-	  t.container_[itr[i]].push_back(itr.index());
-	}
-
-	++itr;
-  }
-}
-
-void
-Proteus::node_to_tria_topo_ctr::construct(
-  Proteus::topology
-  <
-	Proteus::Geometry::node_list,
-	Proteus::Geometry::tria_list,
-	Proteus::node_to_tria_topo_ctr
-  > &
-  t
-)
-{
-
-  // Resize the topology
-  t.container_.resize(t.fl_.size());
-
-  // Push counter variable for allocation later
-  for(auto & itr : t.container_) {
-	if(!itr.empty())
-	  itr.clear();
-	itr.push_back(0);
-  }
-  
-  Proteus::all_range<decltype(t.tl_)> al(t.tl_);
-  Proteus::entity_iterator<decltype(t.tl_), Proteus::all_range<decltype(t.tl_)>> ei(t.tl_, al);
-
-  // Increment counter for each entity sharing that node
-  auto eit = ei.begin();
-  while(eit != ei.end()) {
-	t.container_[eit[0]][0] += 1;
-	t.container_[eit[1]][0] += 1;
-	t.container_[eit[2]][0] += 1;
-	++eit;
-  }
-
-  // Reserve the space for all of the push_back
-  for(auto & itr : t.container_) {
-	itr.reserve(itr[0]);
-	itr.pop_back();
-  }
-
-  // Construct map
-  auto itr = ei.begin();
-  while(itr != ei.end()) {
-	t.container_[itr[0]].push_back(itr.index());
-	t.container_[itr[1]].push_back(itr.index());
-	t.container_[itr[2]].push_back(itr.index());
-	++itr;
   }
 }

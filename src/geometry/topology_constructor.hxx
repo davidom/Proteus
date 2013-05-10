@@ -10,32 +10,16 @@ namespace Proteus
     private:
 
 	public:
-      void construct(
-        Proteus::topology
-        <
-          Proteus::Geometry::node_list,
-          Proteus::Geometry::face_list,
-          Proteus::node_to_face_topo_ctr
-        > & t
-      );
+	  template
+	  <
+	    typename node_list,
+	    typename face_list
+	  >
+      void construct(Proteus::topology <> & t, const node_list &, const face_list &);
 	  node_to_face_topo_ctr() = default;
   };
 
-  class node_to_tria_topo_ctr
-  {
-    private:
-
-	public:
-      void construct(
-        Proteus::topology
-        <
-          Proteus::Geometry::node_list,
-          Proteus::Geometry::tria_list,
-          Proteus::node_to_tria_topo_ctr
-        > & t
-      );
-	  node_to_tria_topo_ctr() = default;
-  };
+//#include <geometry/topology_constructor.cxx>
 
 }
 #endif
