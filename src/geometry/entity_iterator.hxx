@@ -23,6 +23,9 @@ namespace Proteus
 	  const range & range_;
 
 	  decltype(range_.begin()) range_itr_;
+	  std::size_t index_;
+
+	  void update_index() { (!range_.empty() && range_.end() != range_itr_) ? index_ = *range_itr_ : index_ = -1; }
 
 	public:
 	  /** \brief Constructor
@@ -33,30 +36,31 @@ namespace Proteus
 	  entity_iterator(const list & l_, const range & r_)
 	    : list_(l_),
 		  range_(r_),
-		  range_itr_(range_.begin())
-		{}
+		  range_itr_(range_.begin()),
+		  index_(0)
+		{ update_index(); }
 
       /// \brief Dereference Operator
-	  auto operator->() const -> decltype(&(list_[*range_itr_]))
+	  auto operator->() const -> decltype(&(list_[index_]))
 	  {
-		return &(list_[*range_itr_]);
+		return &(list_[index_]);
 	  }
-	  auto operator*() const -> decltype(list_[*range_itr_])
+	  auto operator*() const -> decltype(list_[index_])
 	  {
-		return list_[*range_itr_];
+		return list_[index_];
 	  }
-	  auto operator[](std::size_t n) const -> decltype(list_[*range_itr_][n])
+	  auto operator[](std::size_t n) const -> decltype(list_[index_][n])
 	  {
-		return list_[*range_itr_][n];
+		return list_[index_][n];
 	  }
 	  /// Pre-increment operator
-	  const entity_iterator & operator++() { ++range_itr_; return *this; }
+	  const entity_iterator & operator++() { ++range_itr_; update_index(); return *this; }
 	  /// Pre-decrement operator
-	  const entity_iterator & operator--() { --range_itr_; return *this; }
+	  const entity_iterator & operator--() { --range_itr_; update_index(); return *this; }
 	  /// Resets the iterator to point to the beginning of the range-list
-	  void reset() { range_itr_ = range_.begin(); }
+	  void reset() { range_itr_ = range_.begin(); update_index(); }
 	  /// Resets the iterator to point to the end of the range-list
-	  void reset_end() { range_itr_ = range_.end(); }
+	  void reset_end() { range_itr_ = range_.end(); update_index(); }
 	  /// Returns iterator pointing at beginning of range-list
       const entity_iterator begin() const
 	  {
@@ -70,12 +74,12 @@ namespace Proteus
 	  /// Comparison Operator
 	  bool operator==(const entity_iterator &ei) const
 	  {
-        return ei.range_itr_ == this->range_itr_;
+        return ei.index_ == this->index_;
 	  }
 	  /// Comparison Operator
 	  bool operator!=(const entity_iterator &ei) const
 	  {
-        return ei.range_itr_ != this->range_itr_;
+        return ei.index_ != this->index_;
 	  }
 	  /// Returns the index to which the iterator points to in the range
 	  auto index() -> decltype(*range_itr_) { return *range_itr_; } 
