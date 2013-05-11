@@ -127,6 +127,44 @@ namespace Proteus
 	  iterator_adapter begin() const { return iterator_adapter(container_,container_.begin()); }
 	  iterator_adapter end() const { return iterator_adapter(container_,container_.end()); } 
   };
+
+  template
+  <
+    typename associative_container,
+	typename limiting_list
+  >
+  class obverse_trait_adapter
+  {
+	class iterator_adapter {
+	  private:
+	    const associative_container &_container;
+	    decltype(_container.begin()) _container_itr;
+	    const limiting_list &_list;
+		std::size_t _current_index;
+	    iterator_adapter() = delete;
+
+	  public:
+	    ~iterator_adapter() = default;
+		iterator_adapter(const associative_container & ac, const decltype(_container.begin()) & itr, const limiting_list &l, decltype(_current_index) i) : _container(ac), _container_itr(itr), _list(l), _current_index(i) { if(_list.size() != 0) while(_current_index == _container_itr->first) { ++_current_index; ++_container_itr; } }
+		auto operator*() const -> decltype(_current_index) { return _current_index; }
+		iterator_adapter & operator=(const iterator_adapter & rhs) {this->_container_itr = rhs._container_itr; this->_current_index = rhs._current_index; return *this; }
+		const iterator_adapter & operator++() { if(_list.size()) {++_current_index; while(_current_index == _container_itr->first) { ++_current_index; ++_container_itr; } } return *this; }
+		const iterator_adapter & operator--() { if(_list.size()) {--_current_index; while(_current_index == _container_itr->first) { --_current_index; --_container_itr; } } return *this; }
+		bool operator!=(const iterator_adapter &ia) const { return ia._current_index != this->_current_index; }
+	};
+
+	private:
+	  const associative_container & _container;
+	  const limiting_list & _list;
+	  obverse_trait_adapter() = delete;
+
+	public:
+	  ~obverse_trait_adapter() = default;
+	  obverse_trait_adapter(const associative_container & ac, const limiting_list & l) : _container(ac), _list(l) {}
+	  iterator_adapter begin() const { return iterator_adapter(_container,_container.begin(),_list,0); }
+	  iterator_adapter end() const { return iterator_adapter(_container,_container.end(),_list,_list.size()); }
+  };
+
 }
 
 #endif
