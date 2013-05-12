@@ -25,7 +25,26 @@ namespace Proteus
 	  decltype(range_.begin()) range_itr_;
 	  std::size_t index_;
 
-	  void update_index() { (!range_.empty() && range_.end() != range_itr_) ? index_ = *range_itr_ : index_ = -1; }
+	  bool obverse_flag_;
+
+	  void update_index()
+	  {
+		if(obverse_flag_)
+		{
+		  (!range_.empty() && range_.end() != range_itr_) ? 
+		    index_ = *range_itr_ :
+			index_ = -1;
+		}
+		else
+		{
+		  if(!range_.empty())
+			while(index_ != *range_itr_ && range_itr_ != range_.end())
+			{
+			  ++index_;
+			  ++range_itr_;
+			}
+		}
+	  }
 
 	public:
 	  /** \brief Constructor
@@ -33,11 +52,12 @@ namespace Proteus
 	   * @param l_ random-access container 
 	   * @param r_ sequential-access container
 	  */
-	  entity_iterator(const list & l_, const range & r_)
+	  entity_iterator(const list & l_, const range & r_, bool obverse_flag = true)
 	    : list_(l_),
 		  range_(r_),
 		  range_itr_(range_.begin()),
-		  index_(0)
+		  index_(0),
+		  obverse_flag_(obverse_flag)
 		{ update_index(); }
 
       /// \brief Dereference Operator
@@ -64,12 +84,12 @@ namespace Proteus
 	  /// Returns iterator pointing at beginning of range-list
       const entity_iterator begin() const
 	  {
-		return entity_iterator(list_,range_);
+		return entity_iterator(list_,range_,obverse_flag_);
 	  }
 	  /// Returns iterator pointing at end of range-list
       const entity_iterator end() const
 	  {
-		entity_iterator ei(list_,range_); ei.reset_end(); return ei;
+		entity_iterator ei(list_,range_,obverse_flag_); ei.reset_end(); return ei;
 	  }
 	  /// Comparison Operator
 	  bool operator==(const entity_iterator &ei) const
