@@ -304,3 +304,29 @@ TEST(EntityIteratorTest, IteratorWithEntityTrait)
     ++eitr;
   }
 }
+
+TEST(EntityIteratorTest, IteratorWithAllRange)
+{
+  size_t index1=8, index2=3, index3=2, index4=6;
+  double value1=10., value2=1., value3=7., value4=14.;
+
+  Proteus::entity_list<Proteus::Geometry::node3d> list;
+  Proteus::all_range<decltype(list)> ta(list);
+  Proteus::entity_iterator<decltype(list),decltype(ta)> ei(list,ta);
+
+  // add some nodes to the list
+  for(double n=0.; n<10; ++n) {
+    list.push(Proteus::Geometry::node3d(n,n+1,n+2));
+  }
+
+  // This is here because it won't compile if these operators aren't defined
+  for ( auto eii : ei) { ; } 
+
+  auto eitr = ei.begin();
+  auto eitr_end = ei.end();
+  while(eitr != eitr_end) {
+    EXPECT_EQ((*eitr)[0], eitr.index());
+
+    ++eitr;
+  }
+}

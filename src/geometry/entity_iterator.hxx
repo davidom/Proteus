@@ -13,96 +13,187 @@ namespace Proteus
   template
   <
     typename list,
-	typename range
+    typename range
   >
   class entity_iterator
   {
     private:
-	  entity_iterator() = delete;
-	  const list & list_;
-	  const range & range_;
+      entity_iterator() = delete;
+      const list & list_;
+      const range & range_;
 
-	  decltype(range_.begin()) range_itr_;
-	  std::size_t index_;
+      decltype(range_.begin()) range_itr_;
 
-	  bool obverse_flag_;
-
-	  void update_index()
-	  {
-		if(obverse_flag_)
-		{
-		  (!range_.empty() && range_.end() != range_itr_) ? 
-		    index_ = *range_itr_ :
-			index_ = -1;
-		}
-		else
-		{
-		  if(!range_.empty())
-			while(index_ != *range_itr_ && range_itr_ != range_.end())
-			{
-			  ++index_;
-			  ++range_itr_;
-			}
-		}
-	  }
-
-	public:
-	  /** \brief Constructor
-	   *
-	   * @param l_ random-access container 
-	   * @param r_ sequential-access container
-	  */
-	  entity_iterator(const list & l_, const range & r_, bool obverse_flag = true)
-	    : list_(l_),
-		  range_(r_),
-		  range_itr_(range_.begin()),
-		  index_(0),
-		  obverse_flag_(obverse_flag)
-		{ update_index(); }
+    public:
+      /** \brief Constructor
+       *
+       * @param l_ random-access container 
+       * @param r_ sequential-access container
+      */
+      entity_iterator(const list & l_, const range & r_)
+        : list_(l_),
+          range_(r_),
+          range_itr_(range_.begin())
+        {}
 
       /// \brief Dereference Operator
-	  auto operator->() const -> decltype(&(list_[index_]))
-	  {
-		return &(list_[index_]);
-	  }
-	  auto operator*() const -> decltype(list_[index_])
-	  {
-		return list_[index_];
-	  }
-	  auto operator[](std::size_t n) const -> decltype(list_[index_][n])
-	  {
-		return list_[index_][n];
-	  }
-	  /// Pre-increment operator
-	  const entity_iterator & operator++() { ++range_itr_; update_index(); return *this; }
-	  /// Pre-decrement operator
-	  const entity_iterator & operator--() { --range_itr_; update_index(); return *this; }
-	  /// Resets the iterator to point to the beginning of the range-list
-	  void reset() { range_itr_ = range_.begin(); update_index(); }
-	  /// Resets the iterator to point to the end of the range-list
-	  void reset_end() { range_itr_ = range_.end(); update_index(); }
-	  /// Returns iterator pointing at beginning of range-list
+      auto operator->() const -> decltype(&(list_[*range_itr_]))
+      {
+        return &(list_[*range_itr_]);
+      }
+      auto operator*() const -> decltype(list_[*range_itr_])
+      {
+        return list_[*range_itr_];
+      }
+      auto operator[](std::size_t n) const -> decltype(list_[*range_itr_][n])
+      {
+        return list_[*range_itr_][n];
+      }
+      /// Pre-increment operator
+      const entity_iterator & operator++() { ++range_itr_; return *this; }
+      /// Pre-decrement operator
+      const entity_iterator & operator--() { --range_itr_; return *this; }
+      /// Resets the iterator to point to the beginning of the range-list
+      void reset() { range_itr_ = range_.begin(); }
+      /// Resets the iterator to point to the end of the range-list
+      void reset_end() { range_itr_ = range_.end(); }
+      /// Returns iterator pointing at beginning of range-list
       const entity_iterator begin() const
-	  {
-		return entity_iterator(list_,range_,obverse_flag_);
-	  }
-	  /// Returns iterator pointing at end of range-list
+      {
+        return entity_iterator(list_,range_);
+      }
+      /// Returns iterator pointing at end of range-list
       const entity_iterator end() const
-	  {
-		entity_iterator ei(list_,range_,obverse_flag_); ei.reset_end(); return ei;
-	  }
-	  /// Comparison Operator
-	  bool operator==(const entity_iterator &ei) const
-	  {
+      {
+        entity_iterator ei(list_,range_); ei.reset_end(); return ei;
+      }
+      /// Comparison Operator
+      bool operator==(const entity_iterator &ei) const
+      {
+        return ei.range_itr_ == this->range_itr_;
+      }
+      /// Comparison Operator
+      bool operator!=(const entity_iterator &ei) const
+      {
+        return ei.range_itr_ != this->range_itr_;
+      }
+      /// Returns the index to which the iterator points to in the range
+      auto index() -> decltype(*range_itr_) { return *range_itr_; } 
+  };
+
+  template
+  <
+    typename list,
+    typename range
+  >
+  class obverse_entity_iterator
+  {
+    private:
+      obverse_entity_iterator() = delete;
+      const list & list_;
+      const range & range_;
+      
+      decltype(range_.begin()) range_itr_;
+      std::size_t index_;
+
+      void update_index()
+      {
+        ++index_;
+        
+        if(range_.empty()) return;
+
+        while(range_itr_ != range_.end())
+        {
+          if(index_ < *range_itr_) break;
+          else if(index_ > *range_itr_) ++range_itr_;
+          else { ++index_; ++range_itr_; }
+        }
+      }
+      void update_index_back()
+      {
+        --index_;
+        
+        if(range_.empty()) return;
+
+        while(range_itr_ != range_.end())
+        {
+          if(index_ < *range_itr_) break;
+          else if(index_ > *range_itr_) --range_itr_;
+          else { --index_; --range_itr_; }
+        }
+      }
+      void reset_to_first_valid()
+      {
+        index_ = 0; range_itr_ = range_.begin();
+        
+        if(range_.empty()) return;
+
+        while(index_ >= *range_itr_ && range_itr_ != range_.end()) { ++index_; ++range_itr_; }
+      }
+      void reset_to_last_valid()
+      {
+        index_ = list_.size() - 1; range_itr_ = --range_.end();
+
+        if(range_.empty()) return;
+
+        while(index_ <= *range_itr_ && index_ > 0 ) { --index_; --range_itr_; }
+      }
+
+    public:
+      obverse_entity_iterator(const list & l_, const range & r_)
+        : list_(l_),
+          range_(r_),
+          range_itr_(range_.begin())
+        {reset_to_first_valid();}
+      
+      /// \brief Dereference Operator
+      auto operator->() const -> decltype(&(list_[*range_itr_]))
+      {
+        return &(list_[*range_itr_]);
+      }
+      auto operator*() const -> decltype(list_[*range_itr_])
+      {
+        return list_[*range_itr_];
+      }
+      auto operator[](std::size_t n) const -> decltype(list_[*range_itr_][n])
+      {
+        return list_[*range_itr_][n];
+      }
+      /// Pre-increment operator
+      const obverse_entity_iterator & operator++() { update_index(); return *this; }
+      /// Pre-decrement operator
+      const obverse_entity_iterator & operator--() { update_index_back(); return *this; }
+      /// Resets the iterator to point to the beginning of the range-list
+      void reset() { reset_to_first_valid(); }
+      /// Resets the iterator to point to the end of the range-list
+      void reset_end() { reset_to_last_valid(); }
+      /// Returns iterator pointing at beginning of range-list
+      const obverse_entity_iterator begin() const
+      {
+        return obverse_entity_iterator(list_,range_);
+      }
+      /// Returns iterator pointing at end of range-list
+      const obverse_entity_iterator end() const
+      {
+        obverse_entity_iterator ei(list_,range_); ei.reset_end(); return ei;
+      }
+      /// Comparison Operator
+      bool operator==(const obverse_entity_iterator &ei) const
+      {
         return ei.index_ == this->index_;
-	  }
-	  /// Comparison Operator
-	  bool operator!=(const entity_iterator &ei) const
-	  {
+      }
+      /// Comparison Operator
+      bool operator!=(const obverse_entity_iterator &ei) const
+      {
         return ei.index_ != this->index_;
-	  }
-	  /// Returns the index to which the iterator points to in the range
-	  auto index() -> decltype(*range_itr_) { return *range_itr_; } 
+      }
+      bool operator<=(const obverse_entity_iterator &ei) const
+      {
+        return this->index_ <= ei.index_;
+      }
+      /// Returns the index to which the iterator points to in the range
+      auto index() -> decltype(index_) { return index_; } 
+
   };
 
   template
@@ -111,30 +202,21 @@ namespace Proteus
   >
   class all_range
   {
-	private:
-	  const list & list_;
-	  all_range() = delete;
+    private:
+      const list & list_;
+      std::size_t index_;
+      all_range() = delete;
 
-    class index_adapter {
-	  private:
-	    std::size_t index_;
-		index_adapter() = delete;
-
-	  public:
-		~index_adapter() = default;
-		index_adapter(const std::size_t index) : index_(index) {}
-		auto operator*() const -> decltype(index_) { return index_; }
-		index_adapter & operator=(const index_adapter & rhs) { this->index_ = rhs.index_; return *this; }
-		const index_adapter & operator++() { ++index_; return *this; }
-		const index_adapter & operator--() { --index_; return *this; }
-		bool operator!=(const index_adapter &ia) const { return ia.index_ != this->index_; }
-	};
-
-	public:
-	  ~all_range() = default;
-	  all_range(list l) : list_(l) {}
-	  index_adapter begin() const { return index_adapter(static_cast<std::size_t>(0)); }
-	  index_adapter end() const { return index_adapter(static_cast<std::size_t>(list_.size())); }
+    public:
+      ~all_range() = default;
+      all_range(list l) : list_(l), index_(0) {}
+      auto operator*() const -> decltype(index_) { return index_; }
+      all_range begin() const { return all_range(static_cast<std::size_t>(0)); }
+      all_range end() const { return all_range(static_cast<std::size_t>(list_.size())); }
+      all_range & operator=(const all_range & rhs) { this->index_ = rhs.index_; return *this; }
+      const all_range & operator++() { ++index_; return *this; }
+      const all_range & operator--() { --index_; return *this; }
+      bool operator!=(const all_range &ia) const { return ia.index_ != this->index_; }
   };
 }
 
