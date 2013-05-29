@@ -73,6 +73,8 @@ create_entity_lists_from_file_ug_io
        Initial_Normal_Spacing,
        BL_Thickness);
 
+  if(error_flag) throw;
+
   Surf_Grid_BC_Flag = new INT_1D[Number_of_Surf_Quads + Number_of_Surf_Trias + 1];
   Surf_ID_Flag = new INT_1D[Number_of_Surf_Quads + Number_of_Surf_Trias + 1];
   Surf_Reconnection_Flag = new INT_1D[Number_of_Surf_Quads + Number_of_Surf_Trias + 1];
@@ -113,6 +115,8 @@ create_entity_lists_from_file_ug_io
      Coordinates,
      Initial_Normal_Spacing,
      BL_Thickness);
+
+  if(error_flag) throw;
 
   // Return stdout to it's normal state (no longer supressed)  
   fclose(stdout);
@@ -248,11 +252,36 @@ write_entity_lists_to_file_ug_io
 	Surf_Tria_Connectivity[j][1] = tria_list[i][1] + 1;
 	Surf_Tria_Connectivity[j][2] = tria_list[i][2] + 1;
 
+	Surf_ID_Flag[j] = 1;
 	Surf_Grid_BC_Flag[j] = 1;
 	Surf_Reconnection_Flag[j] = 0;
   }
 
-  ug_io_write_grid_file
+  // Copy Over Trias
+  for(i=0, j=1; i<Number_of_Surf_Quads; ++i, ++j) {
+	Surf_Quad_Connectivity[j][0] = quad_list[i][0] + 1;
+	Surf_Quad_Connectivity[j][1] = quad_list[i][1] + 1;
+	Surf_Quad_Connectivity[j][2] = quad_list[i][2] + 1;
+	Surf_Quad_Connectivity[j][3] = quad_list[i][3] + 1;
+
+	Surf_ID_Flag[j] = 1;
+	Surf_Grid_BC_Flag[j] = 1;
+	Surf_Reconnection_Flag[j] = 0;
+  }
+
+  // Copy Over Hexes
+  for(i=0, j=1; i<Number_of_Vol_Hexes; ++i, ++j) {
+    Vol_Hex_Connectivity[j][0] = hex_list[i][0] + 1;
+    Vol_Hex_Connectivity[j][1] = hex_list[i][1] + 1;
+    Vol_Hex_Connectivity[j][2] = hex_list[i][2] + 1;
+    Vol_Hex_Connectivity[j][3] = hex_list[i][3] + 1;
+    Vol_Hex_Connectivity[j][4] = hex_list[i][4] + 1;
+    Vol_Hex_Connectivity[j][5] = hex_list[i][5] + 1;
+    Vol_Hex_Connectivity[j][6] = hex_list[i][6] + 1;
+    Vol_Hex_Connectivity[j][7] = hex_list[i][7] + 1;
+  }
+
+  error_flag = ug_io_write_grid_file
   (Grid_File_Name,
    Error_Message,
    UG_IO_Param_Struct_Ptr,
@@ -278,6 +307,8 @@ write_entity_lists_to_file_ug_io
    Coordinates,
    Initial_Normal_Spacing,
    BL_Thickness);
+
+  if(error_flag) throw;
 
   // Return stdout to it's normal state (no longer supressed)  
   fclose(stdout);

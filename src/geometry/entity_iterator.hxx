@@ -35,6 +35,13 @@ namespace Proteus
           range_(r_),
           range_itr_(range_.begin())
         {}
+      entity_iterator & operator=(const entity_iterator & ei)
+      {
+	this->list_ = ei.list_;
+	this->range_ = ei.range_;
+	this->range_itr_ = ei.range_itr_;
+	return *this;
+      }
 
       /// \brief Dereference Operator
       auto operator->() const -> decltype(&(list_[*range_itr_]))
@@ -211,12 +218,13 @@ namespace Proteus
       ~all_range() = default;
       all_range(list l) : list_(l), index_(0) {}
       auto operator*() const -> decltype(index_) { return index_; }
-      all_range begin() const { return all_range(static_cast<std::size_t>(0)); }
-      all_range end() const { return all_range(static_cast<std::size_t>(list_.size())); }
+      all_range begin() const { return all_range(list_); }
+      all_range end() const { all_range ai(list_); ai.index_ = list_.size(); return ai; }
       all_range & operator=(const all_range & rhs) { this->index_ = rhs.index_; return *this; }
       const all_range & operator++() { ++index_; return *this; }
       const all_range & operator--() { --index_; return *this; }
       bool operator!=(const all_range &ia) const { return ia.index_ != this->index_; }
+      bool operator==(const all_range &ia) const { return ia.index_ == this->index_; }
   };
 }
 
