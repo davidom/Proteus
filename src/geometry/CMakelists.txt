@@ -13,12 +13,11 @@ topology_constructor.hxx
 )
 
 set(geom_lib_srcs
-topology_constructor.cxx
 )
 
 include_directories("../")
 
-add_library(geom_lib SHARED ${geom_lib_headers} ${geom_lib_srcs})
+#add_library(geom_lib SHARED ${geom_lib_headers} ${geom_lib_srcs})
 
 set(CMAKE_CXX_COMPILER g++4.7)
 set(CMAKE_CXX_FLAGS "-m64 -std=c++11")

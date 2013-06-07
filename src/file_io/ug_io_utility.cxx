@@ -12,6 +12,7 @@ create_entity_lists_from_file_ug_io
  Proteus::Geometry::node_list &node_list,
  Proteus::Geometry::tria_list &tria_list,
  Proteus::Geometry::quad_list &quad_list,
+ Proteus::Geometry::surf_label &surf_label,
  Proteus::Geometry::tet_list &tet_list,
  Proteus::Geometry::pent5_list &pent5_list,
  Proteus::Geometry::pent6_list &pent6_list,
@@ -146,6 +147,8 @@ create_entity_lists_from_file_ug_io
 	(Surf_Tria_Connectivity[i][0]-1,
 	 Surf_Tria_Connectivity[i][1]-1,
 	 Surf_Tria_Connectivity[i][2]-1);
+	
+	surf_label.push(Surf_ID_Flag[i]);
   }
   delete [] Surf_Tria_Connectivity;
 
@@ -156,6 +159,8 @@ create_entity_lists_from_file_ug_io
 	(Surf_Quad_Connectivity[i][0]-1,
 	 Surf_Quad_Connectivity[i][1]-1,
 	 Surf_Quad_Connectivity[i][2]-1);
+
+	surf_label.push(Surf_ID_Flag[i+Number_of_Surf_Trias]);
   }
   delete [] Surf_Quad_Connectivity;
 
@@ -176,14 +181,15 @@ write_entity_lists_to_file_ug_io
  Proteus::Geometry::node_list &node_list,
  Proteus::Geometry::tria_list &tria_list,
  Proteus::Geometry::quad_list &quad_list,
+ Proteus::Geometry::surf_label &surf_label,
  Proteus::Geometry::tet_list &tet_list,
  Proteus::Geometry::pent5_list &pent5_list,
  Proteus::Geometry::pent6_list &pent6_list,
  Proteus::Geometry::hex_list &hex_list)
 {
   // Supress output from UG_IO
-  int stdout_fd = dup(STDOUT_FILENO);
-  FILE *fp = freopen("/dev/null", "w", stdout);
+  //int stdout_fd = dup(STDOUT_FILENO);
+  //FILE *fp = freopen("/dev/null", "w", stdout);
 
   int error_flag;
   char * Grid_File_Name = const_cast<char*>(file_name.c_str());
@@ -252,7 +258,7 @@ write_entity_lists_to_file_ug_io
 	Surf_Tria_Connectivity[j][1] = tria_list[i][1] + 1;
 	Surf_Tria_Connectivity[j][2] = tria_list[i][2] + 1;
 
-	Surf_ID_Flag[j] = 1;
+	Surf_ID_Flag[j] = surf_label[i];
 	Surf_Grid_BC_Flag[j] = 1;
 	Surf_Reconnection_Flag[j] = 0;
   }
@@ -264,9 +270,9 @@ write_entity_lists_to_file_ug_io
 	Surf_Quad_Connectivity[j][2] = quad_list[i][2] + 1;
 	Surf_Quad_Connectivity[j][3] = quad_list[i][3] + 1;
 
-	Surf_ID_Flag[j] = 1;
-	Surf_Grid_BC_Flag[j] = 1;
-	Surf_Reconnection_Flag[j] = 0;
+	Surf_ID_Flag[j+Number_of_Surf_Trias] = surf_label[i+Number_of_Surf_Trias];
+	Surf_Grid_BC_Flag[j+Number_of_Surf_Trias] = 1;
+	Surf_Reconnection_Flag[j+Number_of_Surf_Trias] = 0;
   }
 
   // Copy Over Hexes
@@ -311,9 +317,9 @@ write_entity_lists_to_file_ug_io
   if(error_flag) throw;
 
   // Return stdout to it's normal state (no longer supressed)  
-  fclose(stdout);
-  dup2(stdout_fd, STDOUT_FILENO);
-  stdout = fdopen(STDOUT_FILENO, "w");
-  close(stdout_fd);
+  //fclose(stdout);
+  //dup2(stdout_fd, STDOUT_FILENO);
+  //stdout = fdopen(STDOUT_FILENO, "w");
+  //close(stdout_fd);
 
 }
