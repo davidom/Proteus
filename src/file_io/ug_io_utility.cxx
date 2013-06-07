@@ -263,7 +263,7 @@ write_entity_lists_to_file_ug_io
 	Surf_Reconnection_Flag[j] = 0;
   }
 
-  // Copy Over Trias
+  // Copy Over Quads
   for(i=0, j=1; i<Number_of_Surf_Quads; ++i, ++j) {
 	Surf_Quad_Connectivity[j][0] = quad_list[i][0] + 1;
 	Surf_Quad_Connectivity[j][1] = quad_list[i][1] + 1;
@@ -321,5 +321,4 @@ write_entity_lists_to_file_ug_io
   //dup2(stdout_fd, STDOUT_FILENO);
   //stdout = fdopen(STDOUT_FILENO, "w");
   //close(stdout_fd);
-
 }
