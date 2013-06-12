@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include <cassert>
 
 void
 create_entity_lists_from_file_ug_io
@@ -158,7 +159,8 @@ create_entity_lists_from_file_ug_io
 	quad_list.push
 	(Surf_Quad_Connectivity[i][0]-1,
 	 Surf_Quad_Connectivity[i][1]-1,
-	 Surf_Quad_Connectivity[i][2]-1);
+	 Surf_Quad_Connectivity[i][2]-1,
+	 Surf_Quad_Connectivity[i][3]-1);
 
 	surf_label.push(Surf_ID_Flag[i+Number_of_Surf_Trias]);
   }
@@ -258,7 +260,10 @@ write_entity_lists_to_file_ug_io
 	Surf_Tria_Connectivity[j][1] = tria_list[i][1] + 1;
 	Surf_Tria_Connectivity[j][2] = tria_list[i][2] + 1;
 
-	Surf_ID_Flag[j] = surf_label[i];
+        if(surf_label.size() != 0)
+	  Surf_ID_Flag[j] = surf_label[i];
+	else
+	  Surf_ID_Flag[j] = 1;
 	Surf_Grid_BC_Flag[j] = 1;
 	Surf_Reconnection_Flag[j] = 0;
   }
@@ -270,7 +275,10 @@ write_entity_lists_to_file_ug_io
 	Surf_Quad_Connectivity[j][2] = quad_list[i][2] + 1;
 	Surf_Quad_Connectivity[j][3] = quad_list[i][3] + 1;
 
-	Surf_ID_Flag[j+Number_of_Surf_Trias] = surf_label[i+Number_of_Surf_Trias];
+        if(surf_label.size() != 0)
+	  Surf_ID_Flag[j+Number_of_Surf_Trias] = surf_label[i+Number_of_Surf_Trias];
+	else
+	  Surf_ID_Flag[j+Number_of_Surf_Trias] = 1;
 	Surf_Grid_BC_Flag[j+Number_of_Surf_Trias] = 1;
 	Surf_Reconnection_Flag[j+Number_of_Surf_Trias] = 0;
   }
