@@ -17,11 +17,17 @@ create_entity_lists_from_file_ug_io
  Proteus::Geometry::tet_list &tet_list,
  Proteus::Geometry::pent5_list &pent5_list,
  Proteus::Geometry::pent6_list &pent6_list,
- Proteus::Geometry::hex_list &hex_list)
+ Proteus::Geometry::hex_list &hex_list,
+ bool supress_output)
 {
-  // Supress output from UG_IO
-  int stdout_fd = dup(STDOUT_FILENO);
-  FILE *fp = freopen("/dev/null", "w", stdout);
+  int stdout_fd;
+  FILE *fp;
+  if(supress_output)
+  {
+    // Supress output from UG_IO
+    stdout_fd = dup(STDOUT_FILENO);
+    fp = freopen("/dev/null", "w", stdout);
+  }
 
   int error_flag;
   char * Grid_File_Name = const_cast<char*>(file_name.c_str());
@@ -121,10 +127,13 @@ create_entity_lists_from_file_ug_io
   if(error_flag) throw;
 
   // Return stdout to it's normal state (no longer supressed)  
-  fclose(stdout);
-  dup2(stdout_fd, STDOUT_FILENO);
-  stdout = fdopen(STDOUT_FILENO, "w");
-  close(stdout_fd);
+  if(supress_output)
+  {
+    fclose(stdout);
+    dup2(stdout_fd, STDOUT_FILENO);
+    stdout = fdopen(STDOUT_FILENO, "w");
+    close(stdout_fd);
+  }
 
   //std::cout <<"Read "<<Number_of_Nodes<<" nodes from file.\n";
   //std::cout <<"Read "<<Number_of_Surf_Trias<<" trias from file.\n";
@@ -187,11 +196,17 @@ write_entity_lists_to_file_ug_io
  Proteus::Geometry::tet_list &tet_list,
  Proteus::Geometry::pent5_list &pent5_list,
  Proteus::Geometry::pent6_list &pent6_list,
- Proteus::Geometry::hex_list &hex_list)
+ Proteus::Geometry::hex_list &hex_list,
+ bool supress_output = true)
 {
-  // Supress output from UG_IO
-  //int stdout_fd = dup(STDOUT_FILENO);
-  //FILE *fp = freopen("/dev/null", "w", stdout);
+  int stdout_fd;
+  FILE *fp;
+  if(supress_output)
+  {
+    // Supress output from UG_IO
+    stdout_fd = dup(STDOUT_FILENO);
+    fp = freopen("/dev/null", "w", stdout);
+  }
 
   int error_flag;
   char * Grid_File_Name = const_cast<char*>(file_name.c_str());
@@ -324,9 +339,12 @@ write_entity_lists_to_file_ug_io
 
   if(error_flag) throw;
 
-  // Return stdout to it's normal state (no longer supressed)  
-  //fclose(stdout);
-  //dup2(stdout_fd, STDOUT_FILENO);
-  //stdout = fdopen(STDOUT_FILENO, "w");
-  //close(stdout_fd);
+  if(supress_output)
+  {
+    // Return stdout to it's normal state (no longer supressed)  
+    fclose(stdout);
+    dup2(stdout_fd, STDOUT_FILENO);
+    stdout = fdopen(STDOUT_FILENO, "w");
+    close(stdout_fd);
+  }
 }

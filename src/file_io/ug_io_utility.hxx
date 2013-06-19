@@ -16,7 +16,8 @@ create_entity_lists_from_file_ug_io
  Proteus::Geometry::tet_list &,
  Proteus::Geometry::pent5_list&,
  Proteus::Geometry::pent6_list&,
- Proteus::Geometry::hex_list &);
+ Proteus::Geometry::hex_list &,
+ bool supress_output = true);
 
 void
 write_entity_lists_to_file_ug_io
@@ -28,6 +29,7 @@ write_entity_lists_to_file_ug_io
  Proteus::Geometry::tet_list &,
  Proteus::Geometry::pent5_list&,
  Proteus::Geometry::pent6_list&,
- Proteus::Geometry::hex_list &);
+ Proteus::Geometry::hex_list &,
+ bool supress_output = true);
 
 #endif
