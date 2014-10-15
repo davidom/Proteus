@@ -1,0 +1,111 @@
+diff --git a/surfacewrapper/src/surfacewrapper/FRSurfaceMap.cpp b/surfacewrapper/src/surfacewrapper/FRSurfaceMap.cpp
+index 22b0264..5ee0682 100644
+--- a/surfacewrapper/src/surfacewrapper/FRSurfaceMap.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRSurfaceMap.cpp
+@@ -54,35 +54,6 @@ FRSurfaceMap::addedVert(MKCore::Id vertex)
+     }
+ }
+ 
+-MKCore::Id
+-FRSurfaceMap::getNearFace(MKCore::Id vertex)
+-{
+-  double tolerance = 0.01 * _size.getVertexSize(vertex);
+-  Vector<3, double> coord = _data.outputView().getVertexCoordinates(vertex);
+-  std::map<int, MKCore::Id> nearFaces;
+-  std::vector<MKCore::Id> entities;
+-
+-  // find the closest entity to this vertex on the input surface
+-  MKCore::Id searchFace = _rtree.findClosestEntity(coord);
+-  // get the closest point on that triangle to the vertex
+-  Vector<3, double> t1, t2, t3, nearpoint;
+-  MKSurfaceView::triangleCoordinates(_data.inputView(), searchFace, t1, t2, t3);
+-  MKGeom::Triangle3 tri(t1, t2, t3);
+-  tri.getDistance(coord, &nearpoint);
+-
+-  _rtree.getEntitiesWithinDistance(nearpoint, tolerance, entities);
+-  for(size_t i = 0; i < entities.size(); ++i)
+-    {
+-      int group = _data.inputGroups().hasGroups() ?
+-                      _data.inputGroups().getGroup(
+-                          _data.inputView().getFaceType(entities[i])) :
+-                      _data.inputView().getFaceType(entities[i]);
+-      nearFaces[group] = entities[i];
+-    }
+-
+-  return nearFaces.begin()->second;
+-}
+-
+ void
+ FRSurfaceMap::initializeSharpFaces(MKCore::Id vertex)
+ {
+diff --git a/surfacewrapper/src/surfacewrapper/FRSurfaceMap.h b/surfacewrapper/src/surfacewrapper/FRSurfaceMap.h
+index 97e2589..633aaa8 100644
+--- a/surfacewrapper/src/surfacewrapper/FRSurfaceMap.h
++++ b/surfacewrapper/src/surfacewrapper/FRSurfaceMap.h
+@@ -60,7 +60,6 @@ public:
+   void completeInitialization();
+ 
+ protected:
+-  MKCore::Id getNearFace(MKCore::Id vertex);
+   WrapperDataAggregate& _data;
+   FRMesh& _mesh;
+   MKSurfaceView::TriangleFEv& _inputSurface;
+diff --git a/surfacewrapper/src/surfacewrapper/SurfaceWrapper.cpp b/surfacewrapper/src/surfacewrapper/SurfaceWrapper.cpp
+index b68000d..3489053 100644
+--- a/surfacewrapper/src/surfacewrapper/SurfaceWrapper.cpp
++++ b/surfacewrapper/src/surfacewrapper/SurfaceWrapper.cpp
+@@ -3509,7 +3509,8 @@ MKCore::Id Wrapper::getNearFaceVertex(MKCore::Id vertex,
+                                       WrapperSearchTree& searchTree,
+                                       double tolerance)
+ {
+-  std::map<int, MKCore::Id> nearFaces;
++  int smallestFaceType = std::numeric_limits<int>::max();
++  MKCore::Id smallestFaceTypeFace;
+   std::vector<MKCore::Id> entities;
+   double distance;
+   MKCore::Id nearFace;
+@@ -3536,9 +3537,14 @@ MKCore::Id Wrapper::getNearFaceVertex(MKCore::Id vertex,
+       int group = _data->_groupManager.hasGroups() ?
+         _data->_groupManager.getGroup(inputSurface.getFaceType(entities[i])) :
+         inputSurface.getFaceType(entities[i]);
+-      nearFaces[group] = entities[i];
++
++      if(group < smallestFaceType)
++        {
++          smallestFaceType = group;
++          smallestFaceTypeFace = entities[i];
++        }
+     }
+-  return nearFaces.begin()->second;
++  return smallestFaceTypeFace;
+ }
+ 
+ MKCore::Id Wrapper::getNearFace(MKCore::Id initialFace,
+@@ -3547,7 +3553,8 @@ MKCore::Id Wrapper::getNearFace(MKCore::Id initialFace,
+                                 WrapperSearchTree& searchTree,
+                                 double tolerance)
+ {
+-  std::map<int, MKCore::Id> nearFaces;
++  int smallestFaceType = std::numeric_limits<int>::max();
++  MKCore::Id smallestFaceTypeFace;
+   Vector<3,double> centroid(0);
+   std::vector<MKCore::Id> entities;
+   MKCore::Id searchFace = initialFace;
+@@ -3565,9 +3572,15 @@ MKCore::Id Wrapper::getNearFace(MKCore::Id initialFace,
+     int group = _data->_groupManager.hasGroups() ?
+         _data->_groupManager.getGroup(inputSurface.getFaceType(entities[i])) :
+         inputSurface.getFaceType(entities[i]);
+-    nearFaces[group] = entities[i];
++
++      if(group < smallestFaceType)
++      {
++        smallestFaceType = group;
++        smallestFaceTypeFace = entities[i];
++      }
+   }
+-  return nearFaces.begin()->second;
++
++  return smallestFaceTypeFace;
+ }
+ 
+ void Wrapper::setCadAssociation(MKCore::Id outputFace,

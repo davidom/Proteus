@@ -1,0 +1,141 @@
+diff --git a/surfacewrapper/src/surfacewrapper/FRConcaveOperation.cpp b/surfacewrapper/src/surfacewrapper/FRConcaveOperation.cpp
+index 1fa08e3..f2cb792 100644
+--- a/surfacewrapper/src/surfacewrapper/FRConcaveOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRConcaveOperation.cpp
+@@ -32,7 +32,6 @@ FRConcaveOperation::FRConcaveOperation(WrapperDataAggregate& data,
+                     _size(size),
+                     _searchedFeatures(searchedFeatures)
+ {
+-  _task = new MK::Task("Resolving Features");
+ }
+ 
+ FRConcaveOperation::~FRConcaveOperation()
+diff --git a/surfacewrapper/src/surfacewrapper/FRFaceCornerOperation.cpp b/surfacewrapper/src/surfacewrapper/FRFaceCornerOperation.cpp
+index 6e8929f..2dcfdc8 100644
+--- a/surfacewrapper/src/surfacewrapper/FRFaceCornerOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRFaceCornerOperation.cpp
+@@ -26,7 +26,6 @@ FRFaceCornerOperation::FRFaceCornerOperation(WrapperDataAggregate& data,
+                        _inputGeometry(_data.inputGeometry()),
+                        _size(_data.outputSize())
+ {
+-  _task = new MK::Task("Resolving Features");
+ }
+ 
+ FRFaceCornerOperation::~FRFaceCornerOperation()
+diff --git a/surfacewrapper/src/surfacewrapper/FRFalseFeatureOperation.cpp b/surfacewrapper/src/surfacewrapper/FRFalseFeatureOperation.cpp
+index 501ec19..649cfe9 100644
+--- a/surfacewrapper/src/surfacewrapper/FRFalseFeatureOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRFalseFeatureOperation.cpp
+@@ -26,7 +26,6 @@ FRFalseFeatureOperation::FRFalseFeatureOperation(WrapperDataAggregate& data,
+                          _mesh(mesh),
+                          _size(size)
+ {
+-  _task = new MK::Task("Mesh Cleanup");
+ }
+ 
+ FRFalseFeatureOperation::~FRFalseFeatureOperation()
+diff --git a/surfacewrapper/src/surfacewrapper/FRFeatureCollapseOperation.cpp b/surfacewrapper/src/surfacewrapper/FRFeatureCollapseOperation.cpp
+index 5bd6b02..1510c2f 100644
+--- a/surfacewrapper/src/surfacewrapper/FRFeatureCollapseOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRFeatureCollapseOperation.cpp
+@@ -13,7 +13,6 @@ namespace SurfaceWrapper
+ FRFeatureCollapseOperation::FRFeatureCollapseOperation(const MKCore::Subset& vertices, FRCleanupStrategy& cleanup, FRSize& size)
+                            :FROperation(vertices), _cleanup(cleanup), _size(size)
+ {
+-  _task = new MK::Task("Mesh Cleanup");
+ }
+ 
+ FRFeatureCollapseOperation::~FRFeatureCollapseOperation()
+diff --git a/surfacewrapper/src/surfacewrapper/FROperation.cpp b/surfacewrapper/src/surfacewrapper/FROperation.cpp
+index 1f4ffe5..07a6930 100644
+--- a/surfacewrapper/src/surfacewrapper/FROperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FROperation.cpp
+@@ -14,6 +14,7 @@
+ #include "FRSpanningEdgeOperation.h"
+ #include "FRSwapOperation.h"
+ #include "WrapperDataAggregate.h"
++#include "mk/common/CheckInterrupts.h"
+ 
+ namespace SurfaceWrapper
+ {
+@@ -22,13 +23,11 @@ FROperation::FROperation(const MKCore::Subset& operables)
+             :_operables(operables),
+              _count(operables.getNumElements())
+ {
+-  _task = NULL;
+   _maxRepetitions = 5;
+ }
+ 
+ FROperation::~FROperation()
+ {
+-  delete _task;
+ }
+ 
+ void FROperation::execute(WrapperDataAggregate & data)
+@@ -90,13 +89,16 @@ void FROperation::execute(WrapperDataAggregate & data)
+ 
+ void FROperation::execute()
+ {
++  // every 100 checks
++  MK::CheckInterrupts interrupt(MK::CheckInterrupts::veryhigh);
++  interrupt.forceCheck();
+   do
+   {
+     MKCore::SubsetIterator iter(&_operables);
+     for (iter.begin(); !iter.done(); ++iter)
+     {
+-      if (_task != NULL) _task->update();
+       operation(*iter);
++      interrupt.check();
+     }
+   } while (repeat());
+ }
+diff --git a/surfacewrapper/src/surfacewrapper/FROperation.h b/surfacewrapper/src/surfacewrapper/FROperation.h
+index 0d0c932..5af5e2f 100644
+--- a/surfacewrapper/src/surfacewrapper/FROperation.h
++++ b/surfacewrapper/src/surfacewrapper/FROperation.h
+@@ -31,8 +31,6 @@ protected:
+   size_t _count;
+   size_t _maxRepetitions;
+ 
+-  MK::Task* _task;
+-
+   virtual bool repeat();
+   virtual void operation(MKCore::Id entity) = 0;
+ };
+diff --git a/surfacewrapper/src/surfacewrapper/FRSnapOperation.cpp b/surfacewrapper/src/surfacewrapper/FRSnapOperation.cpp
+index dac7172..37c3407 100644
+--- a/surfacewrapper/src/surfacewrapper/FRSnapOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRSnapOperation.cpp
+@@ -19,7 +19,6 @@ FRSnapOperation::FRSnapOperation(WrapperDataAggregate& data,
+                  _inputGeometry(_data.inputGeometry()),
+                  _size(_data.outputSize())
+ {
+-  _task = new MK::Task("Resolving Features");
+ }
+ 
+ FRSnapOperation::~FRSnapOperation()
+diff --git a/surfacewrapper/src/surfacewrapper/FRSpanningEdgeOperation.cpp b/surfacewrapper/src/surfacewrapper/FRSpanningEdgeOperation.cpp
+index 8927135..5cadbfb 100644
+--- a/surfacewrapper/src/surfacewrapper/FRSpanningEdgeOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRSpanningEdgeOperation.cpp
+@@ -13,7 +13,6 @@ namespace SurfaceWrapper
+ FRSpanningEdgeOperation::FRSpanningEdgeOperation(MKCore::Subset& edges, FRCleanupStrategy& cleanup, FRSize& size)
+                         :FROperation(edges), _cleanup(cleanup), _size(size)
+ {
+-  _task = new MK::Task("Resolving Features");
+ }
+ 
+ FRSpanningEdgeOperation::~FRSpanningEdgeOperation()
+diff --git a/surfacewrapper/src/surfacewrapper/FRSwapOperation.cpp b/surfacewrapper/src/surfacewrapper/FRSwapOperation.cpp
+index 4e93022..f19114d 100644
+--- a/surfacewrapper/src/surfacewrapper/FRSwapOperation.cpp
++++ b/surfacewrapper/src/surfacewrapper/FRSwapOperation.cpp
+@@ -13,7 +13,6 @@ namespace SurfaceWrapper
+ FRSwapOperation::FRSwapOperation(FRCleanupStrategy& cleanup, const MKCore::Subset& edges, FRSize& size)
+                 :FROperation(edges), _cleanup(cleanup), _size(size)
+ {
+-  _task = new MK::Task("Mesh Cleanup");
+ }
+ 
+ FRSwapOperation::~FRSwapOperation()
